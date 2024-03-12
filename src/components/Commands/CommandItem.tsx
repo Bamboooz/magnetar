@@ -1,5 +1,6 @@
 import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
+import { appWindow } from "@tauri-apps/api/window"
 
 import admin_icon from "../../assets/admin.png";
 
@@ -11,13 +12,20 @@ interface CommandItemProps {
 }
 
 const CommandItem: React.FC<CommandItemProps> = ({ icon, title, command, requiresAdministrator }) => {
-    const executeCommand = () => {
-        const mode = requiresAdministrator ? "execute_command_as_admin" : "execute_command";
-        
-        invoke(mode, { command: command })
-            .catch((err) => {
-                console.error(err);
-            });
+    const executeCommand = async () => {
+        await appWindow.hide();
+
+        if (requiresAdministrator) {
+            await invoke("execute_command_as_admin", { command: command })
+                .catch(err => {
+                    console.error(err);
+                });
+        } else {
+            await invoke("execute_command", { command: command, displayCmd: true })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
     };
     
     const trimmedTitle = command.length <= 50 ? command : `${command.substring(0, 50)}...`;

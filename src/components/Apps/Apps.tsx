@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { open } from "@tauri-apps/api/dialog";
 import { LuPlus } from "react-icons/lu";
 
 import AppItem from "./AppItem";
@@ -17,6 +18,7 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
     const appsDefault: AppList = appsStorage ? JSON.parse(appsStorage) : {};
     const [apps, setApps] = useState<AppList>(appsDefault);
     const [newAppMenuOpened, setNewAppMenuOpened] = useState<boolean>(false);
+    const [filePath, setFilePath] = useState<string>("");
 
     const displayedApps = Object.keys(apps).filter((key) => apps[key].name.toLowerCase().includes(search.toLowerCase()));
 
@@ -29,6 +31,21 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
         setApps((prevApps) => ({ ...prevApps, [filePath]: newAppItem }));
     };
     
+    const openNewAppDialog = async () => {
+        await open({
+            title: "Select an executable",
+            multiple: false,
+            filters: [{ name: "", extensions: ["exe"] }]
+        }).then((path) => {
+            setFilePath(path as string);
+            setNewAppMenuOpened(true);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    };
+
+
     useEffect(() => {
         localStorage.setItem("apps", JSON.stringify(apps));
     }, [apps]);
@@ -36,9 +53,9 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
     return (
         <>
             <div className="w-full h-full flex flex-col items-center justify-start overflow-auto">
-                <div className="w-full h-12 flex items-center justify-start px-4 gap-6">
-                    <button onClick={() => setNewAppMenuOpened(true)} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
-                        <LuPlus className="text-[16px]" />
+                <div className="w-full h-12 flex items-center justify-start px-6 gap-6">
+                    <button onClick={openNewAppDialog} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
+                        <LuPlus className="text-[22px]" />
                     </button>
                 </div>
                 
@@ -51,7 +68,7 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
                     }
                 </div>
 
-                <NewAppMenu newAppMenuOpened={newAppMenuOpened} setNewAppMenuOpened={setNewAppMenuOpened} addNewApp={addNewApp} />
+                <NewAppMenu newAppMenuOpened={newAppMenuOpened} setNewAppMenuOpened={setNewAppMenuOpened} filePath={filePath} setFilePath={setFilePath} addNewApp={addNewApp} />
             </div>
         </>
     );

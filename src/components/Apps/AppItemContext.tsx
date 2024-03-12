@@ -3,21 +3,28 @@ import { LuTrash2 } from "react-icons/lu";
 
 import Context from "../common/Context";
 import { AppList } from "./Apps";
+import { invoke } from "@tauri-apps/api/tauri";
 
 interface AppItemContextProps {
     x: number;
     y: number;
     closeContextMenu: () => void;
     filePath: string;
+    iconPath: string;
     setApps: React.Dispatch<React.SetStateAction<AppList>>;
 }
 
-const AppItemContext: React.FC<AppItemContextProps> = ({ x, y, closeContextMenu, setApps, filePath }) => {
-    const removeApp = () => {
+const AppItemContext: React.FC<AppItemContextProps> = ({ x, y, closeContextMenu, setApps, filePath, iconPath }) => {
+    const removeApp = async () => {
         setApps((prevApps) => {
             const { [filePath]: ommited, ...newApps } = prevApps;
             return newApps;
         });
+
+        await invoke("remove_file", { filePath: iconPath })
+            .catch(err => {
+                console.error(err);
+            });
 
         closeContextMenu();
     };

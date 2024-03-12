@@ -1,58 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
-import { open } from "@tauri-apps/api/dialog";
 
 import Modal from "../common/Modal";
 
 interface NewAppMenuProps {
     newAppMenuOpened: boolean;
     setNewAppMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
+    filePath: string;
+    setFilePath: React.Dispatch<React.SetStateAction<string>>;
     addNewApp: (filePath: string, icoPath: string, fileName: string) => void;
 }
 
-const NewAppMenu: React.FC<NewAppMenuProps> = ({ newAppMenuOpened, setNewAppMenuOpened, addNewApp }) => {
-    const [filePath, setFilePath] = useState<string>("");
-    const [icoPath, setIcoPath] = useState<string>("");
+const NewAppMenu: React.FC<NewAppMenuProps> = ({ newAppMenuOpened, setNewAppMenuOpened, filePath, setFilePath, addNewApp }) => {
     const [fileNameInput, setFileNameInput] = useState<string>("");
 
-    const savePEIcon = (filePath: string) => {
-        invoke("save_pe_ico", { pePath: filePath })
+    const savePEIcon = async (filePath: string) => {
+        await invoke("save_pe_ico", { pePath: filePath })
             .then((icoPath) => {
-                setIcoPath(icoPath as string);
-                setFilePath(filePath);
+                addNewApp(filePath, icoPath as string, fileNameInput);
             })
-            .catch((err) => {
+            .catch(err => {
                 console.error(err);
             });
-    };
 
-    const openNewAppDialog = () => {
-        open({
-            title: "Select an executable",
-            multiple: false,
-            filters: [{ name: "", extensions: ["exe"] }]
-        }).then((path) => {
-            if (typeof path === "string") {
-                savePEIcon(path);
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+            setNewAppMenuOpened(false);
     };
 
     const createThatNewApp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         if (fileNameInput) {
-            addNewApp(filePath, icoPath, fileNameInput);
+            savePEIcon(filePath);
         }
     };
 
     useEffect(() => {
-        if (newAppMenuOpened)
-            setNewAppMenuOpened(false);
-            openNewAppDialog();
+        // clear input on close
+        if (!newAppMenuOpened) {
+            setFileNameInput("");
+            setFilePath("");
+        }
     }, [newAppMenuOpened]);
 
     return (

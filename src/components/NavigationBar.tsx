@@ -15,7 +15,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
             <div className="w-full h-16 flex items-center justify-between px-6 gap-6">
                 <div className="flex items-center justify-center gap-6">
                     <PageButton text="Apps" targetPage={0} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                    <PageButton text="Commands" targetPage={1} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                    <PageButton text="Games" targetPage={1} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                    <PageButton text="Commands" targetPage={2} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                 </div>
 
                 <div className="h-full w-full flex items-center justify-center">

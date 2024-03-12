@@ -6,16 +6,13 @@ import AppsView from "./components/Apps/Apps";
 import CommandsView from "./components/Commands/Commands";
 import Header from "./components/Header";
 import NavigationBar from "./components/NavigationBar";
+import GamesView from "./components/Games/Games";
 
 const App: React.FC = () => {
     /*
     TODO:
-    1. a modal asking for a file name for an app instead of using the executable name,
-    2. hide toolbox on click outside,
-    3. support for steam games as apps as its most important for me
-    4. minimize to tray on app start/command execute
-    5. make the app not be displayed in task bar
-    6. app freezing when i spawn a new app from it
+    1. support for steam games as apps as its most important for me
+    2. FIXME: when adding new app the app treats it as unfocus
     */
     const pageStorage = localStorage.getItem("page");
     const pageDefault = pageStorage ? Number(pageStorage) : 0;
@@ -49,6 +46,8 @@ const App: React.FC = () => {
                 
                 {selectedPage === 0
                     ? <AppsView search={search} />
+                    : selectedPage === 1
+                    ? <GamesView search={search} />
                     : <CommandsView search={search} />
                 }
             </div>

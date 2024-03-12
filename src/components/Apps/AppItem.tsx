@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { invoke, convertFileSrc } from "@tauri-apps/api/tauri";
+import { appWindow } from "@tauri-apps/api/window"
 
 import AppItemContext from "./AppItemContext";
 import { AppList } from "./Apps";
@@ -35,9 +36,11 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
     const contextMenuClose = () => setContextMenu(initialContextMenu);
 
     const openExecutable = async () => {
-        invoke("spawn_executable", { filePath: filePath })
-            .catch((err) => {
-                console.error(err);
+        await appWindow.hide();
+
+        await invoke("spawn_executable", { filePath: filePath })
+            .catch(err => {
+                console.errorerr;
             });
     };
 
@@ -60,7 +63,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
                 </div>
 
                 {contextMenu.show &&
-                    <AppItemContext x={contextMenu.x} y={contextMenu.y} filePath={filePath} closeContextMenu={contextMenuClose} setApps={setApps} />
+                    <AppItemContext x={contextMenu.x} y={contextMenu.y} filePath={filePath} iconPath={iconPath} closeContextMenu={contextMenuClose} setApps={setApps} />
                 }
             </div>
         </>

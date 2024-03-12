@@ -8,6 +8,7 @@ mod executable;
 mod filesystem;
 mod window;
 mod pe;
+mod steam;
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     if !filesystem::initialize_magnetar_folder() {
@@ -60,8 +61,8 @@ fn main() {
             shell::execute_command_as_admin,
             executable::spawn_executable,
             pe::save_pe_ico,
-            filesystem::get_file_name,
             filesystem::remove_file,
+            steam::get_installed_steam_games,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

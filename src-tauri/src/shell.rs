@@ -6,11 +6,17 @@ use std::os::windows::ffi::OsStrExt;
 use winapi;
 
 #[tauri::command]
-pub fn execute_command(command: &str) -> String {
-    let status = Command::new("cmd")
-        .args(&["/c", &format!("start cmd /k {}", command)])
-        .status()
-        .expect("Failed to execute command");
+pub fn execute_command(command: &str, display_cmd: bool) -> String {
+    let status = if display_cmd {
+        Command::new("cmd")
+            .args(&["/c", &format!("start cmd /k {}", command)])
+            .status()
+    } else {
+        Command::new("cmd")
+            .args(&["/c", command])
+            .status()
+    }
+    .expect("Failed to execute command");
 
     status.to_string()
 }
