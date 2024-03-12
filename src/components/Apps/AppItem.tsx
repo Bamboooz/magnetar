@@ -40,7 +40,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
 
         await invoke("spawn_executable", { filePath: filePath })
             .catch(err => {
-                console.errorerr;
+                console.error(err);
             });
     };
 
