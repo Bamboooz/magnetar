@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { resolveResource } from "@tauri-apps/api/path";
 
 import CommandListView from "./CommandList";
 import { cn } from "../../utils/tw";
@@ -11,6 +12,9 @@ interface CommandsViewProps {
 }
 
 const CommandsView: React.FC<CommandsViewProps> = ({ search }) => {
+    const [bluetoothScriptPath, setBluetoothScriptPath] = useState<string>("");
+
+    // add bluetooth support
     const commandLists: CommandList = {
         "Information": {
             "systeminfo": {
@@ -19,6 +23,16 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search }) => {
             },
             "dxdiag": {
                 title: "View your system information from dxdiag",
+                requiresAdministrator: false
+            },
+        },
+        "Bluetooth": {
+            [`powershell.exe -command ${bluetoothScriptPath} -BluetoothStatus On`]: {
+                title: "Turn bluetooth on",
+                requiresAdministrator: false
+            },
+            [`powershell.exe -command ${bluetoothScriptPath} -BluetoothStatus Off`]: {
+                title: "Turn bluetooth off",
                 requiresAdministrator: false
             },
         },
@@ -67,6 +81,14 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search }) => {
     };
 
     const displayedLists = Object.fromEntries(Object.entries(commandLists).filter(([_, commands]) => Object.values(commands).some(command => command.title.toLowerCase().includes(search.toLowerCase()))));
+
+    resolveResource("bluetooth.ps1")
+        .then(filePath => {
+            setBluetoothScriptPath(filePath as string);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
     return (
         <>
