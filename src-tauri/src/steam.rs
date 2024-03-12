@@ -38,9 +38,9 @@ fn read_steam_games(app_ids: Vec<String>) -> Result<Vec<SteamGame>, Box<dyn Erro
             Err(_) => continue,
         };
 
-        match (key.get_value("Installed"), key.get_value("Name")) {
+        match (key.get_value::<u32, _>("Installed"), key.get_value::<String, _>("Name")) {
             (Ok(installed_value), Ok(name_value)) => {
-                let installed_value: String = installed_value;
+                let installed_value: String = installed_value.to_string();
                 let name_value: String = name_value;
 
                 let steam_game = SteamGame {
@@ -51,8 +51,7 @@ fn read_steam_games(app_ids: Vec<String>) -> Result<Vec<SteamGame>, Box<dyn Erro
 
                 steam_games.push(steam_game);
             }
-            (Err(err), _) | (_, Err(err)) => {
-                eprintln!("{}", err);
+            (Err(_), _) | (_, Err(_)) => {
                 continue; // Steam handler keys, not games will fall here
             }
         }

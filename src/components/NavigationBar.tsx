@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { appWindow } from "@tauri-apps/api/window";
 
 import PageButton from "./PageButton";
 
@@ -10,6 +11,20 @@ interface NavigationBarProps {
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, search, setSearch }) => {
+    const searchRef = useRef<HTMLInputElement>(null);
+    
+    useEffect(() => {
+        const setupFocusListener = async () => {
+            await appWindow.onFocusChanged(async ({ payload: focused }) => {
+                if (focused) {
+                    searchRef.current?.focus();
+                }
+            });
+        };
+
+        setupFocusListener();
+    }, []);
+
     return (
         <>
             <div className="w-full h-16 flex items-center justify-between px-6 gap-6">
@@ -20,7 +35,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
                 </div>
 
                 <div className="h-full w-full flex items-center justify-center">
-                    <input value={search} onChange={(e) => setSearch(e.target.value)} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 bg-transparent outline-none px-2 text-neutral-400 text-[12px] rounded-md border border-border" />
+                    <input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 bg-transparent outline-none px-2 text-neutral-400 text-[12px] rounded-md border border-border" />
                 </div>
             </div>
         </>

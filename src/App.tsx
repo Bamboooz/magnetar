@@ -34,6 +34,18 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        const setupFocusListener = async () => {
+            await appWindow.onFocusChanged(async ({ payload: focused }) => {
+                if (!focused) {
+                    await appWindow.hide();
+                }
+            });
+        };
+
+        setupFocusListener();
+    }, []);
+
+    useEffect(() => {
         setSearch("");
         localStorage.setItem("page", selectedPage.toString());
     }, [selectedPage]);
