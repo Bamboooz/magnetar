@@ -8,7 +8,7 @@
     },
     "package": {
         "productName": "magnetar",
-        "version": "0.0.0"
+        "version": "0.0.1"
     },
     "tauri": {
         "allowlist": {
@@ -62,7 +62,7 @@
             ]
         },
         "security": {
-            "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
+            "csp": "img-src 'self' asset: https://asset.localhost https://cdn.akamai.steamstatic.com"
         },
         "windows": [
             {

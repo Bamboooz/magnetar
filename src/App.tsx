@@ -11,8 +11,8 @@ import GamesView from "./components/Games/Games";
 const App: React.FC = () => {
     /*
     TODO:
-    1. support for steam games as apps as its most important for me
-    2. FIXME: when adding new app the app treats it as unfocus
+    1. FIXME: when adding new app the app treats it as unfocus
+    2. FIXME: sometimes appicons are not loaded in release mode
     */
     const pageStorage = localStorage.getItem("page");
     const pageDefault = pageStorage ? Number(pageStorage) : 0;

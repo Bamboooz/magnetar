@@ -13,6 +13,7 @@ interface NavigationBarProps {
 const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, search, setSearch }) => {
     const searchRef = useRef<HTMLInputElement>(null);
     
+    // focus the input when changing pages, or when the user focuses the window in
     useEffect(() => {
         const setupFocusListener = async () => {
             await appWindow.onFocusChanged(async ({ payload: focused }) => {
@@ -24,6 +25,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
 
         setupFocusListener();
     }, []);
+
+    useEffect(() => {
+        searchRef.current?.focus();
+    }, [selectedPage]);
 
     return (
         <>
