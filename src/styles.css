@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+p, img {
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+    @apply w-2;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #404040;
+    @apply rounded-md;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}

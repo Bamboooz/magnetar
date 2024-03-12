@@ -1,0 +1,27 @@
+[package]
+name = "magnetar"
+version = "0.0.1"
+description = "A simple Windows command palette."
+authors = ["Bamboooz"]
+license = "BSD-3-Clause"
+repository = "https://github.com/Bamboooz/magnetar"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.4", features = [] }
+
+[dependencies]
+tauri = { version = "1.4", features = [ "fs-remove-file", "protocol-asset", "dialog-open", "window-close", "fs-write-file", "fs-create-dir", "fs-exists", "window-set-focus", "window-show", "global-shortcut-all", "system-tray", "shell-open"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tauri-plugin-positioner = "1.0"
+window-shadows = "0.2.2"
+winapi = { version = "0.3.9", features = ["winuser", "winbase", "shellapi"] }
+pelite = "0.10.0"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
