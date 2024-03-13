@@ -16,20 +16,14 @@ const App: React.FC = () => {
     const [search, setSearch] = useState<string>("");
 
     useEffect(() => {
-        const registerOpen = async () => {
+        const setEventListeners = async () => {
             await unregister("CommandOrControl+Shift+P");
 
             await register("CommandOrControl+Shift+P", () => {
                 appWindow.show();
                 appWindow.setFocus();
             });
-        };
 
-        registerOpen();
-    }, []);
-
-    useEffect(() => {
-        const setupFocusListener = async () => {
             await appWindow.onFocusChanged(async ({ payload: focused }) => {
                 if (!focused) {
                     await appWindow.hide();
@@ -37,7 +31,7 @@ const App: React.FC = () => {
             });
         };
 
-        setupFocusListener();
+        setEventListeners();
     }, []);
 
     useEffect(() => {

@@ -28,6 +28,7 @@ pub fn get_file_name(file_path: &str) -> String {
     Path::new(file_path).file_name().unwrap_or_default().to_string_lossy().to_string()
 }
 
+// TODO: move filesystem operations to tauri api for security shit or something idk
 #[tauri::command]
 pub fn remove_file(file_path: &str) -> Result<(), String> {
     match fs::remove_file(file_path) {

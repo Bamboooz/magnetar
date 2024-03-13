@@ -6,10 +6,12 @@ interface SteamGame {
     id: string;
     name: string;
     installed: string;
+    requestCounter: number;
+    setRequestCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
 // installed is redundant in the frontend, only used in the backend but the data structure is shared
-const SteamGameItem: React.FC<SteamGame> = ({ id, name }) => {
+const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setRequestCounter }) => {
     const [iconPath, setIconPath] = useState<string>("");
     const [valid, setValid] = useState<boolean>(true);
 
@@ -28,19 +30,24 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name }) => {
         if (localSteamIcon) {
             setIconPath(localSteamIcon);
         } else {
-            invoke("fetch_steam_game_data", { appId: id })
-                .then(gameData => {
-                    let formattedGameData = JSON.parse(gameData as string);
+            setRequestCounter(prevCounter => prevCounter + 1);
+            const delay = requestCounter * 1000;
 
-                    setIconPath(formattedGameData[id].data.header_image);
-                    localStorage.setItem(id, formattedGameData[id].data.header_image);
-                })
-                .catch(_ => {
-                    // usually steam handlers, not games
-                    setValid(false);
-                });
+            setTimeout(() => {
+                invoke("fetch_steam_game_data", { appId: id })
+                    .then(gameData => {
+                        let formattedGameData = JSON.parse(gameData as string);
+
+                        setIconPath(formattedGameData[id].data.header_image);
+                        localStorage.setItem(id, formattedGameData[id].data.header_image);
+                    })
+                    .catch(_ => {
+                        // usually steam handlers, not games
+                        setValid(false);
+                    });
+            }, delay);
         }
-    }, []);
+    }, [id, requestCounter]);
 
     return (
         <>
