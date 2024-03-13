@@ -3,8 +3,8 @@ import { LuTerminal } from "react-icons/lu";
 import { IoIosArrowForward } from "react-icons/io";
 
 import CommandItem from "./CommandItem";
-import { cn } from "../../utils/tw";
 import { CommandListItem } from "./Commands";
+import { cn } from "../../utils/tw";
 
 interface CommandListViewProps {
     title: string;
@@ -28,13 +28,7 @@ const CommandListView: React.FC<CommandListViewProps> = ({ title, search, comman
                     
                     <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "max-h-screen mb-4" : "max-h-0 mb-0")}>
                         {displayedItems.map((key, index) => (
-                            <CommandItem
-                                key={index}
-                                requiresAdministrator={commands[key].requiresAdministrator}
-                                icon={<LuTerminal />}
-                                title={commands[key].title}
-                                command={key}
-                            />
+                            <CommandItem key={index} requiresAdministrator={commands[key].requiresAdministrator} icon={<LuTerminal />} title={commands[key].title} command={key} />
                         ))}
                     </div>
                 </div>

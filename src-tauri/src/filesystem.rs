@@ -2,8 +2,9 @@ use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+#[tauri::command]
 pub fn get_magnetar_path() -> PathBuf {
-    let appdata = env::var("APPDATA").unwrap_or_else(|_| {
+    let appdata: String = env::var("APPDATA").unwrap_or_else(|_| {
         panic!("Failed to retrieve APPDATA environment variable");
     });
 
@@ -12,6 +13,7 @@ pub fn get_magnetar_path() -> PathBuf {
 
 pub fn initialize_magnetar_folders() -> bool {
     let magnetar_path = get_magnetar_path();
+    let commands_file_path = magnetar_path.join("commands").join("commands.json");
     let folders = ["", "icons", "commands"];
 
     for folder in folders.iter() {
@@ -21,18 +23,15 @@ pub fn initialize_magnetar_folders() -> bool {
         }
     }
 
-    true
-}
-
-pub fn get_file_name(file_path: &str) -> String {
-    Path::new(file_path).file_name().unwrap_or_default().to_string_lossy().to_string()
-}
-
-// TODO: move filesystem operations to tauri api for security shit or something idk
-#[tauri::command]
-pub fn remove_file(file_path: &str) -> Result<(), String> {
-    match fs::remove_file(file_path) {
-        Ok(_) => Ok(()),
-        Err(err) => Err(format!("{}", err))
+    if !fs::metadata(&commands_file_path).is_ok() {
+        if !fs::File::create(&commands_file_path).is_ok() {
+            return false;
+        } else {
+            if !fs::write(commands_file_path, "{\n\n}\n").is_ok() {
+                return false;
+            }
+        }
     }
+
+    true
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { resolveResource } from "@tauri-apps/api/path";
+import { invoke } from "@tauri-apps/api/tauri";
 import { readTextFile } from "@tauri-apps/api/fs";
 
 import CommandListView from "./CommandList";
@@ -21,8 +21,9 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageI
 
     useEffect(() => {
         const getCommandsJsonPath = async () => {
-            const resourcePath = await resolveResource('resources/commands/commands.json')
-            setCommandsJsonPath(JSON.parse(await readTextFile(resourcePath)));
+            const appData = await invoke("get_magnetar_path");
+            const commands = await readTextFile(`${appData}/commands/commands.json`);
+            setCommandsJsonPath(JSON.parse(commands));
         };
 
         getCommandsJsonPath();

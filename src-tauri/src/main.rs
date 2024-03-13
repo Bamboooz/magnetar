@@ -63,7 +63,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             shell::execute_command,
             pe::save_pe_ico,
-            filesystem::remove_file,
+            filesystem::get_magnetar_path,
             steam::get_installed_steam_games,
             steam::run_steam_game,
             steam::fetch_steam_game_data,

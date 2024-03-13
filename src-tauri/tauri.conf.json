@@ -30,10 +30,11 @@
             "fs": {
                 "all": false,
                 "writeFile": true,
+                "readFile": true,
                 "removeFile": true,
                 "createDir": true,
                 "exists": true,
-                "scope": ["$RESOURCE/**"]
+                "scope": ["$DATA/magnetar/**"]
             },
             "dialog": {
                 "all": false,
@@ -55,9 +56,6 @@
                 "icons/128x128@2x.png",
                 "icons/icon.icns",
                 "icons/icon.ico"
-            ],
-            "resources": [
-                "resources/commands/*"
             ]
         },
         "security": {

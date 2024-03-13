@@ -5,6 +5,8 @@ use std::os::windows::ffi::OsStrExt;
 
 use winapi;
 
+use crate::filesystem::get_magnetar_path;
+
 fn execute_command_without_admin(command: &str) -> bool {
     Command::new("cmd")
         .args(&[command])
@@ -33,16 +35,12 @@ fn execute_command_as_admin(command: &str) -> bool {
 }
 
 #[tauri::command]
-pub fn execute_command(command: &str, requires_administrator: bool, display_cmd: bool) -> bool {
-    let final_command = if display_cmd {
-        format!("/c start cmd /k {}", command)
-    } else {
-        format!("/c {}", command)
-    };
+pub fn execute_command(command: &str, requires_administrator: bool) -> bool {
+    let commands_path = get_magnetar_path().join("commands");
 
     if requires_administrator {
-        execute_command_as_admin(&final_command)
+        execute_command_as_admin(&format!("/c cd {} && {}", commands_path.display(), command))
     } else {
-        execute_command_without_admin(&final_command)
+        execute_command_without_admin(&format!("/c cd {} && {}", commands_path.display(), command))
     }
 }

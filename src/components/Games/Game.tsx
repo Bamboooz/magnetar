@@ -13,7 +13,7 @@ interface SteamGame {
 // installed is redundant in the frontend, only used in the backend but the data structure is shared
 const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setRequestCounter }) => {
     const [iconPath, setIconPath] = useState<string>("");
-    const [valid, setValid] = useState<boolean>(true);
+    const [valid, setValid] = useState<boolean>(false);
 
     const startGame = async () => {
         await appWindow.hide();
@@ -29,6 +29,7 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
 
         if (localSteamIcon) {
             setIconPath(localSteamIcon);
+            setValid(true);
         } else {
             setRequestCounter(prevCounter => prevCounter + 1);
             const delay = requestCounter * 10000;
@@ -36,16 +37,14 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
             setTimeout(() => {
                 invoke("fetch_steam_game_data", { appId: id })
                     .then(header_image => {
-                        if (header_image) {
+                        if ((header_image as string).replaceAll(" ", "") !== "") {
                             setIconPath(header_image as string);
                             localStorage.setItem(id, header_image as string);
-                        } else {
-                            setValid(false);
+                            setValid(true);
                         }
                     })
                     .catch(err => {
                         console.error(err);
-                        setValid(false);
                     });
             }, delay);
         }

@@ -1,5 +1,5 @@
 import React from "react";
-import { invoke } from "@tauri-apps/api/tauri";
+import { removeFile } from "@tauri-apps/api/fs";
 import { LuTrash2 } from "react-icons/lu";
 
 import Context from "../common/Context";
@@ -21,10 +21,7 @@ const AppItemContext: React.FC<AppItemContextProps> = ({ x, y, closeContextMenu,
             return newApps;
         });
 
-        await invoke("remove_file", { filePath: iconPath })
-            .catch(err => {
-                console.error(err);
-            });
+        await removeFile(iconPath);
 
         closeContextMenu();
     };

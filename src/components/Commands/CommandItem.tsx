@@ -15,7 +15,7 @@ const CommandItem: React.FC<CommandItemProps> = ({ icon, title, command, require
     const executeCommand = async () => {
         await appWindow.hide();
 
-        await invoke("execute_command", { command: command, requiresAdministrator: requiresAdministrator, displayCmd: true })
+        await invoke("execute_command", { command: command, requiresAdministrator: requiresAdministrator })
             .catch(err => {
                 console.error(err);
             });

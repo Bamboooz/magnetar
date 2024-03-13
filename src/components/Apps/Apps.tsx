@@ -4,8 +4,8 @@ import { open } from "@tauri-apps/api/dialog";
 import { LuPlus } from "react-icons/lu";
 
 import AppItem from "./AppItem";
-import { cn } from "../../utils/tw";
 import NewAppMenu from "./NewAppMenu";
+import { cn } from "../../utils/tw";
 
 type AppItem = { name: string, iconPath: string };
 type AppList = { [filePath: string]: AppItem };
@@ -35,17 +35,14 @@ const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => 
     };
     
     const openNewAppDialog = async () => {
-        await open({
-            title: "Select an executable",
-            multiple: false,
-            filters: [{ name: "", extensions: ["exe"] }]
-        }).then(path => {
-            setFilePath(path as string);
-            setNewAppMenuOpened(true);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        await open({ title: "Select an executable", multiple: false, filters: [{ name: "", extensions: ["exe"] }] })
+            .then(path => {
+                setFilePath(path as string);
+                setNewAppMenuOpened(true);
+            })
+            .catch(err => {
+                console.error(err);
+            });
 
         await appWindow.show();
         await appWindow.setFocus();

@@ -4,51 +4,51 @@
             "title": "Open recycle bin folder",
             "requiresAdministrator": false
         },
-        "del /q /f /s C:\\$Recycle.Bin": {
+        "start cmd /k del /q /f /s C:\\$Recycle.Bin": {
             "title": "Clear recycle bin",
             "requiresAdministrator": false
         }
     },
     "Bluetooth": {
-        "./bluetooth.ps1 -BluetoothStatus On": {
+        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus On": {
             "title": "Turn bluetooth on",
             "requiresAdministrator": false
         },
-        "./bluetooth.ps1 -BluetoothStatus Off": {
+        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus Off": {
             "title": "Turn bluetooth off",
             "requiresAdministrator": false
         }
     },
     "Scans": {
-        "sfc /scannow": {
+        "start cmd /k sfc /scannow": {
             "title": "Perform a system integrity scan",
             "requiresAdministrator": true
         },
-        "CHKDSK /F /R /X": {
+        "start cmd /k CHKDSK /F /R /X": {
             "title": "Scan your drive in search of bad sectors",
             "requiresAdministrator": true
         }
     },
     "Cleanup": {
-        "del /q /f /s %TEMP%\\": {
+        "start cmd /k del /q /f /s %TEMP%\\": {
             "title": "Delete application temp files",
             "requiresAdministrator": false
         },
-        "del /q /s /q C:\\Windows\\Temp\\": {
+        "start cmd /k del /q /s /q C:\\Windows\\Temp\\": {
             "title": "Delete windows temp files",
             "requiresAdministrator": false
         },
-        "./cleaup.ps1": {
+        "start cleaup.cmd": {
             "title": "Performs many cleanups, scans etc.",
             "requiresAdministrator": true
         }
     },
     "Information": {
-        "systeminfo": {
+        "start cmd /k systeminfo": {
             "title": "View your system information",
             "requiresAdministrator": false
         },
-        "dxdiag": {
+        "start cmd /k dxdiag": {
             "title": "View your system information from dxdiag",
             "requiresAdministrator": false
         }

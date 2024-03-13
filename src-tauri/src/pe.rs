@@ -1,14 +1,14 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::fs;
 
 use pelite::{FileMap, PeFile};
 
-use crate::filesystem::{get_magnetar_path, get_file_name};
+use crate::filesystem::get_magnetar_path;
 
-fn sanitize_for_directory_name(input: PathBuf) -> String {
+fn sanitize_for_directory_name(input: String) -> String {
     let invalid_chars = "\\/:*?\"<>|";
     
-    input.to_string_lossy().into_owned().chars()
+    input.chars()
         .filter(|&c| !invalid_chars.contains(c))
         .collect()
 }
@@ -17,7 +17,8 @@ fn sanitize_for_directory_name(input: PathBuf) -> String {
 pub fn save_pe_ico(pe_path: &str) -> PathBuf {
     // make filename unique by just naming it by its filepath without any unsupported characters
     let dest = get_magnetar_path().join("icons");
-    let icon_name = format!("{}.ico", sanitize_for_directory_name(dest.join(get_file_name(pe_path))));
+    let raw_icon_name = Path::new(pe_path).file_name().unwrap_or_default().to_string_lossy().to_string();
+    let icon_name = format!("{}.ico", sanitize_for_directory_name(raw_icon_name));
 
     // don't create again if icon already exists
     if fs::metadata(icon_name.clone()).is_ok() {

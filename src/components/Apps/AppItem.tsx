@@ -38,7 +38,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
     const openExecutable = async () => {
         await appWindow.hide();
 
-        await invoke("execute_command", { command: `start ${filePath}`, requiresAdministrator: false, displayCmd: false })
+        await invoke("execute_command", { command: `start ${filePath}`, requiresAdministrator: false })
             .catch(err => {
                 console.error(err);
             });
