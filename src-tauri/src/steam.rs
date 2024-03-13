@@ -68,12 +68,18 @@ pub async fn fetch_steam_game_data(app_id: String) -> Result<String, String> {
     let api_url = format!("https://store.steampowered.com/api/appdetails?appids={}", app_id);
 
     let result = reqwest::get(&api_url).await.map_err(|err| err.to_string())?;
-    
+
     if result.status().is_success() {
         let json_response: Value = result.json().await.map_err(|err| err.to_string())?;
-        let json_string = serde_json::to_string(&json_response).map_err(|err| err.to_string())?;
 
-        Ok(json_string)
+        let header_image = json_response
+            .get(&app_id)
+            .and_then(|app_data| app_data.get("data"))
+            .and_then(|data| data.get("header_image"))
+            .and_then(|v| v.as_str())
+            .unwrap_or_default();
+
+        Ok(header_image.to_string())
     } else {
         Err(result.status().to_string())
     }

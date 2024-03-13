@@ -31,23 +31,25 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
             setIconPath(localSteamIcon);
         } else {
             setRequestCounter(prevCounter => prevCounter + 1);
-            const delay = requestCounter * 1000;
-
+            const delay = requestCounter * 10000;
+ 
             setTimeout(() => {
                 invoke("fetch_steam_game_data", { appId: id })
-                    .then(gameData => {
-                        let formattedGameData = JSON.parse(gameData as string);
-
-                        setIconPath(formattedGameData[id].data.header_image);
-                        localStorage.setItem(id, formattedGameData[id].data.header_image);
+                    .then(header_image => {
+                        if (header_image) {
+                            setIconPath(header_image as string);
+                            localStorage.setItem(id, header_image as string);
+                        } else {
+                            setValid(false);
+                        }
                     })
-                    .catch(_ => {
-                        // usually steam handlers, not games
+                    .catch(err => {
+                        console.error(err);
                         setValid(false);
                     });
             }, delay);
         }
-    }, [id, requestCounter]);
+    }, []);
 
     return (
         <>
