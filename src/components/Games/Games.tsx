@@ -6,9 +6,11 @@ import { cn } from "../../utils/tw";
 
 interface GamesViewProps {
     search: string;
+    selectedPage: number;
+    pageId: number;
 }
 
-const GamesView: React.FC<GamesViewProps> = ({ search }) => {
+const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) => {
     const [games, setGames] = useState<SteamGame[]>([]);
 
     const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));
@@ -25,7 +27,7 @@ const GamesView: React.FC<GamesViewProps> = ({ search }) => {
 
     return (
         <>
-            <div className={cn("w-full h-full flex flex-col items-center overflow-auto", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
                 {displayedGames.length > 0 ?
                     displayedGames.map((game) => (
                         <SteamGameItem key={games.indexOf(game)} id={game.id} name={game.name} installed={game.installed} />

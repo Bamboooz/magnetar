@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { appWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/api/dialog";
 import { LuPlus } from "react-icons/lu";
 
@@ -11,9 +12,11 @@ type AppList = { [filePath: string]: AppItem };
 
 interface AppsViewProps {
     search: string;
+    selectedPage: number;
+    pageId: number;
 }
 
-const AppsView: React.FC<AppsViewProps> = ({ search }) => {
+const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => {
     const appsStorage = localStorage.getItem("apps");
     const appsDefault: AppList = appsStorage ? JSON.parse(appsStorage) : {};
     const [apps, setApps] = useState<AppList>(appsDefault);
@@ -28,7 +31,7 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
             iconPath: icoPath,
         };
 
-        setApps((prevApps) => ({ ...prevApps, [filePath]: newAppItem }));
+        setApps(prevApps => ({ ...prevApps, [filePath]: newAppItem }));
     };
     
     const openNewAppDialog = async () => {
@@ -36,13 +39,16 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
             title: "Select an executable",
             multiple: false,
             filters: [{ name: "", extensions: ["exe"] }]
-        }).then((path) => {
+        }).then(path => {
             setFilePath(path as string);
             setNewAppMenuOpened(true);
         })
         .catch(err => {
             console.error(err);
         });
+
+        await appWindow.show();
+        await appWindow.setFocus();
     };
 
 
@@ -52,7 +58,7 @@ const AppsView: React.FC<AppsViewProps> = ({ search }) => {
 
     return (
         <>
-            <div className="w-full h-full flex flex-col items-center justify-start overflow-auto">
+            <div className={selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
                 <div className="w-full h-12 flex items-center justify-start px-6 gap-6">
                     <button onClick={openNewAppDialog} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
                         <LuPlus className="text-[22px]" />

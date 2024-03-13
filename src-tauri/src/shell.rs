@@ -5,28 +5,19 @@ use std::os::windows::ffi::OsStrExt;
 
 use winapi;
 
-#[tauri::command]
-pub fn execute_command(command: &str, display_cmd: bool) -> String {
-    let status = if display_cmd {
-        Command::new("cmd")
-            .args(&["/c", &format!("start cmd /k {}", command)])
-            .status()
-    } else {
-        Command::new("cmd")
-            .args(&["/c", command])
-            .status()
-    }
-    .expect("Failed to execute command");
-
-    status.to_string()
+fn execute_command_without_admin(command: &str) -> bool {
+    Command::new("cmd")
+        .args(&[command])
+        .status()
+        .expect("Failed to execute a command")
+        .success()
 }
 
-#[tauri::command]
-pub fn execute_command_as_admin(command: &str) -> bool {
+fn execute_command_as_admin(command: &str) -> bool {
     unsafe {
         let verb = OsStr::new("runas").encode_wide().chain(Some(0).into_iter()).collect::<Vec<_>>();
         let file = OsStr::new("cmd.exe").encode_wide().chain(Some(0).into_iter()).collect::<Vec<_>>();
-        let parameters = OsStr::new(&format!("/c start cmd /k {}", command)).encode_wide().chain(Some(0).into_iter()).collect::<Vec<_>>();
+        let parameters = OsStr::new(&format!("{}", command)).encode_wide().chain(Some(0).into_iter()).collect::<Vec<_>>();
 
         let result = winapi::um::shellapi::ShellExecuteW(
             ptr::null_mut(),
@@ -38,5 +29,20 @@ pub fn execute_command_as_admin(command: &str) -> bool {
         ) as isize;
 
         result > 32
+    }
+}
+
+#[tauri::command]
+pub fn execute_command(command: &str, requires_administrator: bool, display_cmd: bool) -> bool {
+    let final_command = if display_cmd {
+        format!("/c start cmd /k {}", command)
+    } else {
+        format!("/c {}", command)
+    };
+
+    if requires_administrator {
+        execute_command_as_admin(&final_command)
+    } else {
+        execute_command_without_admin(&final_command)
     }
 }

@@ -33,7 +33,7 @@
                 "removeFile": true,
                 "createDir": true,
                 "exists": true,
-                "scope": ["$RESOURCE/*"]
+                "scope": ["$RESOURCE/**"]
             },
             "dialog": {
                 "all": false,
@@ -42,12 +42,7 @@
             "protocol": {
                 "all": false,
                 "asset": true,
-                "assetScope": ["$DATA/magnetar/*"]
-            },
-            "http": {
-                "all": false,
-                "request": true,
-                "scope": ["https://store.steampowered.com/api/*"]
+                "assetScope": ["$DATA/magnetar/**"]
             }
         },
         "bundle": {
@@ -62,7 +57,7 @@
                 "icons/icon.ico"
             ],
             "resources": [
-                "resources/bluetooth.ps1"
+                "resources/commands/*"
             ]
         },
         "security": {

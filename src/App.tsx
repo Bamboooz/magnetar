@@ -9,11 +9,6 @@ import NavigationBar from "./components/NavigationBar";
 import GamesView from "./components/Games/Games";
 
 const App: React.FC = () => {
-    /*
-    TODO:
-    1. FIXME: when adding new app the app treats it as unfocus
-    2. FIXME: sometimes appicons are not loaded in release mode
-    */
     const pageStorage = localStorage.getItem("page");
     const pageDefault = pageStorage ? Number(pageStorage) : 0;
     const [selectedPage, setSelectedPage] = useState<number>(pageDefault);
@@ -56,12 +51,9 @@ const App: React.FC = () => {
                 <Header />
                 <NavigationBar search={search} setSearch={setSearch} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                 
-                {selectedPage === 0
-                    ? <AppsView search={search} />
-                    : selectedPage === 1
-                    ? <GamesView search={search} />
-                    : <CommandsView search={search} />
-                }
+                <AppsView search={search} selectedPage={selectedPage} pageId={0} />
+                <GamesView search={search} selectedPage={selectedPage} pageId={1} />
+                <CommandsView search={search} selectedPage={selectedPage} pageId={2} />
             </div>
         </>
     );

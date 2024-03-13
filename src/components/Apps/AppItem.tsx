@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { invoke, convertFileSrc } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window"
+import { LuMoreVertical } from "react-icons/lu";
 
 import AppItemContext from "./AppItemContext";
 import { AppList } from "./Apps";
-import { LuMoreVertical } from "react-icons/lu";
 
 const initialContextMenu = {
     show: false,
@@ -38,7 +38,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
     const openExecutable = async () => {
         await appWindow.hide();
 
-        await invoke("spawn_executable", { filePath: filePath })
+        await invoke("execute_command", { command: `start ${filePath}`, requiresAdministrator: false, displayCmd: false })
             .catch(err => {
                 console.error(err);
             });

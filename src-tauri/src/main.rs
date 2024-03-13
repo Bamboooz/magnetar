@@ -9,14 +9,13 @@ use tauri_plugin_positioner::{WindowExt, Position};
 use window_shadows::set_shadow;
 
 mod shell;
-mod executable;
 mod filesystem;
 mod window;
 mod pe;
 mod steam;
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
-    if !filesystem::initialize_magnetar_folder() {
+    if !filesystem::initialize_magnetar_folders() {
         panic!("Failed to create magnetar directory.");
     }
 
@@ -63,11 +62,11 @@ fn main() {
         .on_system_tray_event(handle_system_tray_event)
         .invoke_handler(tauri::generate_handler![
             shell::execute_command,
-            shell::execute_command_as_admin,
-            executable::spawn_executable,
             pe::save_pe_ico,
             filesystem::remove_file,
             steam::get_installed_steam_games,
+            steam::run_steam_game,
+            steam::fetch_steam_game_data,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

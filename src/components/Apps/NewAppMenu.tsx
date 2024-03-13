@@ -16,7 +16,7 @@ const NewAppMenu: React.FC<NewAppMenuProps> = ({ newAppMenuOpened, setNewAppMenu
 
     const savePEIcon = async (filePath: string) => {
         await invoke("save_pe_ico", { pePath: filePath })
-            .then((icoPath) => {
+            .then(icoPath => {
                 addNewApp(filePath, icoPath as string, fileNameInput);
             })
             .catch(err => {

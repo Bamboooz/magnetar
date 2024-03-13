@@ -16,7 +16,7 @@ fn sanitize_for_directory_name(input: PathBuf) -> String {
 #[tauri::command]
 pub fn save_pe_ico(pe_path: &str) -> PathBuf {
     // make filename unique by just naming it by its filepath without any unsupported characters
-    let dest = get_magnetar_path();
+    let dest = get_magnetar_path().join("icons");
     let icon_name = format!("{}.ico", sanitize_for_directory_name(dest.join(get_file_name(pe_path))));
 
     // don't create again if icon already exists

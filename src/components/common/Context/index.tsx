@@ -18,7 +18,6 @@ const Context: React.FC<ContextProps> = ({ x, y, closeContextMenu, className, ch
     useOnClickOutside(contextMenuRef, closeContextMenu);
 
     useEffect(() => {
-        // FIXME: sometimes randomly going up when its not meant to
         const updatePosition = () => {
             if (contextMenuRef.current) {
                 const rect = contextMenuRef.current.getBoundingClientRect();

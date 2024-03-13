@@ -10,18 +10,18 @@ pub fn get_magnetar_path() -> PathBuf {
     Path::new(&appdata).join("magnetar")
 }
 
-pub fn initialize_magnetar_folder() -> bool{
+pub fn initialize_magnetar_folders() -> bool {
     let magnetar_path = get_magnetar_path();
+    let folders = ["", "icons", "commands"];
 
-    // check if exists beforehand
-    if fs::metadata(magnetar_path.clone()).is_ok() {
-        return true;
+    for folder in folders.iter() {
+        let path = magnetar_path.join(folder);
+        if !fs::metadata(&path).is_ok() && !fs::create_dir(&path).is_ok() {
+            return false;
+        }
     }
 
-    match fs::create_dir(magnetar_path) {
-        Ok(_) => true,
-        Err(_) => false,
-    }
+    true
 }
 
 pub fn get_file_name(file_path: &str) -> String {

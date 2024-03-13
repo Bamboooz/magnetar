@@ -1,9 +1,9 @@
 import React from "react";
+import { invoke } from "@tauri-apps/api/tauri";
 import { LuTrash2 } from "react-icons/lu";
 
 import Context from "../common/Context";
 import { AppList } from "./Apps";
-import { invoke } from "@tauri-apps/api/tauri";
 
 interface AppItemContextProps {
     x: number;
@@ -16,7 +16,7 @@ interface AppItemContextProps {
 
 const AppItemContext: React.FC<AppItemContextProps> = ({ x, y, closeContextMenu, setApps, filePath, iconPath }) => {
     const removeApp = async () => {
-        setApps((prevApps) => {
+        setApps(prevApps => {
             const { [filePath]: ommited, ...newApps } = prevApps;
             return newApps;
         });

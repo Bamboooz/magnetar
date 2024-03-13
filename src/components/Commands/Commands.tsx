@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { resolveResource } from "@tauri-apps/api/path";
+import { readTextFile } from "@tauri-apps/api/fs";
 
 import CommandListView from "./CommandList";
 import { cn } from "../../utils/tw";
@@ -9,93 +10,30 @@ type CommandList = { [name: string]: CommandListItem };
 
 interface CommandsViewProps {
     search: string;
+    selectedPage: number;
+    pageId: number;
 }
 
-const CommandsView: React.FC<CommandsViewProps> = ({ search }) => {
-    const [bluetoothScriptPath, setBluetoothScriptPath] = useState<string>("");
+const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageId }) => {
+    const [commandsJsonPath, setCommandsJsonPath] = useState<CommandList>({});
 
-    // add bluetooth support
-    const commandLists: CommandList = {
-        "Information": {
-            "systeminfo": {
-                title: "View your system information",
-                requiresAdministrator: false
-            },
-            "dxdiag": {
-                title: "View your system information from dxdiag",
-                requiresAdministrator: false
-            },
-        },
-        "Bluetooth": {
-            [`powershell.exe -command ${bluetoothScriptPath} -BluetoothStatus On`]: {
-                title: "Turn bluetooth on",
-                requiresAdministrator: false
-            },
-            [`powershell.exe -command ${bluetoothScriptPath} -BluetoothStatus Off`]: {
-                title: "Turn bluetooth off",
-                requiresAdministrator: false
-            },
-        },
-        "Scans": {
-            "sfc /scannow": {
-                title: "Perform a system integrity scan",
-                requiresAdministrator: true
-            },
-            "CHKDSK /F /R /X": {
-                title: "Scan your drive in search of bad sectors",
-                requiresAdministrator: true
-            },
-        },
-        "Cleanup": {
-            "del /q /f /s %TEMP%\\": {
-                title: "Delete application temp files",
-                requiresAdministrator: false
-            },
-            "del /q /s /q C:\\Windows\\Temp\\": {
-                title: "Delete windows temp files",
-                requiresAdministrator: false
-            }
-        },
-        "Power": {
-            "shutdown /s /t 0": {
-                title: "Shutdown your PC",
-                requiresAdministrator: false
-            },
-            "shutdown /r /t 0": {
-                title: "Reboot your PC",
-                requiresAdministrator: false
-            },
-            "rundll32.exe powrprof.dll,SetSuspendState 0,1,0": {
-                title: "Sleep",
-                requiresAdministrator: false
-            },
-            "shutdown /r /o /f /t 00": {
-                title: "Reboot into recovery options",
-                requiresAdministrator: true
-            },
-            "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00": {
-                title: "Reboot in safe mode",
-                requiresAdministrator: true
-            },
-        }
-    };
+    const displayedLists = Object.fromEntries(Object.entries(commandsJsonPath).filter(([_, commands]) => Object.values(commands).some(command => command.title.toLowerCase().includes(search.toLowerCase()))));
 
-    const displayedLists = Object.fromEntries(Object.entries(commandLists).filter(([_, commands]) => Object.values(commands).some(command => command.title.toLowerCase().includes(search.toLowerCase()))));
+    useEffect(() => {
+        const getCommandsJsonPath = async () => {
+            const resourcePath = await resolveResource('resources/commands/commands.json')
+            setCommandsJsonPath(JSON.parse(await readTextFile(resourcePath)));
+        };
 
-    resolveResource("bluetooth.ps1")
-        .then(filePath => {
-            setBluetoothScriptPath(filePath as string);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        getCommandsJsonPath();
+    }, []);
 
     return (
         <>
-            <div className={cn("w-full h-full flex flex-col items-center overflow-auto", Object.keys(displayedLists).length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(selectedPage === pageId ? "flex w-full h-full flex-col items-center overflow-auto" : "hidden", Object.keys(displayedLists).length > 0 ? "justify-start" : "justify-center")}>
                 {Object.keys(displayedLists).length > 0 ?
                     Object.keys(displayedLists).map((key, index) => (
-                        <CommandListView key={index} title={key} search={search} commands={commandLists[key]} />
+                        <CommandListView key={index} title={key} search={search} commands={commandsJsonPath[key]} />
                     ))
                     : <p className="text-neutral-300 text-[18px] font-semibold">No commands found.</p>
                 }

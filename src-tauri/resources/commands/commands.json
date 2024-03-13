@@ -1,0 +1,78 @@
+{
+    "Recycle bin": {
+        "explorer.exe C:\\$Recycle.Bin": {
+            "title": "Open recycle bin folder",
+            "requiresAdministrator": false
+        },
+        "del /q /f /s C:\\$Recycle.Bin": {
+            "title": "Clear recycle bin",
+            "requiresAdministrator": false
+        }
+    },
+    "Bluetooth": {
+        "./bluetooth.ps1 -BluetoothStatus On": {
+            "title": "Turn bluetooth on",
+            "requiresAdministrator": false
+        },
+        "./bluetooth.ps1 -BluetoothStatus Off": {
+            "title": "Turn bluetooth off",
+            "requiresAdministrator": false
+        }
+    },
+    "Scans": {
+        "sfc /scannow": {
+            "title": "Perform a system integrity scan",
+            "requiresAdministrator": true
+        },
+        "CHKDSK /F /R /X": {
+            "title": "Scan your drive in search of bad sectors",
+            "requiresAdministrator": true
+        }
+    },
+    "Cleanup": {
+        "del /q /f /s %TEMP%\\": {
+            "title": "Delete application temp files",
+            "requiresAdministrator": false
+        },
+        "del /q /s /q C:\\Windows\\Temp\\": {
+            "title": "Delete windows temp files",
+            "requiresAdministrator": false
+        },
+        "./cleaup.ps1": {
+            "title": "Performs many cleanups, scans etc.",
+            "requiresAdministrator": true
+        }
+    },
+    "Information": {
+        "systeminfo": {
+            "title": "View your system information",
+            "requiresAdministrator": false
+        },
+        "dxdiag": {
+            "title": "View your system information from dxdiag",
+            "requiresAdministrator": false
+        }
+    },
+    "Power": {
+        "shutdown /s /t 0": {
+            "title": "Shutdown your PC",
+            "requiresAdministrator": false
+        },
+        "shutdown /r /t 0": {
+            "title": "Reboot your PC",
+            "requiresAdministrator": false
+        },
+        "rundll32.exe powrprof.dll,SetSuspendState 0,1,0": {
+            "title": "Sleep",
+            "requiresAdministrator": false
+        },
+        "shutdown /r /o /f /t 00": {
+            "title": "Reboot into recovery options",
+            "requiresAdministrator": true
+        },
+        "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00": {
+            "title": "Reboot in safe mode",
+            "requiresAdministrator": true
+        }
+    }
+}

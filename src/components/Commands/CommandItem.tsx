@@ -15,17 +15,10 @@ const CommandItem: React.FC<CommandItemProps> = ({ icon, title, command, require
     const executeCommand = async () => {
         await appWindow.hide();
 
-        if (requiresAdministrator) {
-            await invoke("execute_command_as_admin", { command: command })
-                .catch(err => {
-                    console.error(err);
-                });
-        } else {
-            await invoke("execute_command", { command: command, displayCmd: true })
-                .catch(err => {
-                    console.error(err);
-                });
-        }
+        await invoke("execute_command", { command: command, requiresAdministrator: requiresAdministrator, displayCmd: true })
+            .catch(err => {
+                console.error(err);
+            });
     };
     
     const trimmedTitle = command.length <= 50 ? command : `${command.substring(0, 50)}...`;

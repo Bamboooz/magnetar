@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
-import { fetch, ResponseType } from "@tauri-apps/api/http"
 import { appWindow } from "@tauri-apps/api/window";
 
 interface SteamGame {
@@ -14,45 +13,33 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name }) => {
     const [iconPath, setIconPath] = useState<string>("");
     const [valid, setValid] = useState<boolean>(true);
 
-    const runCommand = `start steam://rungameid/${id}`;
-
     const startGame = async () => {
         await appWindow.hide();
         
-        await invoke("execute_command", { command: runCommand, displayCmd: false })
+        await invoke("run_steam_game", { appId: id })
             .catch(err => {
                 console.error(err);
             });
     };
 
     useEffect(() => {
-        const getGameIcon = async () => {
-            const savedIdImage = localStorage.getItem(id);
+        const localSteamIcon = localStorage.getItem(id);
 
-            if (savedIdImage === null) {
-                const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${id}`, {
-                    method: "GET",
-                    responseType: ResponseType.JSON,
+        if (localSteamIcon) {
+            setIconPath(localSteamIcon);
+        } else {
+            invoke("fetch_steam_game_data", { appId: id })
+                .then(gameData => {
+                    let formattedGameData = JSON.parse(gameData as string);
+
+                    setIconPath(formattedGameData[id].data.header_image);
+                    localStorage.setItem(id, formattedGameData[id].data.header_image);
+                })
+                .catch(_ => {
+                    // usually steam handlers, not games
+                    setValid(false);
                 });
-
-                if (response.status === 200) {
-                    type SteamResponseJson = { [key: string]: { success: boolean; data: { header_image: string } } };
-                    const data: SteamResponseJson = response.data as SteamResponseJson;
-                
-                    if (data[id]?.success) {
-                        setIconPath(data[id].data.header_image);
-                        localStorage.setItem(id, data[id].data.header_image);
-                    } else {
-                        // usually steam handlers, not games, we can skip those
-                        setValid(false);
-                    }
-                }
-            } else {
-                setIconPath(savedIdImage as string);
-            }
-        };
-
-        getGameIcon();
+        }
     }, []);
 
     return (
@@ -63,7 +50,7 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name }) => {
 
                     <div className="flex flex-col items-start justify-center">
                         <p className="text-[14px] font-bold text-neutral-300">{name}</p>
-                        <p className="text-[11px] text-neutral-400">{runCommand.split(" ")[1]}</p>
+                        <p className="text-[11px] text-neutral-400">{`steam://rungameid/${id}`}</p>
                     </div>
                 </div>
             }
