@@ -85,11 +85,20 @@ pub async fn fetch_steam_game_data(app_id: String) -> Result<String, String> {
     }
 }
 
-#[tauri::command]
-pub fn run_steam_game(app_id: String) -> String {
+fn run_steam_scheme(scheme: String) -> String {
     Command::new("cmd.exe")
-        .args(&["/c", &format!("start steam://rungameid/{}", app_id)])
+        .args(&["/c", &format!("start {}", scheme)])
         .status()
         .expect("Failed to execute command")
         .to_string()
+}
+
+#[tauri::command]
+pub fn run_steam_game(app_id: String) -> String {
+    run_steam_scheme(format!("steam://rungameid/{}", app_id))
+}
+
+#[tauri::command]
+pub fn open_steam_game_page(app_id: String) -> String {
+    run_steam_scheme(format!("steam://store/{}", app_id))
 }

@@ -28,7 +28,7 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
 
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start pt-2" : "justify-center")}>
                 {displayedGames.length > 0 ?
                     displayedGames.map((game) => (
                         <SteamGameItem key={games.indexOf(game)} id={game.id} name={game.name} installed={game.installed} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window";
+import { FaSteam } from "react-icons/fa";
 
 interface SteamGame {
     id: string;
@@ -15,10 +16,10 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
     const [iconPath, setIconPath] = useState<string>("");
     const [valid, setValid] = useState<boolean>(false);
 
-    const startGame = async () => {
+    const useSteamScheme = async (mode: string) => {
         await appWindow.hide();
         
-        await invoke("run_steam_game", { appId: id })
+        await invoke(mode, { appId: id })
             .catch(err => {
                 console.error(err);
             });
@@ -53,13 +54,19 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
     return (
         <>
             {valid &&
-                <div title={name} onClick={startGame} className="w-full flex shrink-0 pl-6 pr-4 py-1 gap-3 items-center justify-start hover:bg-item-hover">
-                    <img src={iconPath} className="h-[44px] rounded-sm" alt="icon" />
+                <div className="w-full flex shrink-0 pl-6 pr-4 py-1 gap-3 items-center justify-between hover:bg-item-hover">
+                    <div title={name} onClick={() => useSteamScheme("run_steam_game")} className="group flex items-center justify-center gap-3">
+                        <img src={iconPath} className="h-[44px] rounded-sm" alt="icon" />
 
-                    <div className="flex flex-col items-start justify-center">
-                        <p className="text-[14px] font-bold text-neutral-300">{name}</p>
-                        <p className="text-[11px] text-neutral-400">{`steam://rungameid/${id}`}</p>
+                        <div className="flex flex-col items-start justify-center">
+                            <p className="text-[14px] font-bold text-neutral-300">{name}</p>
+                            <p className="text-[11px] text-neutral-400">{`steam://rungameid/${id}`}</p>
+                        </div>
                     </div>
+
+                    <button onClick={() => useSteamScheme("open_steam_game_page")} className="p-1 z-20">
+                        <FaSteam className="text-neutral-300 text-[20px]" />
+                    </button>
                 </div>
             }
         </>

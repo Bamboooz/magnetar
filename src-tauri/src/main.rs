@@ -15,8 +15,9 @@ mod pe;
 mod steam;
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
-    if !filesystem::initialize_magnetar_folders() {
-        panic!("Failed to create magnetar directory.");
+    match filesystem::initialize_magnetar_folders() {
+        Ok(_) => println!("Succesfully initialized magnetar directories and files!"),
+        Err(err) => panic!("Failed to initialize magnetar directories and files: {}", err)
     }
 
     let window = app.get_window("main").unwrap();
@@ -67,6 +68,7 @@ fn main() {
             steam::get_installed_steam_games,
             steam::run_steam_game,
             steam::fetch_steam_game_data,
+            steam::open_steam_game_page,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

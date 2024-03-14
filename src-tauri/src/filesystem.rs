@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 
 #[tauri::command]
@@ -11,27 +12,22 @@ pub fn get_magnetar_path() -> PathBuf {
     Path::new(&appdata).join("magnetar")
 }
 
-pub fn initialize_magnetar_folders() -> bool {
+pub fn initialize_magnetar_folders() -> Result<(), String> {
     let magnetar_path = get_magnetar_path();
     let commands_file_path = magnetar_path.join("commands").join("commands.json");
     let folders = ["", "icons", "commands"];
 
-    for folder in folders.iter() {
+    for folder in &folders {
         let path = magnetar_path.join(folder);
-        if !fs::metadata(&path).is_ok() && !fs::create_dir(&path).is_ok() {
-            return false;
+        if !path.exists() {
+            fs::create_dir_all(&path).map_err(|err| err.to_string())?;
         }
     }
 
-    if !fs::metadata(&commands_file_path).is_ok() {
-        if !fs::File::create(&commands_file_path).is_ok() {
-            return false;
-        } else {
-            if !fs::write(commands_file_path, "{\n\n}\n").is_ok() {
-                return false;
-            }
-        }
+    if !commands_file_path.exists() {
+        let mut file = fs::File::create(&commands_file_path).map_err(|err| err.to_string())?;
+        file.write_all(b"{\n\n}\n").map_err(|err| err.to_string())?;
     }
 
-    true
+    Ok(())
 }
