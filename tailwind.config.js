@@ -6,11 +6,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                "primary": "#272831",
+                "primary": "#23272b",
                 "header": "#121314",
-                "btn-hover": "#262727",
                 "accent": "#167dff",
                 "item-hover": "#2e3338",
+                "header-item-hover": "#252626",
                 "border": "#414248",
             },
         },

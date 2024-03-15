@@ -38,7 +38,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
     const openExecutable = async () => {
         await appWindow.hide();
 
-        await invoke("execute_command", { command: `start ${filePath}`, requiresAdministrator: false })
+        await invoke("execute_command", { command: `"${filePath}"`, requiresAdministrator: false })
             .catch(err => {
                 console.error(err);
             });
@@ -46,7 +46,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
 
     return (
         <>
-            <div className="w-full flex shrink-0 pl-6 pr-4 py-1 items-center justify-between hover:bg-item-hover">
+            <div className="group w-full flex shrink-0 pl-6 pr-6 py-1 items-center justify-between hover:bg-item-hover">
                 <div className="w-full flex items-center justify-between">
                     <div title={name} onClick={openExecutable} className="flex items-center justify-center gap-3">
                         <img src={convertFileSrc(iconPath)} className="h-[44px] w-[44px]" alt="icon" />
@@ -57,7 +57,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
                         </div>
                     </div>
 
-                    <button ref={appItemRef} onClick={(e) => handleContextMenu(e)} className="p-1 z-20">
+                    <button title="More" ref={appItemRef} onClick={(e) => handleContextMenu(e)} className="hidden group-hover:block group-hover:p-1 group-hover:z-20">
                         <LuMoreVertical className="text-neutral-300 text-[16px]" />
                     </button>
                 </div>

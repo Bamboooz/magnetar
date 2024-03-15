@@ -1,17 +1,18 @@
 import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window"
+import { LuTerminal } from "react-icons/lu";
+import { VscTerminalPowershell } from "react-icons/vsc";
 
 import admin_icon from "../../assets/admin.png";
 
 interface CommandItemProps {
-    icon: React.ReactElement;
     title: string;
     command: string;
     requiresAdministrator?: boolean;
 }
 
-const CommandItem: React.FC<CommandItemProps> = ({ icon, title, command, requiresAdministrator }) => {
+const CommandItem: React.FC<CommandItemProps> = ({ title, command, requiresAdministrator }) => {
     const executeCommand = async () => {
         await appWindow.hide();
 
@@ -27,7 +28,10 @@ const CommandItem: React.FC<CommandItemProps> = ({ icon, title, command, require
         <>
             <button title={command} onClick={executeCommand} className="w-full h-12 flex shrink-0 px-6 items-center justify-between hover:bg-item-hover">
                 <div className="flex items-center justify-start gap-6">
-                    {React.cloneElement(icon, { className: "text-neutral-300 text-[20px]" })}
+                    {command.includes("powershell")
+                        ? <VscTerminalPowershell className="text-neutral-300 text-[20px]" />
+                        : <LuTerminal className="text-neutral-300 text-[20px]" />
+                    }
 
                     <div className="flex flex-col items-start justify-center">
                         <p className="text-[14px] font-semibold text-neutral-300">{title}</p>

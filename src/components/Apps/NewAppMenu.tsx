@@ -45,9 +45,9 @@ const NewAppMenu: React.FC<NewAppMenuProps> = ({ newAppMenuOpened, setNewAppMenu
     return (
         <>
             <Modal modalOpened={newAppMenuOpened} setModalOpened={setNewAppMenuOpened} className="flex flex-col items-center justify-start h-[30vh] w-[80vw]">
-                <form onSubmit={createThatNewApp} className="w-full h-full flex flex-col items-center justify-center gap-4 text-neutral-300 p-10 text-[14px]">
+                <form autoComplete="off" onSubmit={createThatNewApp} className="w-full h-full flex flex-col items-center justify-center gap-4 text-neutral-300 p-10 text-[14px]">
                     <label htmlFor="name">New app name</label>
-                    <input value={fileNameInput} onChange={(e) => setFileNameInput(e.target.value)} id="name" placeholder="New app name..." type="text" className="bg-transparent h-10 rounded-md px-4 outline-none w-full border border-border" />
+                    <input autoComplete="off" value={fileNameInput} onChange={(e) => setFileNameInput(e.target.value)} id="name" placeholder="New app name..." type="text" className="bg-transparent h-10 rounded-md px-4 outline-none w-full border border-border" />
 
                     <button type="submit" className="w-full h-10 rounded-md bg-accent transition-all hover:shadow-2xl hover:scale-[101%]">
                         Submit

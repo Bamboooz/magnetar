@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
-import CommandItem from "./CommandItem";
-import { CommandListItem } from "./Commands";
+import SteamGameItem from "./Game";
+import { GameListGroup } from "./Games";
 import { cn } from "../../utils/tw";
 
-interface CommandListViewProps {
+interface GameListViewProps {
     title: string;
-    search: string;
-    commands: CommandListItem;
+    games: GameListGroup;
+    requestCounter: number;
+    setRequestCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CommandListView: React.FC<CommandListViewProps> = ({ title, search, commands }) => {
+const GameListView: React.FC<GameListViewProps> = ({ title, games, requestCounter, setRequestCounter }) => {
     const [opened, setOpened] = useState<boolean>(true);
-
-    const displayedItems = Object.keys(commands).filter((key) => commands[key].title.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>
-            {displayedItems.length > 0 &&
+            {games.length > 0 &&
                 <div className="w-full flex flex-col items-center justify-start gap-1">
                     <button onClick={() => setOpened(!opened)} className="w-full h-8 flex items-center justify-start px-6 gap-2">
                         <IoIosArrowForward className={cn("text-neutral-400 text-[14px] transition-all duration-800", opened ? "rotate-90" : "")} />
@@ -26,8 +25,8 @@ const CommandListView: React.FC<CommandListViewProps> = ({ title, search, comman
                     </button>
                     
                     <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "max-h-screen mb-4" : "max-h-0 mb-0")}>
-                        {displayedItems.map((key, index) => (
-                            <CommandItem key={index} requiresAdministrator={commands[key].requiresAdministrator} title={commands[key].title} command={key} />
+                        {games.map((game, index) => (
+                            <SteamGameItem key={index} id={game.id} name={game.name} installed={game.installed} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />
                         ))}
                     </div>
                 </div>
@@ -36,4 +35,4 @@ const CommandListView: React.FC<CommandListViewProps> = ({ title, search, comman
     );
 };
 
-export default CommandListView;
+export default GameListView;

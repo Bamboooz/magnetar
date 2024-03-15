@@ -11,8 +11,7 @@ interface SteamGame {
     setRequestCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// installed is redundant in the frontend, only used in the backend but the data structure is shared
-const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setRequestCounter }) => {
+const SteamGameItem: React.FC<SteamGame> = ({ id, name, installed, requestCounter, setRequestCounter }) => {
     const [iconPath, setIconPath] = useState<string>("");
     const [valid, setValid] = useState<boolean>(false);
 
@@ -54,8 +53,9 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
     return (
         <>
             {valid &&
-                <div className="w-full flex shrink-0 pl-6 pr-4 py-1 gap-3 items-center justify-between hover:bg-item-hover">
-                    <div title={name} onClick={() => useSteamScheme("run_steam_game")} className="group flex items-center justify-center gap-3">
+                <div className="group relative w-full flex shrink-0 pl-6 pr-4 py-1 gap-3 items-center justify-between hover:bg-item-hover">
+                    {/* If not installed running steam scheme to open a game runs the installator */}
+                    <div title={installed === "1" ? `Play ${name}` : `Install ${name}`} onClick={() => useSteamScheme("run_steam_game")} className="group flex items-center justify-center gap-3">
                         <img src={iconPath} className="h-[44px] rounded-sm" alt="icon" />
 
                         <div className="flex flex-col items-start justify-center">
@@ -64,9 +64,13 @@ const SteamGameItem: React.FC<SteamGame> = ({ id, name, requestCounter, setReque
                         </div>
                     </div>
 
-                    <button onClick={() => useSteamScheme("open_steam_game_page")} className="p-1 z-20">
-                        <FaSteam className="text-neutral-300 text-[20px]" />
+                    <button title="Open game page" onClick={() => useSteamScheme("open_steam_game_page")} className="hidden group-hover:block group-hover:p-1 group-hover:z-20">
+                        <FaSteam className="text-neutral-300 text-[16px]" />
                     </button>
+
+                    {installed === "0" &&
+                        <div className="absolute top-0 left-0 w-full h-full z-50 bg-primary bg-opacity-60 hover:bg-transparent" />
+                    }
                 </div>
             }
         </>

@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
+import { LuSearch } from "react-icons/lu";
 
 import PageButton from "./PageButton";
+import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
 interface NavigationBarProps {
     selectedPage: number;
@@ -11,23 +13,22 @@ interface NavigationBarProps {
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, search, setSearch }) => {
+    const [editing, setEditing] = useState<boolean>(false);
+
     const searchRef = useRef<HTMLInputElement>(null);
+
+    useOnClickOutside(searchRef, () => {
+        if (search.replaceAll(" ", "") === "")
+            setEditing(false)
+    });
+
+    useEffect(() => {
+        if (editing)
+            searchRef.current?.focus();
+    }, [editing]);
     
-    // focus the input when changing pages, or when the user focuses the window in
     useEffect(() => {
-        const setupFocusListener = async () => {
-            await appWindow.onFocusChanged(async ({ payload: focused }) => {
-                if (focused) {
-                    searchRef.current?.focus();
-                }
-            });
-        };
-
-        setupFocusListener();
-    }, []);
-
-    useEffect(() => {
-        searchRef.current?.focus();
+        setEditing(false);
     }, [selectedPage]);
 
     return (
@@ -39,8 +40,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
                     <PageButton text="Commands" targetPage={2} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                 </div>
 
-                <div className="h-full w-full flex items-center justify-center">
-                    <input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 bg-transparent outline-none px-2 text-neutral-400 text-[12px] rounded-md border border-border" />
+                <div className="h-full w-full flex items-center justify-end">
+                    {editing
+                        ? <input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 mb-1 bg-transparent outline-none px-2 text-neutral-400 text-[12px] border-b border-border" />
+                        : <button title="Search..." onClick={() => setEditing(true)} className="p-1 rounded-full hover:bg-item-hover">
+                            <LuSearch className="text-neutral-300 text-[16px]" />
+                        </button>
+                    }
                 </div>
             </div>
         </>

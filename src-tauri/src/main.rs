@@ -65,7 +65,7 @@ fn main() {
             shell::execute_command,
             pe::save_pe_ico,
             filesystem::get_magnetar_path,
-            steam::get_installed_steam_games,
+            steam::fetch_all_steam_games,
             steam::run_steam_game,
             steam::fetch_steam_game_data,
             steam::open_steam_game_page,

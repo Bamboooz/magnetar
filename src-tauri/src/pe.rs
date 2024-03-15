@@ -1,5 +1,4 @@
 use std::path::{Path, PathBuf};
-use std::fs;
 
 use pelite::{FileMap, PeFile};
 
@@ -17,11 +16,10 @@ fn sanitize_for_directory_name(input: String) -> String {
 pub fn save_pe_ico(pe_path: &str) -> PathBuf {
     // make filename unique by just naming it by its filepath without any unsupported characters
     let dest = get_magnetar_path().join("icons");
-    let raw_icon_name = Path::new(pe_path).file_name().unwrap_or_default().to_string_lossy().to_string();
-    let icon_name = format!("{}.ico", sanitize_for_directory_name(raw_icon_name));
+    let icon_name = format!("{}.ico", sanitize_for_directory_name(pe_path.to_string()));
 
     // don't create again if icon already exists
-    if fs::metadata(icon_name.clone()).is_ok() {
+    if Path::new(&icon_name).exists() {
         return dest.join(icon_name);
     }
 

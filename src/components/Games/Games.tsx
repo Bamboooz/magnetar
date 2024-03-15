@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 
-import SteamGameItem, { SteamGame } from "./Game";
+import { SteamGame } from "./Game";
 import { cn } from "../../utils/tw";
+import GameListView from "./GameList";
+
+type GameListGroup = {
+    id: string;
+    name: string;
+    installed: string;
+}[];
 
 interface GamesViewProps {
     search: string;
@@ -17,7 +24,7 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
     const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));
 
     useEffect(() => {
-        invoke("get_installed_steam_games")
+        invoke("fetch_all_steam_games")
             .then(games => {
                 setGames(games as SteamGame[]);
             })
@@ -28,11 +35,12 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
 
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start pt-2" : "justify-center")}>
-                {displayedGames.length > 0 ?
-                    displayedGames.map((game) => (
-                        <SteamGameItem key={games.indexOf(game)} id={game.id} name={game.name} installed={game.installed} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />
-                    ))
+            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
+                {displayedGames.length > 0
+                    ? <>
+                        <GameListView title="Installed" games={displayedGames.filter((game) => game.installed === "1")} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />
+                        <GameListView title="Not installed" games={displayedGames.filter((game) => game.installed === "0")} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />
+                    </>
                     : <p className="text-neutral-300 text-[18px] font-semibold">No games found.</p>
                 }
             </div>
@@ -40,4 +48,5 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
     );
 };
 
+export type { GameListGroup };
 export default GamesView;

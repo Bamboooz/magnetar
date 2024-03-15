@@ -28,7 +28,9 @@ fn get_all_available_steam_app_ids() -> Result<Vec<String>, Box<dyn Error>> {
     app_ids
 }
 
-fn get_steam_games_from_app_ids(app_ids: Vec<String>) -> Result<Vec<SteamGame>, Box<dyn Error>> {
+#[tauri::command]
+pub fn fetch_all_steam_games() -> Result<Vec<SteamGame>, String> {
+    let app_ids = get_all_available_steam_app_ids().map_err(|e| e.to_string())?;
     let steam_games: Vec<_> = app_ids
         .into_iter()
         .filter_map(|id| {
@@ -47,20 +49,6 @@ fn get_steam_games_from_app_ids(app_ids: Vec<String>) -> Result<Vec<SteamGame>, 
         .collect();
 
     Ok(steam_games)
-}
-
-#[tauri::command]
-pub fn get_installed_steam_games() -> Vec<SteamGame> {
-    let app_ids = get_all_available_steam_app_ids().unwrap_or_default();
-    let all_games = get_steam_games_from_app_ids(app_ids).unwrap_or_default();
-
-    // 1 REG_DWORD value in a Steam game means that it is installed
-    let installed_games: Vec<SteamGame> = all_games
-        .into_iter()
-        .filter(|game| game.installed == "1")
-        .collect();
-
-    installed_games
 }
 
 #[tauri::command(async)]
