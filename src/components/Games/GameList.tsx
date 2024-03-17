@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 import SteamGameItem from "./Game";
-import { GameListGroup } from "./Games";
+import { SteamGame } from "./Games";
 import { cn } from "../../utils/tw";
 
 interface GameListViewProps {
     title: string;
-    games: GameListGroup;
-    requestCounter: number;
-    setRequestCounter: React.Dispatch<React.SetStateAction<number>>;
+    games: SteamGame[];
 }
 
-const GameListView: React.FC<GameListViewProps> = ({ title, games, requestCounter, setRequestCounter }) => {
+const GameListView: React.FC<GameListViewProps> = ({ title, games }) => {
     const [opened, setOpened] = useState<boolean>(true);
 
     return (
@@ -24,9 +22,9 @@ const GameListView: React.FC<GameListViewProps> = ({ title, games, requestCounte
                         <p className="text-neutral-400 text-[14px]">{title}</p>
                     </button>
                     
-                    <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "max-h-screen mb-4" : "max-h-0 mb-0")}>
+                    <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "h-auto mb-4" : "h-0 mb-0")}>
                         {games.map((game, index) => (
-                            <SteamGameItem key={index} id={game.id} name={game.name} installed={game.installed} requestCounter={requestCounter} setRequestCounter={setRequestCounter} />
+                            <SteamGameItem key={index} id={game.id} name={game.name} installed={game.installed} />
                         ))}
                     </div>
                 </div>

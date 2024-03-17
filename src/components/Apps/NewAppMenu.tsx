@@ -23,7 +23,7 @@ const NewAppMenu: React.FC<NewAppMenuProps> = ({ newAppMenuOpened, setNewAppMenu
                 console.error(err);
             });
 
-            setNewAppMenuOpened(false);
+        setNewAppMenuOpened(false);
     };
 
     const createThatNewApp = (e: React.FormEvent<HTMLFormElement>) => {

@@ -25,7 +25,7 @@ const CommandListView: React.FC<CommandListViewProps> = ({ title, search, comman
                         <p className="text-neutral-400 text-[14px]">{title}</p>
                     </button>
                     
-                    <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "max-h-screen mb-4" : "max-h-0 mb-0")}>
+                    <div className={cn("w-full flex flex-col items-center justify-start transition-all overflow-hidden ease-in-out duration-800", opened ? "h-auto mb-4" : "h-0 mb-0")}>
                         {displayedItems.map((key, index) => (
                             <CommandItem key={index} requiresAdministrator={commands[key].requiresAdministrator} title={commands[key].title} command={key} />
                         ))}

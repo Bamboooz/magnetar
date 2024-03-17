@@ -1,39 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
-import { appWindow } from "@tauri-apps/api/window";
 import { LuSearch } from "react-icons/lu";
 
 import PageButton from "./PageButton";
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
+import { cn } from "../utils/tw";
 
 interface NavigationBarProps {
     selectedPage: number;
     setSelectedPage: React.Dispatch<React.SetStateAction<number>>;
+    settingsOpened: boolean;
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, search, setSearch }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, settingsOpened, search, setSearch }) => {
     const [editing, setEditing] = useState<boolean>(false);
 
     const searchRef = useRef<HTMLInputElement>(null);
 
     useOnClickOutside(searchRef, () => {
-        if (search.replaceAll(" ", "") === "")
-            setEditing(false)
+        if (search.replaceAll(" ", "") === "") {
+            setEditing(false);
+        }
     });
 
     useEffect(() => {
-        if (editing)
+        if (editing) {
             searchRef.current?.focus();
+        }
     }, [editing]);
     
     useEffect(() => {
         setEditing(false);
+        setSearch("");
     }, [selectedPage]);
 
     return (
         <>
-            <div className="w-full h-16 flex items-center justify-between px-6 gap-6">
+            <div className={cn(!settingsOpened ? "w-full h-16 flex items-center justify-between px-6 gap-6" : "hidden")}>
                 <div className="flex items-center justify-center gap-6">
                     <PageButton text="Apps" targetPage={0} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                     <PageButton text="Games" targetPage={1} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />

@@ -38,7 +38,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
     const openExecutable = async () => {
         await appWindow.hide();
 
-        await invoke("execute_command", { command: `"${filePath}"`, requiresAdministrator: false })
+        await invoke("run_pe", { pePath: filePath })
             .catch(err => {
                 console.error(err);
             });
@@ -49,7 +49,7 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
             <div className="group w-full flex shrink-0 pl-6 pr-6 py-1 items-center justify-between hover:bg-item-hover">
                 <div className="w-full flex items-center justify-between">
                     <div title={name} onClick={openExecutable} className="flex items-center justify-center gap-3">
-                        <img src={convertFileSrc(iconPath)} className="h-[44px] w-[44px]" alt="icon" />
+                        <img src={convertFileSrc(iconPath)} className="h-[44px] w-[44px]" />
 
                         <div className="flex flex-col items-start justify-center">
                             <p className="text-[14px] font-bold text-neutral-300">{name}</p>

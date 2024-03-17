@@ -1,10 +1,11 @@
 use std::path::{Path, PathBuf};
+use std::process::Command;
 
 use pelite::{FileMap, PeFile};
 
 use crate::filesystem::get_magnetar_path;
 
-fn sanitize_for_directory_name(input: String) -> String {
+fn sanitize_pe_path_to_filename(input: String) -> String {
     let invalid_chars = "\\/:*?\"<>|";
     
     input.chars()
@@ -16,7 +17,7 @@ fn sanitize_for_directory_name(input: String) -> String {
 pub fn save_pe_ico(pe_path: &str) -> PathBuf {
     // make filename unique by just naming it by its filepath without any unsupported characters
     let dest = get_magnetar_path().join("icons");
-    let icon_name = format!("{}.ico", sanitize_for_directory_name(pe_path.to_string()));
+    let icon_name = format!("{}.ico", sanitize_pe_path_to_filename(pe_path.to_string()));
 
     // don't create again if icon already exists
     if Path::new(&icon_name).exists() {
@@ -37,4 +38,13 @@ pub fn save_pe_ico(pe_path: &str) -> PathBuf {
     }
 
     dest.join(icon_name)
+}
+
+#[tauri::command]
+pub fn run_pe(pe_path: &str) -> bool {
+    Command::new("cmd.exe")
+        .args(&["/c", pe_path])
+        .status()
+        .expect("Failed to execute a command")
+        .success()
 }

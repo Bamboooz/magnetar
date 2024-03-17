@@ -1885,7 +1885,6 @@ name = "magnetar"
 version = "0.0.2"
 dependencies = [
  "pelite",
- "reqwest",
  "serde",
  "serde_json",
  "tauri",

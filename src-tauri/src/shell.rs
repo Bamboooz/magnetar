@@ -8,8 +8,10 @@ use winapi;
 use crate::filesystem::get_magnetar_path;
 
 fn execute_command_without_admin(command: &str) -> bool {
-    Command::new("cmd")
-        .args(&[command])
+    let commands_path = &get_magnetar_path().join("commands").display().to_string();
+
+    Command::new("cmd.exe")
+        .args(["/c", "cd", commands_path, "&&", command])
         .status()
         .expect("Failed to execute a command")
         .success()
@@ -36,11 +38,9 @@ fn execute_command_as_admin(command: &str) -> bool {
 
 #[tauri::command]
 pub fn execute_command(command: &str, requires_administrator: bool) -> bool {
-    let commands_path = get_magnetar_path().join("commands");
-
     if requires_administrator {
-        execute_command_as_admin(&format!("/c cd {} && {}", commands_path.display(), command))
+        execute_command_as_admin(command)
     } else {
-        execute_command_without_admin(&format!("/c cd {} && {}", commands_path.display(), command))
+        execute_command_without_admin(command)
     }
 }

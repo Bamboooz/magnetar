@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/api/dialog";
-import { LuPlus, LuBraces, LuArrowDownAZ, LuArrowDownZA } from "react-icons/lu";
+import { LuPlus } from "react-icons/lu";
 
 import AppItem from "./AppItem";
 import NewAppMenu from "./NewAppMenu";
@@ -14,9 +14,10 @@ interface AppsViewProps {
     search: string;
     selectedPage: number;
     pageId: number;
+    settingsOpened: boolean;
 }
 
-const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => {
+const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId, settingsOpened }) => {
     const appsStorage = localStorage.getItem("apps");
     const appsDefault: AppList = appsStorage ? JSON.parse(appsStorage) : {};
 
@@ -56,7 +57,7 @@ const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => 
 
     return (
         <>
-            <div className={selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
+            <div className={selectedPage === pageId && !settingsOpened ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
                 <div className="w-full h-12 flex items-center justify-start px-6">
                     <button onClick={openNewAppDialog} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
                         <LuPlus className="text-[22px]" />

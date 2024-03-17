@@ -64,11 +64,10 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             shell::execute_command,
             pe::save_pe_ico,
+            pe::run_pe,
             filesystem::get_magnetar_path,
             steam::fetch_all_steam_games,
-            steam::run_steam_game,
-            steam::fetch_steam_game_data,
-            steam::open_steam_game_page,
+            steam::run_steam_scheme,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
