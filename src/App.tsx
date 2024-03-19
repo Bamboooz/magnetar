@@ -4,16 +4,17 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import AppsView from "./components/Apps/Apps";
 import CommandsView from "./components/Commands/Commands";
-import Header from "./components/Header";
-import NavigationBar from "./components/NavigationBar";
+import Header from "./components/Header/Header";
+import NavigationBar from "./components/Navigation/NavigationBar";
 import GamesView from "./components/Games/Games";
 import SettingsView from "./components/Settings/Settings";
+import AudioView from "./components/Audio/Audio";
+import HomeView from "./components/Home/Home";
 
 const App: React.FC = () => {
     const pageStorage = localStorage.getItem("page");
     const pageDefault = pageStorage ? Number(pageStorage) : 0;
     const [selectedPage, setSelectedPage] = useState<number>(pageDefault);
-    const [settingsOpened, setSettingsOpened] = useState<boolean>(false);
 
     const [search, setSearch] = useState<string>("");
 
@@ -44,13 +45,15 @@ const App: React.FC = () => {
     return (
         <>
             <div className="w-screen h-screen flex flex-col bg-primary shadow-2xl pb-12">
-                <Header settingsOpened={settingsOpened} setSettingsOpened={setSettingsOpened} />
+                <Header setSelectedPage={setSelectedPage} />
 
-                <NavigationBar search={search} setSearch={setSearch} settingsOpened={settingsOpened} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                <AppsView search={search} selectedPage={selectedPage} pageId={0} settingsOpened={settingsOpened} />
-                <GamesView search={search} selectedPage={selectedPage} pageId={1} settingsOpened={settingsOpened} />
-                <CommandsView search={search} selectedPage={selectedPage} pageId={2} settingsOpened={settingsOpened} />
-                <SettingsView settingsOpened={settingsOpened} />
+                <NavigationBar search={search} setSearch={setSearch} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                <HomeView selectedPage={selectedPage} pageId={0} />
+                <SettingsView selectedPage={selectedPage} pageId={1} />
+                <AppsView search={search} selectedPage={selectedPage} pageId={2} />
+                <GamesView search={search} selectedPage={selectedPage} pageId={3} />
+                <CommandsView search={search} selectedPage={selectedPage} pageId={4} />
+                <AudioView selectedPage={selectedPage} pageId={5} />
             </div>
         </>
     );

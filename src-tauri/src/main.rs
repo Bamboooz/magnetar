@@ -13,6 +13,7 @@ mod filesystem;
 mod window;
 mod pe;
 mod steam;
+mod audio;
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     match filesystem::initialize_magnetar_folders() {
@@ -21,9 +22,9 @@ fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let window = app.get_window("main").unwrap();
+
     set_shadow(&window, true).unwrap();
     window.hide().unwrap();
-
     let _ = window.move_window(Position::BottomRight);
 
     Ok(())
@@ -68,6 +69,9 @@ fn main() {
             filesystem::get_magnetar_path,
             steam::fetch_all_steam_games,
             steam::run_steam_scheme,
+            audio::list_audio_devices,
+            audio::set_device_volume,
+            audio::get_device_volume,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

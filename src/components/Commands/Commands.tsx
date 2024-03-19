@@ -12,10 +12,9 @@ interface CommandsViewProps {
     search: string;
     selectedPage: number;
     pageId: number;
-    settingsOpened: boolean;
 }
 
-const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageId, settingsOpened }) => {
+const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageId }) => {
     const [commandsJson, setCommandsJson] = useState<CommandList>({});
 
     const displayedLists = Object.fromEntries(Object.entries(commandsJson).filter(([_, commands]) => Object.values(commands).some(command => command.title.toLowerCase().includes(search.toLowerCase()))));
@@ -32,7 +31,7 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageI
 
     return (
         <>
-            <div className={cn(selectedPage === pageId && !settingsOpened ? "flex w-full h-full flex-col items-center overflow-auto" : "hidden", Object.keys(displayedLists).length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(selectedPage === pageId ? "flex w-full h-full flex-col items-center overflow-auto" : "hidden", Object.keys(displayedLists).length > 0 ? "justify-start" : "justify-center")}>
                 {Object.keys(displayedLists).length > 0 ?
                     Object.keys(displayedLists).map((key, index) => (
                         <CommandListView key={index} title={key} search={search} commands={commandsJson[key]} />

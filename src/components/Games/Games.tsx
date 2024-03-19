@@ -14,10 +14,9 @@ interface GamesViewProps {
     search: string;
     selectedPage: number;
     pageId: number;
-    settingsOpened: boolean;
 }
 
-const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId, settingsOpened }) => {
+const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) => {
     const [games, setGames] = useState<SteamGame[]>([]);
 
     const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));
@@ -34,7 +33,7 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId, set
 
     return (
         <>
-            <div className={cn(selectedPage === pageId && !settingsOpened ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center overflow-auto" : "hidden", displayedGames.length > 0 ? "justify-start" : "justify-center")}>
                 {displayedGames.length > 0
                     ? <>
                         <GameListView title="Installed" games={displayedGames.filter((game) => game.installed === "1")} />

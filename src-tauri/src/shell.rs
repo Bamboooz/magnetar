@@ -11,7 +11,7 @@ fn execute_command_without_admin(command: &str) -> bool {
     let commands_path = &get_magnetar_path().join("commands").display().to_string();
 
     Command::new("cmd.exe")
-        .args(["/c", "cd", commands_path, "&&", command])
+        .args(&["/c", &format!("cd {} && {}", commands_path, command)])
         .status()
         .expect("Failed to execute a command")
         .success()
