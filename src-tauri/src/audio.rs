@@ -5,7 +5,12 @@ pub struct AudioDevice {
 }
 
 #[tauri::command]
-pub fn list_audio_devices() -> Result<Vec<AudioDevice>, String> {
+pub fn list_input_devices() -> Result<Vec<AudioDevice>, String> {
+    Ok(vec![])
+}
+
+#[tauri::command]
+pub fn list_output_devices() -> Result<Vec<AudioDevice>, String> {
     Ok(vec![])
 }
 

@@ -40,7 +40,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
                     <PageButton text="Apps" targetPage={2} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                     <PageButton text="Games" targetPage={3} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                     <PageButton text="Commands" targetPage={4} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                    <PageButton text="Audio" targetPage={5} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                    {/*<PageButton text="Audio" targetPage={5} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />*/}
                 </div>
 
                 {selectedPage !== 0 && selectedPage !== 1 && selectedPage !== 5 &&

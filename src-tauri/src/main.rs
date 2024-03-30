@@ -69,7 +69,8 @@ fn main() {
             filesystem::get_magnetar_path,
             steam::fetch_all_steam_games,
             steam::run_steam_scheme,
-            audio::list_audio_devices,
+            audio::list_input_devices,
+            audio::list_output_devices,
             audio::set_device_volume,
             audio::get_device_volume,
         ])

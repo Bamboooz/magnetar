@@ -1,6 +1,6 @@
 import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
-import { appWindow } from "@tauri-apps/api/window"
+import { appWindow } from "@tauri-apps/api/window";
 import { LuTerminal } from "react-icons/lu";
 import { VscTerminalPowershell } from "react-icons/vsc";
 
