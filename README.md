@@ -43,12 +43,12 @@ To build magnetar from source you need to do the following steps:
 ```bash
 git clone https://github.com/Bamboooz/magnetar.git
 ```
-or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
+    or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
 
 2. Install the following prerequisites:
-- [node.js](https://nodejs.org/en/download/prebuilt-installer)
-- [pnpm](https://pnpm.io/installation#using-npm)
-- [Rust compiler](https://www.rust-lang.org/tools/install)
+   - [node.js](https://nodejs.org/en/download/prebuilt-installer)
+    - [pnpm](https://pnpm.io/installation#using-npm)
+    - [Rust compiler](https://www.rust-lang.org/tools/install)
 
 3. Open the cloned/downloaded directory in a terminal and execute the following command
 ```bash
