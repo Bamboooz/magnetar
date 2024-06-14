@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { register, unregister } from "@tauri-apps/api/globalShortcut";
 import { appWindow } from "@tauri-apps/api/window";
 
-import AppsView from "./components/Apps/Apps";
-import CommandsView from "./components/Commands/Commands";
-import Header from "./components/Header/Header";
-import NavigationBar from "./components/Navigation/NavigationBar";
-import GamesView from "./components/Games/Games";
-import SettingsView from "./components/Settings/Settings";
-import AudioView from "./components/Audio/Audio";
-import HomeView from "./components/Home/Home";
+import AppsView from "./modules/Apps";
+import CommandsView from "./modules/Commands";
+import Header from "./interface/Header";
+import NavigationBar from "./interface/Navigation";
+import GamesView from "./modules/Games";
+import SettingsView from "./interface/Settings";
+import HomeView from "./interface/Home";
+import FoldersView from "./modules/Folders";
 
 const App: React.FC = () => {
     const pageStorage = localStorage.getItem("page");
@@ -53,7 +53,7 @@ const App: React.FC = () => {
                 <AppsView search={search} selectedPage={selectedPage} pageId={2} />
                 <GamesView search={search} selectedPage={selectedPage} pageId={3} />
                 <CommandsView search={search} selectedPage={selectedPage} pageId={4} />
-                <AudioView selectedPage={selectedPage} pageId={5} />
+                <FoldersView search={search} selectedPage={selectedPage} pageId={5} />
             </div>
         </>
     );

@@ -1,7 +1,7 @@
 {
     "name": "magnetar",
     "private": true,
-    "version": "0.0.4",
+    "version": "0.0.5",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -31,7 +31,6 @@
         "@types/react": "^18.0.15",
         "@types/react-dom": "^18.0.6",
         "@vitejs/plugin-react": "^3.0.0",
-        "daisyui": "^3.2.1",
         "typescript": "^4.9.5",
         "vite": "^4.2.1"
     }

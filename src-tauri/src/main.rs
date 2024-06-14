@@ -8,12 +8,13 @@ use tauri::{App, Manager, AppHandle, CustomMenuItem, SystemTray, SystemTrayMenu,
 use tauri_plugin_positioner::{WindowExt, Position};
 use window_shadows::set_shadow;
 
-mod shell;
-mod filesystem;
 mod window;
-mod pe;
-mod steam;
-mod audio;
+mod filesystem;
+
+#[path = "./modules/folders/explorer.rs"] mod explorer;
+#[path = "./modules/commands/shell.rs"] mod shell;
+#[path = "./modules/apps/pe.rs"] mod pe;
+#[path = "./modules/games/steam.rs"] mod games;
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     match filesystem::initialize_magnetar_folders() {
@@ -67,12 +68,9 @@ fn main() {
             pe::save_pe_ico,
             pe::run_pe,
             filesystem::get_magnetar_path,
-            steam::fetch_all_steam_games,
-            steam::run_steam_scheme,
-            audio::list_input_devices,
-            audio::list_output_devices,
-            audio::set_device_volume,
-            audio::get_device_volume,
+            games::fetch_all_steam_games,
+            games::run_steam_scheme,
+            explorer::explorer_open,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

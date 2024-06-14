@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
     content: [
         "./index.html", "./src/**/*.{js,ts,jsx,tsx}"
@@ -10,6 +10,7 @@ export default {
                 "header": "#121314",
                 "accent": "#167dff",
                 "item-hover": "#2e3338",
+                "item-within": "#4c5359",
                 "header-item-hover": "#252626",
                 "border": "#414248",
             },

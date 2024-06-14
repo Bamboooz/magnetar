@@ -1,78 +1,94 @@
 {
-    "Recycle bin": {
-        "explorer.exe C:\\$Recycle.Bin": {
+    "Recycle bin": [
+        {
             "title": "Open recycle bin folder",
-            "requiresAdministrator": false
+            "command": "explorer.exe C:\\$Recycle.Bin",
+            "admin": false
         },
-        "start cmd /k del /q /f /s C:\\$Recycle.Bin": {
+        {
             "title": "Clear recycle bin",
-            "requiresAdministrator": false
+            "command": "start cmd /k del /q /f /s C:\\$Recycle.Bin",
+            "admin": false
         }
-    },
-    "Bluetooth": {
-        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus On": {
+    ],
+    "Bluetooth": [
+        {
             "title": "Turn bluetooth on",
-            "requiresAdministrator": false
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus On",
+            "admin": false
         },
-        "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus Off": {
+        {
             "title": "Turn bluetooth off",
-            "requiresAdministrator": false
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus Off",
+            "admin": false
         }
-    },
-    "Scans": {
-        "start cmd /k sfc /scannow": {
+    ],
+    "Scans": [
+        {
             "title": "Perform a system integrity scan",
-            "requiresAdministrator": true
+            "command": "start cmd /k sfc /scannow",
+            "admin": true
         },
-        "start cmd /k CHKDSK /F /R /X": {
+        {
             "title": "Scan your drive in search of bad sectors",
-            "requiresAdministrator": true
+            "command": "start cmd /k CHKDSK /F /R /X",
+            "admin": true
         }
-    },
-    "Cleanup": {
-        "start cmd /k del /q /f /s %TEMP%\\": {
+    ],
+    "Cleanup": [
+        {
             "title": "Delete application temp files",
-            "requiresAdministrator": false
+            "command": "start cmd /k del /q /f /s %TEMP%\\",
+            "admin": false
         },
-        "start cmd /k del /q /s /q C:\\Windows\\Temp\\": {
+        {
             "title": "Delete windows temp files",
-            "requiresAdministrator": false
+            "command": "start cmd /k del /q /s /q C:\\Windows\\Temp\\",
+            "admin": false
         },
-        "start cleaup.cmd": {
+        {
             "title": "Performs many cleanups, scans etc.",
-            "requiresAdministrator": true
+            "command": "start cleaup.cmd",
+            "admin": true
         }
-    },
-    "Information": {
-        "start cmd /k systeminfo": {
+    ],
+    "Information": [
+        {
             "title": "View your system information",
-            "requiresAdministrator": false
+            "command": "start cmd /k systeminfo",
+            "admin": false
         },
-        "start cmd /k dxdiag": {
+        {
             "title": "View your system information from dxdiag",
-            "requiresAdministrator": false
+            "command": "start cmd /k dxdiag",
+            "admin": false
         }
-    },
-    "Power": {
-        "shutdown /s /t 0": {
+    ],
+    "Power": [
+        {
             "title": "Shutdown your PC",
-            "requiresAdministrator": false
+            "command": "shutdown /s /t 0",
+            "admin": false
         },
-        "shutdown /r /t 0": {
+        {
             "title": "Reboot your PC",
-            "requiresAdministrator": false
+            "command": "shutdown /r /t 0",
+            "admin": false
         },
-        "rundll32.exe powrprof.dll,SetSuspendState 0,1,0": {
+        {
             "title": "Sleep",
-            "requiresAdministrator": false
+            "command": "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+            "admin": false
         },
-        "shutdown /r /o /f /t 00": {
+        {
             "title": "Reboot into recovery options",
-            "requiresAdministrator": true
+            "command": "shutdown /r /o /f /t 00",
+            "admin": true
         },
-        "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00": {
+        {
             "title": "Reboot in safe mode",
-            "requiresAdministrator": true
+            "command": "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00",
+            "admin": true
         }
-    }
+    ]
 }
