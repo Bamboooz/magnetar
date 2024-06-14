@@ -8,11 +8,7 @@
 
 <br />
 
-<<<<<<< HEAD
 magnetar is a free, open-source, Windows toolbox that allows you to reduce the time you are wasting on doing daily repetetive tasks, or saves your time on searching for things on your desktop. It provides the user with many helpful modules such as: application manager, gaming hub, command picker which you can customize, a folder saver and many more. In the future it will also allow the users to build custom modules using Rust and React.
-=======
-magnetar is a free, open-source, Windows toolbox that allows you to reduce the time you are wasting on doing daily repetetive tasks, or saves your time on searching for things on your desktop. It provides the user with many helpful modules such as: application manager, gaming hub, command picker which you can customize, a folder saver, clipboard viewer and many more. In the future it will also allow the users to build custom modules using Rust and React.
->>>>>>> 0829cb48fe6e8e37e9226d5055427b7cb6944184
 
 <br />
 
@@ -26,12 +22,6 @@ magnetar is a free, open-source, Windows toolbox that allows you to reduce the t
 - Gaming Hub
 - Terminal commands palette
 - Folder saver
-<<<<<<< HEAD
-=======
-- Clipboard manager
-- System information display
-- Audio controls
->>>>>>> 0829cb48fe6e8e37e9226d5055427b7cb6944184
 
 ## Download
 
@@ -72,8 +62,4 @@ You can buy me a coffee if you enjoy my work [Buy me a Ko-fi ☕](https://ko-fi.
 
 ## License
 
-<<<<<<< HEAD
 This project is licensed under the [BSD-3 Clause License](https://github.com/Bamboooz/magnetar/blob/main/LICENSE).
-=======
-This project is licensed under the [BSD-3 Clause License](https://github.com/Bamboooz/magnetar/blob/main/LICENSE).
->>>>>>> 0829cb48fe6e8e37e9226d5055427b7cb6944184
