@@ -3,16 +3,17 @@ import { open } from "@tauri-apps/api/shell";
 import { LuSettings, LuGift, LuDownload } from "react-icons/lu";
 
 import { appContext } from "../../context";
-import store from "../../store";
+import store, { RootState } from "../../store";
 import { setPage } from "../../store/slices/page";
 import { cn } from "../../utils/cn";
 import icon_white from "../../assets/icon_white.png";
+import { useSelector } from "react-redux";
 
 const Header: React.FC = () => {
     const [latestRelease, setLatestRelease] = useState<string>("");
     const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
 
-    const page = store.getState().page;
+    const page = useSelector((state: RootState) => state.page);
 
     const openGitHub = () => open("https://github.com/Bamboooz/magnetar/releases/latest");
     const openHome = () => store.dispatch(setPage(-2));
@@ -60,7 +61,7 @@ const Header: React.FC = () => {
                     }
 
                     <button title="Settings" onClick={openSettings} className="flex items-center justify-center p-1 rounded-full transition-colors hover:bg-header-item-hover">
-                        <LuSettings className={cn("text-[16px]", page === -2 ? "text-accent" : "text-neutral-300")} />
+                        <LuSettings className={cn("text-[16px]", page === -1 ? "text-accent" : "text-neutral-300")} />
                     </button>
                 </div>
             </header>

@@ -3,14 +3,15 @@ import React from "react";
 import { Module } from "../../modules/Module";
 import { cn } from "../../utils/cn";
 import { setPage } from "../../store/slices/page";
-import store from "../../store";
+import store, { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 interface PageButtonProps {
     module: Module;
 }
 
 const PageButton: React.FC<PageButtonProps> = ({ module }) => {
-    const page = store.getState().page;
+    const page = useSelector((state: RootState) => state.page);
 
     return (
         <>

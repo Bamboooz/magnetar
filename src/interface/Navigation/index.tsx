@@ -3,17 +3,18 @@ import { LuSearch } from "react-icons/lu";
 
 import PageButton from "./PageButton";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-import store from "../../store";
+import store, { RootState } from "../../store";
 import { setSearch } from "../../store/slices/search";
 import { modules } from "../../modules/Module";
+import { useSelector } from "react-redux";
 
 const NavigationBar: React.FC = () => {
     const [editing, setEditing] = useState<boolean>(false);
 
     const searchRef = useRef<HTMLInputElement>(null);
 
-    const search = store.getState().search;
-    const page = store.getState().page;
+    const page = useSelector((state: RootState) => state.page);
+    const search = useSelector((state: RootState) => state.search);
 
     useOnClickOutside(searchRef, () => {
         if (search.replaceAll(" ", "") === "") {
@@ -34,7 +35,7 @@ const NavigationBar: React.FC = () => {
 
     return (
         <>
-            <div className="w-full h-16 flex items-center justify-between px-6 gap-6">
+            <div className="w-full h-14 flex items-center justify-between shrink-0 px-6 gap-6">
                 <div className="flex items-center justify-center gap-6">
                     {modules.map((module, index) => 
                         <PageButton key={index} module={module} />

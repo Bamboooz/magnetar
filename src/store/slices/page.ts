@@ -5,7 +5,7 @@ const pageSlice = createSlice({
     initialState: -2 as number,
     reducers: {
         setPage: (state, action: PayloadAction<number>) => {
-            state = action.payload;
+            return action.payload;
         },
         getPage: (state) => state,
     },

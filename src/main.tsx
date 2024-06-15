@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { register, unregister } from "@tauri-apps/api/globalShortcut";
-import { appWindow } from "@tauri-apps/api/window";
 
 import App from "./App";
 import AppsModule from "./modules/Apps";
@@ -13,24 +11,7 @@ import { Module } from "./modules/Module";
 import store from "./store";
 import "./styles.css";
 
-async function registerKeybind() {
-    const keybind = store.getState().settings.keybind;
-
-    await unregister(keybind);
-
-    await register(keybind, () => {
-        appWindow.show();
-        appWindow.setFocus();
-    });
-
-    await appWindow.onFocusChanged(async ({ payload: focused }) => {
-        if (!focused) {
-            await appWindow.hide();
-        }
-    });
-}
-
-function loadBuiltInModules() {
+window.onload = async () => {
     const builtInModules = [
         { name: "Apps", useSearch: true, ModuleComponent: AppsModule },
         { name: "Games", useSearch: true, ModuleComponent: GamesModule },
@@ -39,17 +20,11 @@ function loadBuiltInModules() {
     ];
       
     builtInModules.forEach(({ name, useSearch, ModuleComponent }) => {
-        const moduleInstance = new Module(name, useSearch);
-        const componentWithProps = <ModuleComponent module={moduleInstance} />;
-        
-        moduleInstance.assign(componentWithProps);
-        moduleInstance.register();
-    });
-}
+        const module = new Module(name, useSearch);
 
-window.onload = async () => {
-    await registerKeybind();
-    loadBuiltInModules();
+        module.assign(<ModuleComponent module={module} />);
+        module.register();
+    });
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

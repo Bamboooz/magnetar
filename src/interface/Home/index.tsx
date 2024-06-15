@@ -4,15 +4,16 @@ import { FaGithub } from "react-icons/fa6";
 
 import { cn } from "../../utils/cn";
 import icon_white from "../../assets/icon_white.png";
-import store from "../../store";
+import store, { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 const HomeView: React.FC = () => {
-    const currentPage = store.getState().page;
+    const page = useSelector((state: RootState) => state.page);
 
     return (
         <>
             {/* -2 is reserved page for Home */}
-            <div className={cn(currentPage === -2 ? "w-full h-full flex flex-col items-center justify-between pb-12" : "hidden")}>
+            <div className={cn(page === -2 ? "w-full h-full flex flex-col items-center justify-between pb-12" : "hidden")}>
                 <div />
                 
                 <div className="flex flex-col items-center justify-center">
