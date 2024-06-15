@@ -22,7 +22,7 @@ window.onload = async () => {
     builtInModules.forEach(({ name, useSearch, ModuleComponent }) => {
         const module = new Module(name, useSearch);
 
-        module.assign(<ModuleComponent module={module} />);
+        module.assign(<ModuleComponent />);
         module.register();
     });
 };

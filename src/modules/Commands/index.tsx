@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import CommandList from "./CommandList";
-import { cn } from "../../utils/cn";
 import { TerminalCommand } from "./Command";
 import { Commands } from "../../types/commands";
 import { RootState } from "../../store";
-import { Module } from "../Module";
 import { useSelector } from "react-redux";
 
-interface CommandsModuleProps {
-    module: Module;
-}
-
-const CommandsModule: React.FC<CommandsModuleProps> = ({ module }) => {
+const CommandsModule: React.FC = () => {
     const [commands, setCommands] = useState<Commands>({});
 
-    const page = useSelector((state: RootState) => state.page);
     const search = useSelector((state: RootState) => state.search);
 
     const displayedCategories: Commands = Object.fromEntries(

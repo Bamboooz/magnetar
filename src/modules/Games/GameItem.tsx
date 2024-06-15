@@ -32,7 +32,7 @@ const SteamGameItem: React.FC<SteamGameItemProps> = ({ game }) => {
     return (
         <>
             {valid &&
-                <Item onClick={game.run} title={title} onContextMenu={handleContextMenu} className="gap-3">
+                <Item onClick={() => game.run()} title={title} onContextMenu={handleContextMenu} className="gap-3">
                     <img src={game.gameImageUrl} onError={() => setValid(false)} className="h-[44px] rounded-sm" />
 
                     <div className="flex flex-col items-start justify-center">

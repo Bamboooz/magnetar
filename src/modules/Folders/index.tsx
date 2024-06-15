@@ -6,17 +6,11 @@ import { cn } from "../../utils/cn";
 import { LuPlus } from "react-icons/lu";
 import FolderItem from "./FolderItem";
 import { RootState } from "../../store";
-import { Module } from "../Module";
 import { useSelector } from "react-redux";
 
-interface FoldersModuleProps {
-    module: Module;
-}
-
-const FoldersModule: React.FC<FoldersModuleProps> = ({ module }) => {
+const FoldersModule: React.FC = () => {
     const [folders, setFolders] = useState<string[]>(["C://Users//Bambu//Pulpit"]);
 
-    const page = useSelector((state: RootState) => state.page);
     const search = useSelector((state: RootState) => state.search);
 
     const displayedFolders = folders.filter((key) => key.toLowerCase().includes(search.toLowerCase()));

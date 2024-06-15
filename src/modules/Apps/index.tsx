@@ -7,23 +7,17 @@ import AppItem from "./AppItem";
 import NewAppMenu from "./NewAppMenu";
 import { cn } from "../../utils/cn";
 import { RootState } from "../../store";
-import { Module } from "../Module";
 import { useSelector } from "react-redux";
 
 type AppItem = { name: string, iconPath: string };
 type AppList = { [filePath: string]: AppItem };
 
-interface AppsModuleProps {
-    module: Module;
-}
-
-const AppsModule: React.FC<AppsModuleProps> = ({ module }) => {
+const AppsModule: React.FC = () => {
     const [apps, setApps] = useState<AppList>({});
 
     const [newAppMenuOpened, setNewAppMenuOpened] = useState<boolean>(false);
     const [filePath, setFilePath] = useState<string>("");
 
-    const page = useSelector((state: RootState) => state.page);
     const search = useSelector((state: RootState) => state.search);
 
     const displayedApps = Object.keys(apps).filter((key) => apps[key].name.toLowerCase().includes(search.toLowerCase()));

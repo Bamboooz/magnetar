@@ -2,21 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import GameList from "./GameList";
 import GameLaunchers from "./GameLaunchers";
-import { cn } from "../../utils/cn";
 import { SteamGame } from "./Game";
 import { SteamLauncher } from "./GameLauncher";
 import { RootState } from "../../store";
-import { Module } from "../Module";
 import { useSelector } from "react-redux";
 
-interface GamesModuleProps {
-    module: Module;
-}
-
-const GamesModule: React.FC<GamesModuleProps> = ({ module }) => {
+const GamesModule: React.FC = () => {
     const [games, setGames] = useState<SteamGame[]>([]);
 
-    const page = useSelector((state: RootState) => state.page);
     const search = useSelector((state: RootState) => state.search);
 
     const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));

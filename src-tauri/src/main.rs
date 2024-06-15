@@ -26,7 +26,7 @@ fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
 
     set_shadow(&window, true).unwrap();
     window.hide().unwrap();
-    let _ = window.move_window(Position::BottomRight);
+    let _ = window.move_window(Position::TrayBottomRight);
 
     Ok(())
 }
