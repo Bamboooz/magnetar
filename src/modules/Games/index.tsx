@@ -5,15 +5,18 @@ import GameLaunchers from "./GameLaunchers";
 import { cn } from "../../utils/cn";
 import { SteamGame } from "./Game";
 import { SteamLauncher } from "./GameLauncher";
+import store from "../../store";
+import { Module } from "../Module";
 
-interface GamesViewProps {
-    search: string;
-    selectedPage: number;
-    pageId: number;
+interface GamesModuleProps {
+    module: Module;
 }
 
-const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) => {
+const GamesModule: React.FC<GamesModuleProps> = ({ module }) => {
     const [games, setGames] = useState<SteamGame[]>([]);
+
+    const search = store.getState().search;
+    const page = store.getState().page;
 
     const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));
 
@@ -31,7 +34,7 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
 
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden")}>
+            <div className={cn(page === module.id ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden")}>
                 <GameLaunchers />
                 
                 <GameList title="Installed" games={displayedGames.filter((game) => game.installed === "1")} />
@@ -41,4 +44,4 @@ const GamesView: React.FC<GamesViewProps> = ({ search, selectedPage, pageId }) =
     );
 };
 
-export default GamesView;
+export default GamesModule;

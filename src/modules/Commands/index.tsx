@@ -4,15 +4,19 @@ import CommandList from "./CommandList";
 import { cn } from "../../utils/cn";
 import { TerminalCommand } from "./Command";
 import { Commands } from "../../types/commands";
+import { Module } from "../Module";
+import store from "../../store";
 
-interface CommandsViewProps {
-    search: string;
-    selectedPage: number;
-    pageId: number;
+interface CommandsModuleProps {
+    module: Module;
 }
 
-const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageId }) => {
+const CommandsModule: React.FC<CommandsModuleProps> = ({ module }) => {
     const [commands, setCommands] = useState<Commands>({});
+
+    const search = store.getState().search;
+    const page = store.getState().page;
+
 
     const displayedCategories: Commands = Object.fromEntries(
         Object.entries(commands)
@@ -34,7 +38,7 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageI
 
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "flex w-full h-full flex-col items-center overflow-auto" : "hidden", Object.keys(displayedCategories).length > 0 ? "justify-start" : "justify-center")}>
+            <div className={cn(page === module.id ? "flex w-full h-full flex-col items-center overflow-auto" : "hidden", Object.keys(displayedCategories).length > 0 ? "justify-start" : "justify-center")}>
                 {Object.keys(displayedCategories).length > 0
                     ? Object.keys(displayedCategories).map((category, index) => (
                         <CommandList key={index} title={category} search={search} commands={commands[category]} />
@@ -46,4 +50,4 @@ const CommandsView: React.FC<CommandsViewProps> = ({ search, selectedPage, pageI
     );
 };
 
-export default CommandsView;
+export default CommandsModule;

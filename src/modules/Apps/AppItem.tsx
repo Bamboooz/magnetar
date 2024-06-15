@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { invoke, convertFileSrc } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window"
-import { LuMoreVertical } from "react-icons/lu";
 
 import AppItemContext from "./AppItemContext";
 import { AppList } from ".";
 import { trim } from "../../utils/string";
+import Item from "../../components/Item";
 
 const initialContextMenu = {
     show: false,
@@ -22,8 +22,6 @@ interface AppItemProps {
 
 const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) => {
     const [contextMenu, setContextMenu] = useState(initialContextMenu);
-
-    const appItemRef = useRef<HTMLButtonElement>(null);
 
     const handleContextMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -45,27 +43,19 @@ const AppItem: React.FC<AppItemProps> = ({ name, filePath, iconPath, setApps }) 
 
     return (
         <>
-            <div className="group w-full flex shrink-0 px-6 py-1 items-center justify-between hover:bg-item-hover">
-                <div className="w-full flex items-center justify-between">
-                    <div title={name} onClick={openExecutable} className="flex items-center justify-center gap-3">
-                        <img src={convertFileSrc(iconPath)} className="w-[32px] h-[32px]" />
+            <Item title={name} onClick={openExecutable} onContextMenu={handleContextMenu} className="gap-3">
+                <img src={convertFileSrc(iconPath)} className="w-[px] h-[40px]" />
 
-                        <div className="flex flex-col items-start justify-center">
-                            <p className="text-[14px] font-bold text-neutral-300">{name}</p>
-                            
-                            <p className="text-[11px] text-neutral-400">{trim(filePath, 50)}</p>
-                        </div>
-                    </div>
-
-                    <button title="More" ref={appItemRef} onClick={(e) => handleContextMenu(e)} className="hidden group-hover:block group-hover:p-1 group-hover:z-20">
-                        <LuMoreVertical className="text-neutral-300 text-[16px]" />
-                    </button>
+                <div className="flex flex-col items-start justify-center">
+                    <p className="text-[14px] font-bold text-neutral-300">{name}</p>
+                    
+                    <p className="text-[11px] text-neutral-400">{trim(filePath, 50)}</p>
                 </div>
 
                 {contextMenu.show &&
                     <AppItemContext x={contextMenu.x} y={contextMenu.y} filePath={filePath} iconPath={iconPath} closeContextMenu={contextMenuClose} setApps={setApps} />
                 }
-            </div>
+            </Item>
         </>
     );
 };

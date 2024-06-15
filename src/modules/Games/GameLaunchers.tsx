@@ -3,6 +3,7 @@ import { FaSteam } from "react-icons/fa";
 
 import Expander from "../../components/Expander";
 import { GameLauncher, SteamLauncher } from "./GameLauncher";
+import Item from "../../components/Item";
 
 interface LauncherControlsProps {
     launcher: GameLauncher;
@@ -11,25 +12,25 @@ interface LauncherControlsProps {
 const LauncherControls: React.FC<LauncherControlsProps> = ({ launcher }) => {
     return (
         <>
-            <div onClick={launcher.open} className="w-full h-12 flex items-center justify-start pl-6 gap-6 hover:bg-item-hover">
+            <Item onClick={launcher.open} title={`Launch ${launcher.name}`} className="gap-6">
                 <FaSteam className="text-neutral-300 text-[26px]" />
 
                 <div className="flex flex-col items-start justify-center">
                     <p className="text-[14px] font-semibold text-neutral-300">Open {launcher.name}</p>
 
-                    <p className="text-[12px] text-neutral-400 truncate">{launcher.openCommand}</p>
+                    <p className="text-[12px] text-neutral-400">{launcher.openCommand}</p>
                 </div>
-            </div>
+            </Item>
 
-            <div onClick={launcher.close} className="w-full h-12 flex items-center justify-start pl-6 gap-6 hover:bg-item-hover">
+            <Item onClick={launcher.close} title={`Close ${launcher.name}`} className="gap-6">
                 <FaSteam className="text-neutral-300 text-[26px]" />
 
                 <div className="flex flex-col items-start justify-center">
                     <p className="text-[14px] font-semibold text-neutral-300">Close {launcher.name}</p>
-                    
-                    <p className="text-[12px] text-neutral-400 truncate">{launcher.closeCommand}</p>
+
+                    <p className="text-[12px] text-neutral-400">{launcher.closeCommand}</p>
                 </div>
-            </div>
+            </Item>
         </>
     );
 };

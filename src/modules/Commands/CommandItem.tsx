@@ -14,7 +14,7 @@ interface CommandItemProps {
 const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
     return (
         <>
-            <Item title={command.command} onClick={command.execute}>
+            <Item title={command.command} onClick={command.execute} className="justify-between">
                 <div className="flex items-center justify-start gap-6 text-neutral-300 text-[20px]">
                     {command.isPowershell()
                         ? <VscTerminalPowershell />

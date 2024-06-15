@@ -1,22 +1,21 @@
 import React from "react";
-import { LuLanguages, LuPaintbrush, LuPackage, LuHelpCircle, LuCode2, LuFile, LuBug, LuLightbulb, LuExternalLink } from "react-icons/lu";
+import { LuLanguages, LuPaintbrush, LuPackage, LuHelpCircle, LuCode2, LuFile, LuBug, LuLightbulb, LuExternalLink, LuPlay } from "react-icons/lu";
+import { IoIosGlobe } from "react-icons/io";
 
 import Checkbox from "../../components/Checkbox";
 import SettingsItem from "./SettingsItem";
 import { cn } from "../../utils/cn";
 import { appContext } from "../../context";
 import Dropdown from "../../components/Dropdown";
-import { IoIosGlobe } from "react-icons/io";
+import store from "../../store";
 
-interface SettingsViewProps {
-    selectedPage: number;
-    pageId: number;
-}
+const SettingsView: React.FC = () => {
+    const currentPage = store.getState().page;
 
-const SettingsView: React.FC<SettingsViewProps> = ({ selectedPage, pageId }) => {
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-start justify-start overflow-auto px-6 py-4 gap-4" : "hidden")}>
+            {/* -1 is reserved page for Settings */}
+            <div className={cn(currentPage === -1 ? "w-full h-full flex flex-col items-start justify-start overflow-auto px-6 py-4 gap-4" : "hidden")}>
                 <p className="text-neutral-300 font-semibold text-[16px]">Settings</p>
 
                 <div className="w-full h-full flex flex-col items-center justify-start gap-2">
@@ -26,6 +25,14 @@ const SettingsView: React.FC<SettingsViewProps> = ({ selectedPage, pageId }) => 
 
                     <SettingsItem icon={<LuPaintbrush />} name="Theme" description="Select which app theme to display.">
                         <Dropdown values={["Dark", "Light"]} defaultIndex={0} />
+                    </SettingsItem>
+
+                    <SettingsItem icon={<LuPlay />} name="Autostart" description="Select whether you want the app to start with your computer.">
+                        <div className="flex items-center justify-center gap-2">
+                            <Checkbox defaultState={false} className="bg-item-within border-border" />
+
+                            <p className="text-neutral-300 text-[12px] mb-[1.5px]">Add to autostart</p>
+                        </div>
                     </SettingsItem>
 
                     <SettingsItem icon={<LuPackage />} name="Enabled modules" description="Choose which modules you want to be displayed in the navbar.">

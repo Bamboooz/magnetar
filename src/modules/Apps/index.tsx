@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/api/dialog";
 import { LuPlus } from "react-icons/lu";
@@ -6,24 +6,24 @@ import { LuPlus } from "react-icons/lu";
 import AppItem from "./AppItem";
 import NewAppMenu from "./NewAppMenu";
 import { cn } from "../../utils/cn";
+import { Module } from "../Module";
+import store from "../../store";
 
 type AppItem = { name: string, iconPath: string };
 type AppList = { [filePath: string]: AppItem };
 
-interface AppsViewProps {
-    search: string;
-    selectedPage: number;
-    pageId: number;
+interface AppsModuleProps {
+    module: Module;
 }
 
-const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => {
-    const appsStorage = localStorage.getItem("apps");
-    const appsDefault: AppList = appsStorage ? JSON.parse(appsStorage) : {};
-
-    const [apps, setApps] = useState<AppList>(appsDefault);
+const AppsModule: React.FC<AppsModuleProps> = ({ module }) => {
+    const [apps, setApps] = useState<AppList>({});
 
     const [newAppMenuOpened, setNewAppMenuOpened] = useState<boolean>(false);
     const [filePath, setFilePath] = useState<string>("");
+
+    const search = store.getState().search;
+    const page = store.getState().page;
 
     const displayedApps = Object.keys(apps).filter((key) => apps[key].name.toLowerCase().includes(search.toLowerCase()));
 
@@ -50,13 +50,9 @@ const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => 
         await appWindow.setFocus();
     };
 
-    useEffect(() => {
-        localStorage.setItem("apps", JSON.stringify(apps));
-    }, [apps]);
-
     return (
         <>
-            <div className={selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
+            <div className={page === module.id ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
                 <div className="w-full h-12 flex items-center justify-start px-6">
                     <button onClick={openNewAppDialog} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
                         <LuPlus className="text-[22px]" />
@@ -79,4 +75,4 @@ const AppsView: React.FC<AppsViewProps> = ({ search, selectedPage, pageId }) => 
 };
 
 export type { AppList };
-export default AppsView;
+export default AppsModule;

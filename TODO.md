@@ -21,3 +21,4 @@
 - [ ] Context menu hover also hovers the item behind it
 - [ ] Website for the app
 - [ ] Fix cmd's spawning in places where they shouldn't e.g. opening games
+- [ ] Autostart launch setting

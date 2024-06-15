@@ -3,18 +3,17 @@ import { LuSearch } from "react-icons/lu";
 
 import PageButton from "./PageButton";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+import store from "../../store";
+import { setSearch } from "../../store/slices/search";
+import { modules } from "../../modules/Module";
 
-interface NavigationBarProps {
-    selectedPage: number;
-    setSelectedPage: React.Dispatch<React.SetStateAction<number>>;
-    search: string;
-    setSearch: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelectedPage, search, setSearch }) => {
+const NavigationBar: React.FC = () => {
     const [editing, setEditing] = useState<boolean>(false);
 
     const searchRef = useRef<HTMLInputElement>(null);
+
+    const search = store.getState().search;
+    const page = store.getState().page;
 
     useOnClickOutside(searchRef, () => {
         if (search.replaceAll(" ", "") === "") {
@@ -30,20 +29,19 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ selectedPage, setSelected
     
     useEffect(() => {
         setEditing(false);
-        setSearch("");
-    }, [selectedPage]);
+        store.dispatch(setSearch(""));
+    }, [page]);
 
     return (
         <>
             <div className="w-full h-16 flex items-center justify-between px-6 gap-6">
                 <div className="flex items-center justify-center gap-6">
-                    <PageButton text="Apps" targetPage={2} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                    <PageButton text="Games" targetPage={3} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                    <PageButton text="Commands" targetPage={4} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-                    <PageButton text="Folders" targetPage={5} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                    {modules.map((module, index) => 
+                        <PageButton key={index} module={module} />
+                    )}
                 </div>
 
-                {selectedPage !== 0 && selectedPage !== 1 &&
+                {modules.find(module => module.id === page)?.useSearch &&
                     <div className="h-full w-full flex items-center justify-end">
                         {editing
                             ? <input ref={searchRef} value={search} onChange={(e) => setSearch(e.target.value)} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 mb-1 bg-transparent outline-none px-2 text-neutral-400 text-[12px] border-b border-border" />

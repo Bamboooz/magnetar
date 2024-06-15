@@ -12,17 +12,17 @@ interface FolderItemProps {
 const FolderItem: React.FC<FolderItemProps> = ({ filePath }) => {
     const folderName = filePath.replace(/\\/g, "/").replace(/\/+$/, "").split("/").pop() || "";
 
+    const openFolder = () => invoke("explorer_open", { path: filePath });
+
     return (
         <>
-            <Item onClick={() => invoke("explorer_open", { path: filePath })} title="Open folder in explorer">
-                <div className="flex items-center justify-center gap-3">
-                    <FcFolder className="text-neutral-300 text-[32px]" />
+            <Item onClick={openFolder} title="Open folder in explorer" className="gap-3">
+                <FcFolder className="text-neutral-300 text-[40px]" />
 
-                    <div className="flex flex-col items-start justify-center">
-                        <p className="text-[14px] font-bold text-neutral-300">{folderName}</p>
-                        
-                        <p className="text-[11px] text-neutral-400">{trim(filePath, 50)}</p>
-                    </div>
+                <div className="flex flex-col items-start justify-center">
+                    <p className="text-[14px] font-bold text-neutral-300">{folderName}</p>
+                    
+                    <p className="text-[11px] text-neutral-400">{trim(filePath, 50)}</p>
                 </div>
             </Item>
         </>

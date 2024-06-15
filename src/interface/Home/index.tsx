@@ -4,16 +4,15 @@ import { FaGithub } from "react-icons/fa6";
 
 import { cn } from "../../utils/cn";
 import icon_white from "../../assets/icon_white.png";
+import store from "../../store";
 
-interface HomeViewProps {
-    selectedPage: number;
-    pageId: number;
-}
+const HomeView: React.FC = () => {
+    const currentPage = store.getState().page;
 
-const HomeView: React.FC<HomeViewProps> = ({ selectedPage, pageId }) => {
     return (
         <>
-            <div className={cn(selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-between pb-12" : "hidden")}>
+            {/* -2 is reserved page for Home */}
+            <div className={cn(currentPage === -2 ? "w-full h-full flex flex-col items-center justify-between pb-12" : "hidden")}>
                 <div />
                 
                 <div className="flex flex-col items-center justify-center">

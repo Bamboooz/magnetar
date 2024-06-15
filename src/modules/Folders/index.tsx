@@ -5,18 +5,20 @@ import { appWindow } from "@tauri-apps/api/window";
 import { cn } from "../../utils/cn";
 import { LuPlus } from "react-icons/lu";
 import FolderItem from "./FolderItem";
+import { Module } from "../Module";
+import store from "../../store";
 
-interface FoldersViewProps {
-    search: string;
-    selectedPage: number;
-    pageId: number;
+interface FoldersModuleProps {
+    module: Module;
 }
 
-const FoldersView: React.FC<FoldersViewProps> = ({ search, selectedPage, pageId }) => {
-    const foldersStorage = localStorage.getItem("folders");
-    const foldersDefault = foldersStorage ? JSON.parse(foldersStorage) : ["C://Users//Bambu//Pulpit"];
+const FoldersModule: React.FC<FoldersModuleProps> = ({ module }) => {
+    const [folders, setFolders] = useState<string[]>(["C://Users//Bambu//Pulpit"]);
 
-    const [folders, setFolders] = useState<string[]>(foldersDefault);
+    const search = store.getState().search;
+    const page = store.getState().page;
+
+    const displayedFolders = folders.filter((key) => key.toLowerCase().includes(search.toLowerCase()));
 
     const addFolder = async () => {
         await open({ title: "Select a folder", directory: true, multiple: false })
@@ -31,13 +33,11 @@ const FoldersView: React.FC<FoldersViewProps> = ({ search, selectedPage, pageId 
         await appWindow.setFocus();
     };
 
-    const displayedFolders = folders.filter((key) => key.toLowerCase().includes(search.toLowerCase()));
-
     useEffect(() => localStorage.setItem("folders", JSON.stringify(folders)), [folders]);
 
     return (
         <>
-           <div className={selectedPage === pageId ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
+           <div className={page === module.id ? "w-full h-full flex flex-col items-center justify-start overflow-auto" : "hidden"}>
                 <div className="w-full h-12 flex items-center justify-start px-6">
                     <button onClick={addFolder} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
                         <LuPlus className="text-[22px]" />
@@ -57,4 +57,4 @@ const FoldersView: React.FC<FoldersViewProps> = ({ search, selectedPage, pageId 
     );
 };
 
-export default FoldersView;
+export default FoldersModule;
