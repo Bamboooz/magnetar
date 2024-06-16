@@ -39,11 +39,11 @@ const AppItem: React.FC<AppItemProps> = ({ app, setApps }) => {
                     
                     <p className="text-[11px] text-neutral-400">{trim(app.path, 50)}</p>
                 </div>
-
-                {contextMenu.show &&
-                    <AppItemContext x={contextMenu.x} y={contextMenu.y} closeContextMenu={contextMenuClose} app={app} setApps={setApps} />
-                }
             </Item>
+
+            {contextMenu.show &&
+                <AppItemContext x={contextMenu.x} y={contextMenu.y} closeContextMenu={contextMenuClose} app={app} setApps={setApps} />
+            }
         </>
     );
 };

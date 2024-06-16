@@ -4,22 +4,12 @@ import { appWindow } from "@tauri-apps/api/window";
 interface Application {
     path: string;
     name: string;
-    iconPath?: string;
+    iconPath: string;
 }
 
 class App implements Application {
-    constructor(public path: string, public name: string, public iconPath?: string) {
-        if (!iconPath) {
-            this.save_icon(); 
-        }
-    }
+    constructor(public path: string, public name: string, public iconPath: string) {}
 
-    private async save_icon() {
-        const iconPath = await invoke("save_pe_ico", { pePath: this.path });
-
-        this.iconPath = iconPath as string;
-    }
-    
     public async open() {
         await appWindow.hide();
 

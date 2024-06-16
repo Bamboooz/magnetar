@@ -12,7 +12,7 @@ const GamesModule: React.FC = () => {
 
     const search = useSelector((state: RootState) => state.search);
 
-    const displayedGames = games.filter((game) => game.name.toLowerCase().includes(search.toLowerCase()));
+    const displayedGames = games.filter(game => game.name.toLowerCase().includes(search.toLowerCase()));
 
     useEffect(() => {
         const steamLauncher = new SteamLauncher();
@@ -29,8 +29,8 @@ const GamesModule: React.FC = () => {
         <>
             <GameLaunchers />
                 
-            <GameList title="Installed" games={displayedGames.filter((game) => game.installed === "1")} />
-            <GameList title="Not installed" games={displayedGames.filter((game) => game.installed === "0")} />
+            <GameList title="Installed" games={displayedGames.filter(game => game.installed === "1")} />
+            <GameList title="Not installed" games={displayedGames.filter(game => game.installed === "0")} />
         </>
     );
 };
