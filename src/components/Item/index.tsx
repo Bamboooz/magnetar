@@ -21,7 +21,7 @@ const Item: React.FC<ItemProps> = ({ title, onClick, className, onContextMenu, c
 
     return (
         <>
-            <button title={title} onClick={onClick} onContextMenu={handleContextMenu} className={cn("group w-full flex items-center relative shrink-0 pl-6 pr-5 py-1 hover:bg-item-hover", className)}>
+            <button title={title} onClick={onClick} onContextMenu={handleContextMenu} className={cn("group w-full flex items-center relative shrink-0 pl-6 pr-5 py-1 hover:bg-secondary", className)}>
                 {children}
             </button>
         </>

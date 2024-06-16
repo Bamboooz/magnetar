@@ -8,16 +8,11 @@ import NavigationBar from "./interface/Navigation";
 import SettingsView from "./interface/Settings";
 import HomeView from "./interface/Home";
 import store, { RootState } from "./store";
-import { setSearch } from "./store/slices/search";
 import { modules } from "./modules/Module";
 import { cn } from "./utils/cn";
 
 const App: React.FC = () => {
     const page = useSelector((state: RootState) => state.page);
-
-    useEffect(() => {
-        store.dispatch(setSearch(""));
-    }, [page]);
 
     useEffect(() => {
         const registerKeybind = async () => {

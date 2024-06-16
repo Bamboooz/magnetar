@@ -2,42 +2,37 @@ import { readTextFile } from "@tauri-apps/api/fs";
 import { invoke } from "@tauri-apps/api/tauri";
 import { appWindow } from "@tauri-apps/api/window";
 
-import { Commands } from "../../types/commands";
-
-type CommandsJson = { [category: string]: { title: string, command: string, admin: boolean }[] };
-
 interface Command {
     title: string;
     command: string;
     admin: boolean;
+    isPowershell: boolean;
+    execute: () => Promise<void>;
 }
 
+type Commands = { [category: string]: Command[] };
+
 class TerminalCommand implements Command {
-    constructor (public title: string, public command: string, public admin: boolean = false) {}
+    public isPowershell: boolean;
 
-    public static async loadCommands(): Promise<Commands> {
-        let commands: Commands = {};
-
-        const appData = await invoke("get_magnetar_path");
-        
-        await readTextFile(`${appData}/commands/commands.json`)
-            .then((foundCommands) => {
-                const commandsJson = JSON.parse(foundCommands) as CommandsJson;
-
-                commands = Object.fromEntries(
-                    Object.entries(commandsJson)
-                        .map(([key, commands]) => [key, commands.map(command => new TerminalCommand(
-                            command.title, command.command, command.admin
-                        ))]
-                    )
-                );
-            });
-
-        return commands;
+    constructor (public title: string, public command: string, public admin: boolean = false) {
+        this.isPowershell = this.command.includes("powershell");
     }
 
-    public isPowershell(): boolean {
-        return this.command.includes("powershell");
+    public static async loadCommands(): Promise<Commands> {
+        const appData = await invoke("get_magnetar_path");
+
+        let commandsJson = await readTextFile(`${appData}/commands/commands.json`);
+
+        let commands = Object.fromEntries(
+            Object.entries(JSON.parse(commandsJson) as Commands)
+                .map(([key, commands]) => [key, commands.map(command => new TerminalCommand(
+                    command.title, command.command, command.admin
+                ))]
+            )
+        );
+
+        return commands;
     }
 
     public async execute() {
@@ -47,4 +42,5 @@ class TerminalCommand implements Command {
     }
 }
 
+export type { Command, Commands };
 export { TerminalCommand };

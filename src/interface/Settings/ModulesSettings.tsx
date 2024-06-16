@@ -23,7 +23,7 @@ const ModulesSettings: React.FC = () => {
             <SettingsItem icon={<LuPackage />} name="Enabled modules" description="Select which modules you want to be displayed in the navbar.">
                 <div className="w-full h-full flex flex-col items-start justify-start gap-2">
                     {modules.map((module, index) => 
-                        <Checkbox key={index} text={module.name} defaultState={false} onCheck={(checked) => changeEnabled(module, checked)} className="bg-item-within border-border" />
+                        <Checkbox key={index} text={module.name} defaultState={false} onCheck={(checked) => changeEnabled(module, checked)} className="bg-tertiary border-border" />
                     )}
                 </div>
             </SettingsItem>

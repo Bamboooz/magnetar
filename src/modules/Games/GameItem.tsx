@@ -32,23 +32,25 @@ const SteamGameItem: React.FC<SteamGameItemProps> = ({ game }) => {
     return (
         <>
             {valid &&
-                <Item onClick={() => game.run()} title={title} onContextMenu={handleContextMenu} className="gap-3">
-                    <img src={game.gameImageUrl} onError={() => setValid(false)} className="h-[44px] rounded-sm" />
+                <>
+                    <Item onClick={() => game.run()} title={title} onContextMenu={handleContextMenu} className="gap-3">
+                        <img src={game.gameImageUrl} onError={() => setValid(false)} className="h-[44px] rounded-sm" />
 
-                    <div className="flex flex-col items-start justify-center">
-                        <p className="text-[14px] font-bold text-neutral-300">{game.name}</p>
+                        <div className="flex flex-col items-start justify-center">
+                            <p className="text-[14px] font-bold text-text-primary">{game.name}</p>
 
-                        <p className="text-[11px] text-neutral-400">{game.runGameIdScheme}</p>
-                    </div>
+                            <p className="text-[11px] text-text-secondary">{game.runGameIdScheme}</p>
+                        </div>
 
-                    {game.installed === "0" &&
-                        <div className="absolute top-0 left-0 w-full h-full z-30 bg-primary bg-opacity-60 group-hover:-z-10 group-hover:bg-transparent" />
-                    }
+                        {game.installed === "0" &&
+                            <div className="absolute top-0 left-0 w-full h-full z-30 bg-primary bg-opacity-60 group-hover:-z-10 group-hover:bg-transparent" />
+                        }
+                    </Item>
 
                     {contextMenu.show &&
                         <GameContext x={contextMenu.x} y={contextMenu.y} closeContextMenu={contextMenuClose} game={game} />
                     }
-                </Item>
+                </>
             }
         </>
     );

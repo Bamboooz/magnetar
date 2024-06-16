@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import CommandList from "./CommandList";
 import { TerminalCommand } from "./Command";
-import { Commands } from "../../types/commands";
+import { Commands } from "./Command";
 import { RootState } from "../../store";
-import { useSelector } from "react-redux";
 
 const CommandsModule: React.FC = () => {
     const [commands, setCommands] = useState<Commands>({});
@@ -35,7 +35,9 @@ const CommandsModule: React.FC = () => {
                 ? Object.keys(displayedCategories).map((category, index) => (
                     <CommandList key={index} title={category} search={search} commands={commands[category]} />
                 ))
-                : <p className="text-neutral-300 text-[18px] font-semibold">No commands found.</p>
+                : <div className="w-full h-full flex items-center justify-center">
+                    <p className="text-text-primary text-[18px] font-semibold">No commands found.</p>
+                </div>
             }
         </>
     );

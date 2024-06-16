@@ -14,7 +14,7 @@ const AutostartSettings: React.FC = () => {
     return (
         <>
             <SettingsItem icon={<LuPlay />} name="Autostart" description="Select whether you want the app to start with your computer.">
-                <Checkbox text="Add to autostart" defaultState={false} onCheck={changeAutostart} className="bg-item-within border-border" />
+                <Checkbox text="Add to autostart" defaultState={false} onCheck={changeAutostart} className="bg-tertiary border-border" />
             </SettingsItem>
         </>
     );

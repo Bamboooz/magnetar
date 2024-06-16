@@ -10,20 +10,20 @@ const About: React.FC = () => {
         <>
             <SettingsItem icon={<LuHelpCircle />} name="About" description="Additional information about the application.">
                 <div className="w-full h-full flex flex-col items-start justify-start gap-4">
-                    <p className="text-neutral-300 text-[12px] font-medium">Version: <span className="font-normal">{appContext.version}</span></p>
+                    <p className="text-text-primary text-[12px] font-medium">Version: <span className="font-normal">{appContext.version}</span></p>
                     
                     <div className="flex flex-col items-start justify-start gap-2">
-                        <p className="text-neutral-300 text-[12px] font-medium">Useful links:</p>
+                        <p className="text-text-primary text-[12px] font-medium">Useful links:</p>
 
                         <div className="flex items-start justify-start gap-4">
                             <div className="flex flex-col items-start justify-start gap-1">
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <LuCode2 />
                                     
                                     <p>Source code</p>
                                 </button>
 
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <LuFile />
                                     
                                     <p>License</p>
@@ -31,13 +31,13 @@ const About: React.FC = () => {
                             </div>
 
                             <div className="flex flex-col items-start justify-start gap-1">
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <LuBug />
                                     
                                     <p>Report a bug</p>
                                 </button>
 
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <LuLightbulb />
                                     
                                     <p>Suggest a feature</p>
@@ -45,13 +45,13 @@ const About: React.FC = () => {
                             </div>
 
                             <div className="flex flex-col items-start justify-start gap-1">
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <LuExternalLink />
                                     
                                     <p>Third party licenses</p>
                                 </button>
 
-                                <button className="flex items-center justify-between gap-1 text-neutral-300 text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-item-within">
+                                <button className="flex items-center justify-between gap-1 text-text-primary text-[12px] rounded-sm px-[6px] py-[2px] hover:bg-tertiary">
                                     <IoIosGlobe />
                                     
                                     <p>Website</p>

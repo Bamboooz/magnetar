@@ -14,7 +14,7 @@ const Expander: React.FC<ExpanderProps> = ({ title, children }) => {
     return (
         <>
             <div className="w-full flex flex-col items-center justify-start gap-1">
-                <button onClick={() => setOpened(!opened)} className="w-full h-8 flex items-center justify-start text-neutral-400 text-[14px] px-6 gap-2">
+                <button onClick={() => setOpened(!opened)} className="w-full h-8 flex items-center justify-start text-text-secondary text-[14px] px-6 gap-2">
                     <IoIosArrowForward className={cn("transition-all duration-800", opened ? "rotate-90" : "")} />
                     
                     <p>{title}</p>

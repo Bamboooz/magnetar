@@ -26,7 +26,8 @@ fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
 
     set_shadow(&window, true).unwrap();
     window.hide().unwrap();
-    let _ = window.move_window(Position::TrayBottomRight);
+
+    let _ = window.move_window(Position::BottomRight);
 
     Ok(())
 }
@@ -60,6 +61,7 @@ fn main() {
         .add_item(quit_btn_tray_item);
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_positioner::init())
         .setup(initialize)
         .system_tray(SystemTray::new().with_menu(tray_menu))
         .on_system_tray_event(handle_system_tray_event)

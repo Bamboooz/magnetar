@@ -45,9 +45,9 @@ const NavigationBar: React.FC = () => {
                 {modules.find(module => module.id === page)?.useSearch &&
                     <div className="h-full w-full flex items-center justify-end">
                         {editing
-                            ? <input ref={searchRef} value={search} onChange={(e) => store.dispatch(setSearch(e.target.value))} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 mb-1 bg-transparent outline-none px-2 text-neutral-400 text-[12px] border-b border-border" />
-                            : <button title="Search..." onClick={() => setEditing(true)} className="p-1 rounded-full hover:bg-item-hover">
-                                <LuSearch className="text-neutral-300 text-[16px]" />
+                            ? <input ref={searchRef} value={search} onChange={(e) => store.dispatch(setSearch(e.target.value))} spellCheck={false} type="text" placeholder="Search..." className="w-full h-8 mb-1 bg-transparent outline-none px-2 text-text-secondary text-[12px] border-b border-border" />
+                            : <button title="Search..." onClick={() => setEditing(true)} className="p-1 rounded-full hover:bg-secondary">
+                                <LuSearch className="text-text-primary text-[16px]" />
                             </button>
                         }
                     </div>

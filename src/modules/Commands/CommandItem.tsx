@@ -15,8 +15,8 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
     return (
         <>
             <Item title={command.command} onClick={() => command.execute()} className="justify-between">
-                <div className="flex items-center justify-start gap-6 text-neutral-300 text-[20px]">
-                    {command.isPowershell()
+                <div className="flex items-center justify-start gap-6 text-text-primary text-[20px]">
+                    {command.isPowershell
                         ? <VscTerminalPowershell />
                         : <LuTerminal />
                     }
@@ -24,7 +24,7 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
                     <div className="flex flex-col items-start justify-center">
                         <p className="text-[14px] font-semibold">{command.title}</p>
 
-                        <p className="text-[12px] text-neutral-400">{trim(command.command, 50)}</p>
+                        <p className="text-[12px] text-text-secondary">{trim(command.command, 50)}</p>
                     </div>
                 </div>
 

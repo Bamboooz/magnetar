@@ -17,7 +17,7 @@ const SettingsView: React.FC = () => {
         <>
             {/* -1 is reserved page for Settings */}
             <div className={cn(page === -1 ? "w-full h-full flex flex-col items-start justify-start overflow-auto px-6 py-4 gap-4" : "hidden")}>
-                <p className="text-neutral-300 font-semibold text-[16px]">Settings</p>
+                <p className="text-text-primary font-semibold text-[16px]">Settings</p>
 
                 <div className="w-full h-full flex flex-col items-center justify-start gap-2">
                     <LanguageSettings />

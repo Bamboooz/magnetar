@@ -34,13 +34,13 @@ const Dropdown: React.FC<DropdownProps> = ({ values, defaultIndex, className, on
 
     return (
         <div ref={dropdownRef} className="flex flex-col gap-1">
-            <button onClick={toggleDropdown} className={cn("h-8 w-32 flex items-center justify-between px-2 bg-item-within rounded-[3px] text-neutral-300 text-[12px]", className)}>
+            <button onClick={toggleDropdown} className={cn("h-8 w-32 flex items-center justify-between px-2 bg-tertiary rounded-[3px] text-text-primary text-[12px]", className)}>
                 <p>{values[selectedIndex]}</p>
 
                 <LuChevronDown className={cn("transition-all", expanded ? "-rotate-180" : "")} />
             </button>
 
-            <div className={cn("w-32 flex flex-col items-start justify-start transition-all ease-in-out duration-800 overflow-hidden bg-item-within rounded-[3px] text-neutral-300 text-[12px]", expanded ? "h-auto" : "h-0")}>
+            <div className={cn("w-32 flex flex-col items-start justify-start transition-all ease-in-out duration-800 overflow-hidden bg-tertiary rounded-[3px] text-text-primary text-[12px]", expanded ? "h-auto" : "h-0")}>
                 {values.map((value, index) => (
                     <div key={index} className="w-full h-8">
                         <button onClick={() => handleSelect(index)} className="h-full w-full px-2 flex items-center justify-start">

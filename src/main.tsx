@@ -6,25 +6,25 @@ import App from "./App";
 import AppsModule from "./modules/Apps";
 import GamesModule from "./modules/Games";
 import CommandsModule from "./modules/Commands";
-import FoldersModule from "./modules/Folders";
 import { Module } from "./modules/Module";
 import store from "./store";
 import "./styles.css";
 
 window.onload = async () => {
     const builtInModules = [
-        { name: "Apps", useSearch: true, ModuleComponent: AppsModule },
-        { name: "Games", useSearch: true, ModuleComponent: GamesModule },
-        { name: "Commands", useSearch: true, ModuleComponent: CommandsModule },
-        { name: "Folders", useSearch: true, ModuleComponent: FoldersModule }
+        { name: "Apps", useSearch: true, component: <AppsModule /> },
+        { name: "Games", useSearch: true, component: <GamesModule /> },
+        { name: "Commands", useSearch: true, component: <CommandsModule /> },
     ];
       
-    builtInModules.forEach(({ name, useSearch, ModuleComponent }) => {
+    builtInModules.forEach(({ name, useSearch, component }) => {
         const module = new Module(name, useSearch);
 
-        module.assign(<ModuleComponent />);
+        module.assign(component);
         module.register();
     });
+
+    document.documentElement.setAttribute("data-theme", store.getState().settings.theme.toLowerCase());
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

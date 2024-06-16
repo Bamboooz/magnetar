@@ -1,5 +1,5 @@
 <div align="center">
-        <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icon_white.png?raw=true" />
+    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icon_white.png?raw=true" />
 </div>
 
 <div align="center">
@@ -8,7 +8,7 @@
 
 <br />
 
-magnetar is a free, open-source, Windows toolbox that allows you to reduce the time you are wasting on doing daily repetetive tasks, or saves your time on searching for things on your desktop. It provides the user with many helpful modules such as: application manager, gaming hub, command picker which you can customize, a folder saver and many more. In the future it will also allow the users to build custom modules using Rust and React.
+magnetar is a free, open-source, Windows toolbox that allows you to reduce the time you are wasting on doing daily repetetive tasks, or saves your time on searching for things on your desktop. It provides the user with many helpful modules such as: application manager, gaming hub, command picker which you can customize and in the future there will be many more to choose from. In the future it will also allow the users to build custom modules using Rust and React.
 
 <br />
 
@@ -21,7 +21,6 @@ magnetar is a free, open-source, Windows toolbox that allows you to reduce the t
 - Application manager
 - Gaming Hub
 - Terminal commands palette
-- Folder saver
 
 ## Download
 

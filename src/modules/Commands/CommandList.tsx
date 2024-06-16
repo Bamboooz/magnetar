@@ -2,16 +2,16 @@ import React from "react";
 
 import CommandItem from "./CommandItem";
 import Expander from "../../components/Expander";
-import { TerminalCommand } from "./Command";
+import { Command } from "./Command";
 
 interface CommandListProps {
     title: string;
     search: string;
-    commands: TerminalCommand[];
+    commands: Command[];
 }
 
 const CommandList: React.FC<CommandListProps> = ({ title, search, commands }) => {
-    const displayedItems = commands.filter((command) => command.title.toLowerCase().includes(search.toLowerCase()));
+    const displayedItems = commands.filter(command => command.title.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>

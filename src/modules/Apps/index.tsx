@@ -1,71 +1,40 @@
-import React, { useState } from "react";
-import { appWindow } from "@tauri-apps/api/window";
-import { open } from "@tauri-apps/api/dialog";
-import { LuPlus } from "react-icons/lu";
-
-import AppItem from "./AppItem";
-import NewAppMenu from "./NewAppMenu";
-import { cn } from "../../utils/cn";
-import { RootState } from "../../store";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-type AppItem = { name: string, iconPath: string };
-type AppList = { [filePath: string]: AppItem };
+import { cn } from "../../utils/cn";
+import { RootState } from "../../store";
+import { App, Application } from "./App";
+import AppPanel from "./AppPanel";
+import AppItem from "./AppItem";
 
 const AppsModule: React.FC = () => {
-    const [apps, setApps] = useState<AppList>({});
+    const savedApps = localStorage.getItem("apps");
+    
+    let loadedApps: Application[] = savedApps ? JSON.parse(savedApps) : [];
 
-    const [newAppMenuOpened, setNewAppMenuOpened] = useState<boolean>(false);
-    const [filePath, setFilePath] = useState<string>("");
+    const [apps, setApps] = useState<Application[]>(loadedApps);
 
     const search = useSelector((state: RootState) => state.search);
+    const displayedApps = Array.isArray(apps) ? apps.filter(app => app.name.toLowerCase().includes(search.toLowerCase())) : [];
 
-    const displayedApps = Object.keys(apps).filter((key) => apps[key].name.toLowerCase().includes(search.toLowerCase()));
-
-    const addNewApp = (filePath: string, icoPath: string, fileName: string) => {
-        const newAppItem: AppItem = {
-            name: fileName,
-            iconPath: icoPath,
-        };
-
-        setApps(prevApps => ({ ...prevApps, [filePath]: newAppItem }));
-    };
-    
-    const openNewAppDialog = async () => {
-        await open({ title: "Select an executable", multiple: false, filters: [{ name: "", extensions: ["exe"] }] })
-            .then(path => {
-                setFilePath(path as string);
-                setNewAppMenuOpened(true);
-            })
-            .catch(err => {
-                console.error(err);
-            });
-
-        await appWindow.show();
-        await appWindow.setFocus();
-    };
+    useEffect(() => {
+        localStorage.setItem("apps", JSON.stringify(apps));
+    }, [apps]);
 
     return (
         <>
-            <div className="w-full h-12 flex items-center justify-start px-6">
-                <button onClick={openNewAppDialog} className="h-10 w-10 flex items-center justify-center text-neutral-400 transition-colors hover:text-neutral-300">
-                    <LuPlus className="text-[22px]" />
-                </button>
-            </div>
+            <AppPanel setApps={setApps} />
             
             <div className={cn("w-full h-full flex flex-col items-center overflow-auto", displayedApps.length > 0 ? "justify-start" : "justify-center")}>
-                {displayedApps.length > 0 ?
-                    displayedApps.map((key, index) => (
-                        <AppItem key={index} filePath={key} name={apps[key].name} iconPath={apps[key].iconPath} setApps={setApps} />
+                {displayedApps.length > 0
+                    ? displayedApps.map((app, index) => (
+                        <AppItem key={index} app={new App(app.path, app.name, app.iconPath)} setApps={setApps} />
                     ))
-                    : <p className="text-neutral-300 text-[18px] font-semibold">No applications found.</p>
+                    : <p className="text-text-primary text-[18px] font-semibold">No applications found.</p>
                 }
             </div>
-
-            <NewAppMenu newAppMenuOpened={newAppMenuOpened} setNewAppMenuOpened={setNewAppMenuOpened} filePath={filePath} setFilePath={setFilePath} addNewApp={addNewApp} />
         </>
     );
 };
 
-export type { AppList };
 export default AppsModule;

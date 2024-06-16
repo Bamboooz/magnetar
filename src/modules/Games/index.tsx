@@ -25,7 +25,6 @@ const GamesModule: React.FC = () => {
         fetchGames();
     }, []);
     
-
     return (
         <>
             <GameLaunchers />

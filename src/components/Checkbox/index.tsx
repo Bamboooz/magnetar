@@ -26,11 +26,11 @@ const Checkbox: React.FC<CheckboxProps> = ({ text, defaultState, onCheck, classN
             <button onClick={onCheckboxCheck} className="flex items-center justify-center gap-2">
                 <div className={cn("h-3 w-3 flex items-center justify-center rounded-sm", className)}>
                     {checked &&
-                        <LuCheck className="text-neutral-300 text-[10px]" />
+                        <LuCheck className="text-text-primary text-[10px]" />
                     }
                 </div>
 
-                <p className="text-neutral-300 text-[12px] mb-[1.5px]">{text}</p>
+                <p className="text-text-primary text-[12px] mb-[1.5px]">{text}</p>
             </button>
         </>
     );

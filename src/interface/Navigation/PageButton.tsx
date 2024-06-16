@@ -16,7 +16,7 @@ const PageButton: React.FC<PageButtonProps> = ({ module }) => {
     return (
         <>
             <div className="flex flex-col items-center justify-center gap-1 h-full">
-                <p onClick={() => store.dispatch(setPage(module.id))} className={cn("text-[14px] font-semibold cursor-pointer", page === module.id ? "text-neutral-300" : "text-neutral-400 transition-colors hover:text-neutral-300")}>{module.name}</p>
+                <p onClick={() => store.dispatch(setPage(module.id))} className={cn("text-[14px] font-semibold cursor-pointer", page === module.id ? "text-text-primary" : "text-text-secondary transition-colors hover:text-text-primary")}>{module.name}</p>
                 
                 <div className={cn("w-full h-[3px] rounded-full", page === module.id ? "bg-accent" : "bg-transparent")} />
             </div>

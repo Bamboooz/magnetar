@@ -14,14 +14,14 @@ interface GameContextProps {
 const GameContext: React.FC<GameContextProps> = ({ x, y, closeContextMenu, game }) => {
     return (
         <>
-            <Context x={x} y={y} closeContextMenu={closeContextMenu} className="w-56 bg-primary shadow-2xl rounded-md border-solid border-[1px] border-border">
-                <button title="Play" onClick={() => game.run()} className="h-10 w-full px-4 gap-2 flex items-center justify-start text-[12px] text-neutral-400 hover:text-neutral-300">
+            <Context x={x} y={y} closeContextMenu={closeContextMenu} className="w-56 bg-primary shadow-2xl rounded-sm border-solid border-[1px] border-border">
+                <button title="Play" onClick={() => game.run()} className="h-10 w-full px-4 gap-2 flex items-center justify-start text-[12px] text-text-secondary hover:text-text-primary">
                     <LuPlay />
                     
                     <p>Play</p>
                 </button>
                 
-                <button title="Open game page" onClick={() => game.openGamePage()} className="h-10 w-full px-4 gap-2 flex items-center justify-start text-[12px] text-neutral-400 hover:text-neutral-300">
+                <button title="Open game page" onClick={() => game.openGamePage()} className="h-10 w-full px-4 gap-2 flex items-center justify-start text-[12px] text-text-secondary hover:text-text-primary">
                     <LuBookOpen />
                     
                     <p>Open game page</p>
