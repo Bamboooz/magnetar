@@ -24,35 +24,36 @@ magnetar is a free, open-source, Windows toolbox that allows you to reduce the t
 
 ## Download
 
-To download magnetar you can use 2 ways:
-1. Visit [magnetar website](https://bamboooz.github.io/magnetar)
-2. Download the installer from [GitHub releases](https://github.com/Bamboooz/magnetar/releases/latest)
-
-## Documentation
-
-Don't know how to use a certain module? Don't worry, and visit [magnetar wiki](https://bamboooz.github.io/magnetar/wiki). It contains tutorials for all built-in modules which will teach you how to use them.
+1. Download the installer from [GitHub releases](https://github.com/Bamboooz/magnetar/releases/latest)
 
 ## Building from source
 
 To build magnetar from source you need to do the following steps:
+
 1. Clone magentar repository from GitHub using this command
+
 ```bash
 git clone https://github.com/Bamboooz/magnetar.git
 ```
+
 or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
 
 2. Install the following prerequisites:
-    - [node.js](https://nodejs.org/en/download/prebuilt-installer)
-    - [pnpm](https://pnpm.io/installation#using-npm)
-    - [Rust compiler](https://www.rust-lang.org/tools/install)
+
+   - [node.js](https://nodejs.org/en/download/prebuilt-installer)
+   - [pnpm](https://pnpm.io/installation#using-npm)
+   - [Rust compiler](https://www.rust-lang.org/tools/install)
 
 3. Open the cloned/downloaded directory in a terminal and execute the following command
+
 ```bash
 pnpm i
 ```
+
 4. Now you are ready to run the app using this command
+
 ```bash
-pnpm run tauri dev
+pnpm start
 ```
 
 ## Support me

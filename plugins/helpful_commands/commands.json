@@ -1,94 +1,94 @@
 {
-    "Recycle bin": [
-        {
-            "title": "Open recycle bin folder",
-            "command": "explorer.exe C:\\$Recycle.Bin",
-            "admin": false
-        },
-        {
-            "title": "Clear recycle bin",
-            "command": "start cmd /k del /q /f /s C:\\$Recycle.Bin",
-            "admin": false
-        }
-    ],
-    "Bluetooth": [
-        {
-            "title": "Turn bluetooth on",
-            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus On",
-            "admin": false
-        },
-        {
-            "title": "Turn bluetooth off",
-            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus Off",
-            "admin": false
-        }
-    ],
-    "Scans": [
-        {
-            "title": "Perform a system integrity scan",
-            "command": "start cmd /k sfc /scannow",
-            "admin": true
-        },
-        {
-            "title": "Scan your drive in search of bad sectors",
-            "command": "start cmd /k CHKDSK /F /R /X",
-            "admin": true
-        }
-    ],
-    "Cleanup": [
-        {
-            "title": "Delete application temp files",
-            "command": "start cmd /k del /q /f /s %TEMP%\\",
-            "admin": false
-        },
-        {
-            "title": "Delete windows temp files",
-            "command": "start cmd /k del /q /s /q C:\\Windows\\Temp\\",
-            "admin": false
-        },
-        {
-            "title": "Performs many cleanups, scans etc.",
-            "command": "start cleaup.cmd",
-            "admin": true
-        }
-    ],
-    "Information": [
-        {
-            "title": "View your system information",
-            "command": "start cmd /k systeminfo",
-            "admin": false
-        },
-        {
-            "title": "View your system information from dxdiag",
-            "command": "start cmd /k dxdiag",
-            "admin": false
-        }
-    ],
-    "Power": [
-        {
-            "title": "Shutdown your PC",
-            "command": "shutdown /s /t 0",
-            "admin": false
-        },
-        {
-            "title": "Reboot your PC",
-            "command": "shutdown /r /t 0",
-            "admin": false
-        },
-        {
-            "title": "Sleep",
-            "command": "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
-            "admin": false
-        },
-        {
-            "title": "Reboot into recovery options",
-            "command": "shutdown /r /o /f /t 00",
-            "admin": true
-        },
-        {
-            "title": "Reboot in safe mode",
-            "command": "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00",
-            "admin": true
-        }
-    ]
+  "Recycle bin": [
+    {
+      "label": "Open recycle bin folder",
+      "command": "start C:\\$Recycle.Bin",
+      "admin": false
+    },
+    {
+      "label": "Clear recycle bin",
+      "command": "start cmd /k del /q /f /s C:\\$Recycle.Bin",
+      "admin": false
+    }
+  ],
+  "Bluetooth": [
+    {
+      "label": "Turn bluetooth on",
+      "command": "cd %appdata%/magnetar && powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus On",
+      "admin": false
+    },
+    {
+      "label": "Turn bluetooth off",
+      "command": "cd %appdata%/magnetar && powershell.exe -NoProfile -ExecutionPolicy Bypass -File bluetooth.ps1 -BluetoothStatus Off",
+      "admin": false
+    }
+  ],
+  "Scans": [
+    {
+      "label": "Perform a system integrity scan",
+      "command": "start cmd /k sfc /scannow",
+      "admin": true
+    },
+    {
+      "label": "Scan your drive in search of bad sectors",
+      "command": "start cmd /k CHKDSK /F /R /X",
+      "admin": true
+    }
+  ],
+  "Cleanup": [
+    {
+      "label": "Delete application temp files",
+      "command": "start cmd /k del /q /f /s %TEMP%\\",
+      "admin": false
+    },
+    {
+      "label": "Delete windows temp files",
+      "command": "start cmd /k del /q /s /q C:\\Windows\\Temp\\",
+      "admin": false
+    },
+    {
+      "label": "Performs many cleanups, scans etc.",
+      "command": "cd %appdata%/magnetar && start cleaup.cmd",
+      "admin": true
+    }
+  ],
+  "Information": [
+    {
+      "label": "View your system information",
+      "command": "start cmd /k systeminfo",
+      "admin": false
+    },
+    {
+      "label": "View your system information from dxdiag",
+      "command": "start cmd /k dxdiag",
+      "admin": false
+    }
+  ],
+  "Power": [
+    {
+      "label": "Shutdown your PC",
+      "command": "shutdown /s /t 0",
+      "admin": false
+    },
+    {
+      "label": "Reboot your PC",
+      "command": "shutdown /r /t 0",
+      "admin": false
+    },
+    {
+      "label": "Sleep",
+      "command": "rundll32.exe powrprof.dll,SetSuspendState 0,1,0",
+      "admin": false
+    },
+    {
+      "label": "Reboot into recovery options",
+      "command": "shutdown /r /o /f /t 00",
+      "admin": true
+    },
+    {
+      "label": "Reboot in safe mode",
+      "command": "bcdedit /set {current} safeboot minimal && shutdown /r /f /t 00",
+      "admin": true
+    }
+  ]
 }

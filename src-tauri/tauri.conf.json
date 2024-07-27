@@ -1,80 +1,81 @@
 {
-    "build": {
-        "beforeDevCommand": "pnpm dev",
-        "beforeBuildCommand": "pnpm build",
-        "devPath": "http://localhost:1420",
-        "distDir": "../dist",
-        "withGlobalTauri": false
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "magnetar",
+    "version": "0.0.5"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "globalShortcut": {
+        "all": true
+      },
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "dialog": {
+        "all": false,
+        "open": true
+      },
+      "window": {
+        "all": false,
+        "show": true,
+        "setFocus": true,
+        "hide": true,
+        "close": true
+      },
+      "fs": {
+        "all": false,
+        "writeFile": true,
+        "readFile": true,
+        "removeFile": true,
+        "createDir": true,
+        "exists": true,
+        "scope": ["$DATA/magnetar/**"]
+      },
+      "protocol": {
+        "all": false,
+        "asset": true,
+        "assetScope": ["$DATA/magnetar/**"]
+      }
     },
-    "package": {
-        "productName": "magnetar",
-        "version": "0.0.5"
+    "security": {
+      "csp": "img-src 'self' asset: https://asset.localhost https://cdn.akamai.steamstatic.com"
     },
-    "tauri": {
-        "allowlist": {
-            "all": false,
-            "shell": {
-                "all": false,
-                "open": true
-            },
-            "globalShortcut": {
-                "all": true
-            },
-            "window": {
-                "all": false,
-                "show": true,
-                "setFocus": true,
-                "hide": true,
-                "close": true
-            },
-            "fs": {
-                "all": false,
-                "writeFile": true,
-                "readFile": true,
-                "removeFile": true,
-                "createDir": true,
-                "exists": true,
-                "scope": ["$DATA/magnetar/**"]
-            },
-            "dialog": {
-                "all": false,
-                "open": true
-            },
-            "protocol": {
-                "all": false,
-                "asset": true,
-                "assetScope": ["$DATA/magnetar/**"]
-            }
-        },
-        "bundle": {
-            "active": true,
-            "targets": "all",
-            "identifier": "com.magnetar.dev",
-            "icon": [
-                "icons/32x32.png",
-                "icons/128x128.png",
-                "icons/128x128@2x.png",
-                "icons/icon.icns",
-                "icons/icon.ico"
-            ]
-        },
-        "security": {
-            "csp": "img-src 'self' asset: https://asset.localhost https://cdn.akamai.steamstatic.com"
-        },
-        "windows": [
-            {
-                "label": "main",
-                "fullscreen": false,
-                "resizable": false,
-                "decorations": false,
-                "title": "magnetar",
-                "width": 440,
-                "height": 720
-            }
-        ],
-        "systemTray": {
-            "iconPath": "icons/icon.png",
-            "iconAsTemplate": true
-        }
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.magnetar.dev",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "windows": [
+      {
+        "label": "main",
+        "fullscreen": false,
+        "resizable": false,
+        "decorations": false,
+        "visible": false,
+        "title": "magnetar",
+        "width": 440,
+        "height": 720,
+        "skipTaskbar": true
+      }
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
     }
+  }
 }
