@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icon_white.png?raw=true" />
+    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icons/icon_white.png?raw=true" />
 </div>
 
 <div align="center">
