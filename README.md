@@ -8,29 +8,44 @@
 
 <br />
 
-magnetar is a free, open-source, Windows toolbox that allows you to reduce the time you are wasting on doing daily repetetive tasks, or saves your time on searching for things on your desktop. It provides the user with many helpful modules such as: application manager, gaming hub, command picker which you can customize and in the future there will be many more to choose from. In the future it will also allow the users to build custom modules using Rust and React.
+magnetar is a free, Windows toolbox ([Linux soon](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md)) that allows you to store all your frequently used commands, applications and games in one place.
 
 <br />
 
-<img alt="project preview" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/preview.png?raw=true" />
+<img alt="preview 1" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview1.png?raw=true" />
 
 <br />
 
 ## Built-in modules
 
-- Application manager
-- Gaming Hub
-- Terminal commands palette
+- Applications
+- Games
+- Commands
+
+<br />
+
+<table>
+  <tr>
+    <td><img alt="preview 2" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview2.png?raw=true" />
+    <td><img alt="preview 3" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview3.png?raw=true" />
+    <td><img alt="preview 4" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview4.png?raw=true" />
+</table>
+
+<br />
 
 ## Download
 
-1. Download the installer from [GitHub releases](https://github.com/Bamboooz/magnetar/releases/latest)
+To download magnetar you simply need to visit the [GitHub releases](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer for the latest version.
+
+## Roadmap
+
+You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md).
 
 ## Building from source
 
-To build magnetar from source you need to do the following steps:
+To build magnetar from source you need to follow these steps:
 
-1. Clone magentar repository from GitHub using this command
+1. Clone the magentar repository from GitHub using this command
 
 ```bash
 git clone https://github.com/Bamboooz/magnetar.git
@@ -40,9 +55,9 @@ or download the source code from this [url](https://github.com/Bamboooz/magnetar
 
 2. Install the following prerequisites:
 
-   - [node.js](https://nodejs.org/en/download/prebuilt-installer)
-   - [pnpm](https://pnpm.io/installation#using-npm)
-   - [Rust compiler](https://www.rust-lang.org/tools/install)
+  - [node.js](https://nodejs.org/en/download/prebuilt-installer)
+  - [pnpm](https://pnpm.io/installation#using-npm)
+  - [Rust compiler](https://www.rust-lang.org/tools/install)
 
 3. Open the cloned/downloaded directory in a terminal and execute the following command
 
