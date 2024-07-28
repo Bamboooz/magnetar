@@ -1,14 +1,11 @@
 <div align="center">
     <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icons/icon_white.png?raw=true" />
-</div>
-
-<div align="center">
-    <h1>magnetar</h1>
+    <p style="font-size: 32px;">magnetar</p>
 </div>
 
 <br />
 
-magnetar is a free, Windows toolbox ([Linux soon](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md)) that allows you to store all your frequently used commands, applications and games in one place.
+magnetar is a free, Windows toolbox ([Linux soon](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md)) that allows you to store all your frequently used commands, applications and games in one place. It provices a simple, lightweight and easy to use interface to get things done.
 
 <br />
 
@@ -35,7 +32,7 @@ magnetar is a free, Windows toolbox ([Linux soon](https://github.com/Bamboooz/ma
 
 ## Download
 
-To download magnetar you simply need to visit the [GitHub releases](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer for the latest version.
+To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer.
 
 ## Roadmap
 
@@ -43,15 +40,13 @@ You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/bl
 
 ## Building from source
 
-To build magnetar from source you need to follow these steps:
+To build magnetar from source code you need to follow these steps:
 
-1. Clone the magentar repository from GitHub using this command
+1. Clone the magentar repository from GitHub using this command or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
 
 ```bash
 git clone https://github.com/Bamboooz/magnetar.git
 ```
-
-or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
 
 2. Install the following prerequisites:
 
