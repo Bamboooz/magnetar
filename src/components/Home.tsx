@@ -18,7 +18,7 @@ const Home: React.FC<HomeProps> = ({ page }) => {
           <img src={icon} alt="logo" className="w-16 h-16" />
           <p className="text-3xl text-neutral-300">magnetar</p>
           <p className="text-lg text-neutral-400 text-center">
-            An advanced cross-platform toolbox
+            An advanced Windows toolbox
           </p>
         </div>
 

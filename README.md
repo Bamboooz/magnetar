@@ -5,7 +5,7 @@
 
 <br />
 
-magnetar is a free, Windows toolbox ([Linux soon](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md)) that allows you to store all your frequently used commands, applications and games in one place. It provices a simple, lightweight and easy to use interface to get things done.
+magnetar is a free, Windows toolbox that allows you to store all your frequently used commands, applications and games in one place. It provices a simple, lightweight and easy to use interface to just get things done.
 
 <br />
 
@@ -50,9 +50,9 @@ git clone https://github.com/Bamboooz/magnetar.git
 
 2. Install the following prerequisites:
 
-  - [node.js](https://nodejs.org/en/download/prebuilt-installer)
-  - [pnpm](https://pnpm.io/installation#using-npm)
-  - [Rust compiler](https://www.rust-lang.org/tools/install)
+- [node.js](https://nodejs.org/en/download/prebuilt-installer)
+- [pnpm](https://pnpm.io/installation#using-npm)
+- [Rust compiler](https://www.rust-lang.org/tools/install)
 
 3. Open the cloned/downloaded directory in a terminal and execute the following command
 

@@ -31,7 +31,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
       filters: [
         {
           name: "",
-          extensions: ["exe"],
+          extensions: ["exe", "lnk"],
         },
       ],
     });

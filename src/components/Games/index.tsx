@@ -24,7 +24,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const games = (await invoke("fetch_all_steam_games")) as Game[];
+        const games = (await invoke("fetch_steam_games")) as Game[];
         setGames(games);
       } catch (error) {
         console.error(error);

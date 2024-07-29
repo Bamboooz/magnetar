@@ -9,21 +9,6 @@ pub fn get_magnetar_path() -> PathBuf {
   Path::new(&appdata).join("magnetar")
 }
 
-pub fn cleanup_last_version() {
-  let path = get_magnetar_path();
-
-  let deprecated_commands = path.join("commands");
-  let deprecated_icons = path.join("icons");
-
-  if deprecated_commands.exists() {
-    fs::remove_dir_all(deprecated_commands).unwrap();
-  }
-  
-  if deprecated_icons.exists() {
-    fs::remove_dir_all(deprecated_icons).unwrap();
-  }
-}
-
 pub fn verify_magnetar_files() {
   let path = get_magnetar_path();
 

@@ -13,7 +13,7 @@ interface AppItemProps {
 }
 
 const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
-  const openApp = async () => executeCommand(app.path, false);
+  const openApp = async () => executeCommand(`start "${app.path}"`, false);
 
   const removeApp = async () => {
     const newApps = apps.filter((a) => a.label !== app.label);

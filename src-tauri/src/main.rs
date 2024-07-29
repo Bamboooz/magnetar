@@ -1,8 +1,17 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::{
+  process::exit,
+  ffi::c_void,
+  mem::size_of,
+};
 use tauri::{App, Manager, AppHandle, CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayEvent};
 use tauri_plugin_positioner::{WindowExt, Position};
 use window_shadows::set_shadow;
+use windows::Win32::{
+  Foundation::{BOOL, HWND},
+  Graphics::Dwm::{DwmSetWindowAttribute, DWMWA_TRANSITIONS_FORCEDISABLED},
+};
 
 mod dir;
 mod steam;
@@ -13,18 +22,6 @@ fn focus_window(app: &AppHandle) {
 
   let _ = window.show();
   let _ = window.set_focus();
-}
-
-fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
-  dir::verify_magnetar_files();
-  dir::cleanup_last_version();
-
-  let window = app.get_window("main").unwrap();
-
-  let _ = set_shadow(&window, true);
-  let _ = window.move_window(Position::BottomRight);
-
-  Ok(())
 }
 
 fn handle_system_tray_event(app: &AppHandle, event: SystemTrayEvent) {
@@ -38,9 +35,32 @@ fn handle_system_tray_event(app: &AppHandle, event: SystemTrayEvent) {
 fn handle_menu_item_click(app: &AppHandle, id: String) {
   match id.as_str() {
     "Open toolbox" => focus_window(app),
-    "Quit toolbox" => std::process::exit(0),
+    "Quit toolbox" => exit(0),
     _ => {}
   }
+}
+
+fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
+  dir::verify_magnetar_files();
+
+  let window = app.get_window("main").unwrap();
+
+  // Disable fade in/out transitions
+  if let Ok(hwnd) = window.hwnd() {
+    unsafe {
+      let _ = DwmSetWindowAttribute(
+        HWND(hwnd.0 as *mut c_void),
+        DWMWA_TRANSITIONS_FORCEDISABLED,
+        &mut BOOL::from(true) as *mut _ as *mut c_void,
+        size_of::<BOOL>() as u32,
+      );
+    };
+  }
+
+  let _ = set_shadow(&window, true);
+  let _ = window.move_window(Position::BottomRight);
+
+  Ok(())
 }
 
 fn main() {
@@ -57,7 +77,7 @@ fn main() {
     .system_tray(SystemTray::new().with_menu(tray_menu))
     .on_system_tray_event(handle_system_tray_event)
     .invoke_handler(tauri::generate_handler![
-      steam::fetch_all_steam_games,
+      steam::fetch_steam_games,
       commands::get_commands_json,
       commands::execute_command,
     ])
