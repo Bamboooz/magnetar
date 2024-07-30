@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-import Home from "./components/Home";
-import Apps from "./components/Apps";
-import Games from "./components/Games";
-import Commands from "./components/Commands";
 import { Page } from "./enums/page";
+
+const Home = lazy(() => import("./components/Home"));
+const Apps = lazy(() => import("./components/Apps"));
+const Games = lazy(() => import("./components/Games"));
+const Commands = lazy(() => import("./components/Commands"));
 
 const App: React.FC = () => {
   const [page, setPage] = useState<Page>(Page.HOME);
@@ -22,10 +23,12 @@ const App: React.FC = () => {
         setSearch={setSearch}
       />
 
-      <Home page={page} />
-      <Apps page={page} search={search} />
-      <Games page={page} search={search} />
-      <Commands page={page} search={search} />
+      <Suspense>
+        <Home page={page} />
+        <Apps page={page} search={search} />
+        <Games page={page} search={search} />
+        <Commands page={page} search={search} />
+      </Suspense>
     </div>
   );
 };

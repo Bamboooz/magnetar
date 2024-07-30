@@ -3,7 +3,7 @@ import { FaSteam } from "react-icons/fa";
 
 import Expander from "../Expander";
 import Item from "../Item";
-import { executeCommand } from "../../utils/command";
+import { executeCommand } from "../../utils/cmd";
 
 const GameLaunchers: React.FC = () => {
   const openSteam = async () => executeCommand("start steam://run", false);

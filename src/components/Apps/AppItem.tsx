@@ -3,7 +3,7 @@ import { LuPackage, LuTrash } from "react-icons/lu";
 
 import Item from "../Item";
 import { trim } from "../../utils/trim";
-import { executeCommand } from "../../utils/command";
+import { executeCommand } from "../../utils/cmd";
 import { App } from ".";
 
 interface AppItemProps {

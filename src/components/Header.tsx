@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { open } from "@tauri-apps/api/shell";
+import { getVersion } from "@tauri-apps/api/app";
 import { LuDownload } from "react-icons/lu";
 
 import { Page } from "../enums/page";
-import { context } from "../context";
 import icon from "../assets/icons/icon_white.png";
 
 interface HeaderProps {
@@ -22,11 +22,12 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
         signal,
       })
         .then((res) => res.json())
-        .then((data) => {
-          setUpdateAvailable(data.tag_name !== context.version);
+        .then(async (data) => {
+          const currentVersion = await getVersion();
+          setUpdateAvailable(data.tag_name !== currentVersion);
         })
-        .catch((err) => {
-          console.log("Failed to fetch latest version: ", err);
+        .catch((error) => {
+          console.error(error);
         });
     } catch (error) {
       console.error(error);
@@ -52,6 +53,7 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
           onClick={() =>
             open("https://github.com/Bamboooz/magnetar/releases/latest")
           }
+          title="Updates available"
           className="flex items-center justify-center p-2 text-xl text-neutral-400 hover:text-neutral-300"
         >
           <LuDownload />

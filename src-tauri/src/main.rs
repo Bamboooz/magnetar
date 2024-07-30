@@ -7,7 +7,6 @@ use std::{
 };
 use tauri::{App, Manager, AppHandle, CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayEvent};
 use tauri_plugin_positioner::{WindowExt, Position};
-use window_shadows::set_shadow;
 use windows::Win32::{
   Foundation::{BOOL, HWND},
   Graphics::Dwm::{DwmSetWindowAttribute, DWMWA_TRANSITIONS_FORCEDISABLED},
@@ -57,7 +56,6 @@ fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
     };
   }
 
-  let _ = set_shadow(&window, true);
   let _ = window.move_window(Position::BottomRight);
 
   Ok(())

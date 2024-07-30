@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "magnetar",
-    "version": "0.0.5"
+    "version": "0.0.6"
   },
   "tauri": {
     "allowlist": {
@@ -34,15 +34,9 @@
         "all": false,
         "writeFile": true,
         "readFile": true,
-        "removeFile": true,
         "createDir": true,
         "exists": true,
         "scope": ["$DATA/magnetar/**"]
-      },
-      "protocol": {
-        "all": false,
-        "asset": true,
-        "assetScope": ["$DATA/magnetar/**"]
       }
     },
     "security": {
@@ -62,14 +56,13 @@
     },
     "windows": [
       {
+        "title": "magnetar",
         "label": "main",
-        "fullscreen": false,
+        "width": 440,
+        "height": 720,
         "resizable": false,
         "decorations": false,
         "visible": false,
-        "title": "magnetar",
-        "width": 440,
-        "height": 720,
         "skipTaskbar": true
       }
     ],

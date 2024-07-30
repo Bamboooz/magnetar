@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Item from "../Item";
 import { trim } from "../../utils/trim";
-import { executeCommand } from "../../utils/command";
+import { executeCommand } from "../../utils/cmd";
 import { Game } from ".";
 
 interface GameItemProps {

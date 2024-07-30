@@ -5,7 +5,7 @@
 
 <br />
 
-magnetar is a free, Windows toolbox that allows you to store all your frequently used commands, applications and games in one place. It provices a simple, lightweight and easy to use interface to just get things done.
+magnetar is a free, open-source, fast and lightweight (~7MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
 
 <br />
 
@@ -37,6 +37,12 @@ To download magnetar you simply need to visit the [latest GitHub release](https:
 ## Roadmap
 
 You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md).
+
+## Plugins
+
+You can view the list of plugins [here](https://github.com/Bamboooz/magnetar/blob/main/plugins/README.md).
+
+> I am also planning to add the ability to write custom plugins for magnetar in the future. But before that the [Rust Aplication Binary Interface (ABI)](https://doc.rust-lang.org/stable/reference/abi.html) which is required to make on-runtime plugins has to become stable.
 
 ## Building from source
 

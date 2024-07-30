@@ -45,11 +45,6 @@
       "label": "Delete windows temp files",
       "command": "start cmd /k del /q /s /q C:\\Windows\\Temp\\",
       "admin": false
-    },
-    {
-      "label": "Performs many cleanups, scans etc.",
-      "command": "cd %appdata%/magnetar && start cleaup.cmd",
-      "admin": true
     }
   ],
   "Information": [
