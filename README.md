@@ -30,6 +30,12 @@ magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox tha
 
 <br />
 
+## Usage
+
+Once installed, to open magnetar you need to enter `Ctrl + Shift + P` and this will open the command palette.
+
+To change the built-in commands, you have to edit the `commands.json` file in the %APPDATA%\magnetar folder. An example commands.json file can be found [here](https://github.com/Bamboooz/magnetar/blob/main/plugins/helpful_commands/commands.json).
+
 ## Download
 
 To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer.
@@ -37,12 +43,6 @@ To download magnetar you simply need to visit the [latest GitHub release](https:
 ## Roadmap
 
 You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md).
-
-## Plugins
-
-You can view the list of plugins [here](https://github.com/Bamboooz/magnetar/blob/main/plugins/README.md).
-
-> I am also planning to add the ability to write custom plugins for magnetar in the future. But before that the [Rust Aplication Binary Interface (ABI)](https://doc.rust-lang.org/stable/reference/abi.html) which is required to make on-runtime plugins has to become stable.
 
 ## Building from source
 
