@@ -5,7 +5,7 @@
 
 <br />
 
-magnetar is a free, open-source, fast and lightweight (~7MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
+magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
 
 <br />
 
