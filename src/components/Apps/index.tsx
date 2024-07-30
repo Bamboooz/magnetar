@@ -26,12 +26,11 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
 
   const addApp = async () => {
     const paths = await open({
-      title: "Select executables to add",
       multiple: true,
       filters: [
         {
           name: "",
-          extensions: ["exe", "lnk"],
+          extensions: ["lnk", "exe"],
         },
       ],
     });

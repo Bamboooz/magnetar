@@ -59,7 +59,7 @@
         "title": "magnetar",
         "label": "main",
         "width": 440,
-        "height": 720,
+        "height": 680,
         "resizable": false,
         "decorations": false,
         "visible": false,

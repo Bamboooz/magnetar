@@ -6,6 +6,7 @@
   "scripts": {
     "pretty": "pnpm exec prettier . --write",
     "start": "pnpm run pretty && pnpm run tauri dev",
+    "release": "pnpm run pretty && pnpm run tauri dev --release",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",

@@ -21,7 +21,7 @@ const PageDisplay: React.FC<PageDisplayProps> = ({
       className={cn(
         className,
         page === id
-          ? "w-full h-full flex flex-col justify-start items-start overflow-auto pb-10"
+          ? "w-full h-full flex flex-col justify-start items-start overflow-auto pb-3"
           : "hidden"
       )}
     >

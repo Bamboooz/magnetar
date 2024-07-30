@@ -1,4 +1,5 @@
 import React from "react";
+import { appWindow } from "@tauri-apps/api/window";
 import { LuPackage, LuTrash } from "react-icons/lu";
 
 import Item from "../Item";
@@ -13,7 +14,10 @@ interface AppItemProps {
 }
 
 const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
-  const openApp = async () => executeCommand(`start "${app.path}"`, false);
+  const openApp = async () => {
+    appWindow.hide();
+    executeCommand(app.path, false);
+  };
 
   const removeApp = async () => {
     const newApps = apps.filter((a) => a.label !== app.label);

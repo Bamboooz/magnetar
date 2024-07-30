@@ -5,8 +5,7 @@ use std::{
   ffi::c_void,
   mem::size_of,
 };
-use tauri::{App, Manager, AppHandle, CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayEvent};
-use tauri_plugin_positioner::{WindowExt, Position};
+use tauri::{Window, App, AppHandle, CustomMenuItem, Manager, Position, PhysicalPosition, PhysicalSize, SystemTray, SystemTrayEvent, SystemTrayMenu};
 use windows::Win32::{
   Foundation::{BOOL, HWND},
   Graphics::Dwm::{DwmSetWindowAttribute, DWMWA_TRANSITIONS_FORCEDISABLED},
@@ -16,25 +15,60 @@ mod dir;
 mod steam;
 mod commands;
 
-fn focus_window(app: &AppHandle) {
-  let window = app.get_window("main").unwrap();
+fn focus_window(window: &Window) {
+  window.show().unwrap();
+  window.set_focus().unwrap();
+}
 
-  let _ = window.show();
-  let _ = window.set_focus();
+fn set_window_position(window: &Window) {
+  if let Ok(Some(screen)) = window.current_monitor() {
+    if let Ok(window_size) = window.outer_size() {
+      let screen_position = screen.position();
+
+      let screen_size = PhysicalSize::<i32> {
+        width: screen.size().width as i32,
+        height: screen.size().height as i32,
+      };
+
+      let taskbar_height = 40;
+    
+      let window_position = PhysicalPosition {
+        x: screen_position.x + (screen_size.width - (window_size.width as i32)),
+        y: screen_size.height - (window_size.height - (screen_position.y as u32)) as i32 - taskbar_height,
+      };
+    
+      window.set_position(Position::Physical(window_position)).unwrap();
+    }
+  }
+}
+
+fn disable_window_transitions(window: Window) {
+  if let Ok(hwnd) = window.hwnd() {
+    unsafe {
+      DwmSetWindowAttribute(
+        HWND(hwnd.0 as *mut c_void),
+        DWMWA_TRANSITIONS_FORCEDISABLED,
+        &mut BOOL::from(true) as *mut _ as *mut c_void,
+        size_of::<BOOL>() as u32,
+      ).unwrap();
+    }
+  }
 }
 
 fn handle_system_tray_event(app: &AppHandle, event: SystemTrayEvent) {
+  let window = app.get_window("main").unwrap();
+
   match event {
-    SystemTrayEvent::LeftClick { .. } => focus_window(app),
-    SystemTrayEvent::MenuItemClick { id, .. } => handle_menu_item_click(app, id),
+    SystemTrayEvent::LeftClick { .. } => focus_window(&window),
+    SystemTrayEvent::MenuItemClick { id, .. } => handle_menu_item_click(&window, id),
     _ => {}
   }
 }
 
-fn handle_menu_item_click(app: &AppHandle, id: String) {
+fn handle_menu_item_click(window: &Window, id: String) {
   match id.as_str() {
-    "Open toolbox" => focus_window(app),
-    "Quit toolbox" => exit(0),
+    "0" => focus_window(window),
+    "1" => exit(0),
     _ => {}
   }
 }
@@ -44,33 +78,21 @@ fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
 
   let window = app.get_window("main").unwrap();
 
-  // Disable fade in/out transitions
-  if let Ok(hwnd) = window.hwnd() {
-    unsafe {
-      let _ = DwmSetWindowAttribute(
-        HWND(hwnd.0 as *mut c_void),
-        DWMWA_TRANSITIONS_FORCEDISABLED,
-        &mut BOOL::from(true) as *mut _ as *mut c_void,
-        size_of::<BOOL>() as u32,
-      );
-    };
-  }
-
-  let _ = window.move_window(Position::BottomRight);
+  set_window_position(&window);
+  disable_window_transitions(window);
 
   Ok(())
 }
 
 fn main() {
-  let open_btn_tray_item = CustomMenuItem::new("Open toolbox".to_string(), "Open toolbox");
-  let quit_btn_tray_item = CustomMenuItem::new("Quit toolbox".to_string(), "Quit toolbox");
+  let open_btn_tray_item = CustomMenuItem::new("0", "Open toolbox");
+  let quit_btn_tray_item = CustomMenuItem::new("1", "Quit toolbox");
 
   let tray_menu = SystemTrayMenu::new()
     .add_item(open_btn_tray_item)
     .add_item(quit_btn_tray_item);
 
   tauri::Builder::default()
-    .plugin(tauri_plugin_positioner::init())
     .setup(initialize)
     .system_tray(SystemTray::new().with_menu(tray_menu))
     .on_system_tray_event(handle_system_tray_event)

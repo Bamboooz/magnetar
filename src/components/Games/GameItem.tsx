@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { appWindow } from "@tauri-apps/api/window";
 
 import Item from "../Item";
 import { trim } from "../../utils/trim";
@@ -15,8 +16,10 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
   const title = game.installed ? `Play ${name}` : `Install ${name}`;
   const headerImage = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
 
-  const openGame = async () =>
+  const openGame = async () => {
+    appWindow.hide();
     executeCommand(`start steam://rungameid/${game.id}`, false);
+  };
 
   return (
     <>

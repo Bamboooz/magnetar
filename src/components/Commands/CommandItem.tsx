@@ -1,4 +1,5 @@
 import React from "react";
+import { appWindow } from "@tauri-apps/api/window";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
 
@@ -13,12 +14,15 @@ interface CommandItemProps {
 }
 
 const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
-  const execute = async () => executeCommand(command.command, command.admin);
+  const execute = async () => {
+    appWindow.hide();
+    executeCommand(command.command, command.admin);
+  };
 
   return (
     <Item label={command.label} onClick={execute} className="justify-between">
       <div className="flex items-center justify-start gap-6 text-neutral-300 text-3xl">
-        {command.command.toLowerCase().startsWith("powershell") ? (
+        {command.command.toLowerCase().includes("powershell") ? (
           <VscTerminalPowershell />
         ) : (
           <LuTerminal />
