@@ -6,7 +6,7 @@ use crate::util::dir;
 pub fn load_themes() -> Vec<String> {
   dir::verify();
 
-  let path = dir::magnetar_path().join("themes");
+  let path = dir::themes_path();
 
   let themes = match fs::read_dir(&path) {
     Ok(entries) => entries,
@@ -31,7 +31,7 @@ pub fn load_themes() -> Vec<String> {
 pub fn load_theme(name: String) -> Result<String, String> {
   dir::verify();
   
-  let path = dir::magnetar_path().join("themes").join(format!("{}.json", name));
+  let path = dir::themes_path().join(format!("{}.json", name));
 
   match fs::read_to_string(&path) {
     Ok(theme) => Ok(theme),

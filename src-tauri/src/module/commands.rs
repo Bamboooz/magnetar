@@ -10,7 +10,7 @@ const CREATE_NO_WINDOW: u32 = 0x08000000;
 pub async fn get_commands_json() -> String {
   dir::verify();
   
-  let path = dir::magnetar_path().join("commands.json");
+  let path = dir::commands_path().join("commands.json");
 
   let json = fs::read_to_string(path).unwrap_or_else(|_| {
     return "{}".to_string();

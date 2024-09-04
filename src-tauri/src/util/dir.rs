@@ -7,6 +7,18 @@ pub fn magnetar_path() -> PathBuf {
   Path::new(&appdata).join("magnetar")
 }
 
+pub fn commands_path() -> PathBuf {
+  let path = magnetar_path();
+
+  path.join("commands")
+}
+
+pub fn themes_path() -> PathBuf {
+  let path = magnetar_path();
+
+  path.join("themes")
+}
+
 pub fn verify() {
   let path = magnetar_path();
 
@@ -14,7 +26,13 @@ pub fn verify() {
     fs::create_dir_all(&path).unwrap();
   }
 
-  let commands_json = path.join("commands.json");
+  let commands_directory = path.join("commands");
+
+  if !commands_directory.exists() {
+    fs::create_dir_all(&commands_directory).unwrap();
+  }
+
+  let commands_json = commands_directory.join("commands.json");
 
   if !commands_json.exists() {
     fs::write(commands_json, "{}").unwrap();
