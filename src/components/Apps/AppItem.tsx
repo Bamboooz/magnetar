@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
 import { LuPackage, LuTrash } from "react-icons/lu";
 
 import Item from "../Item";
-import { trim } from "../../utils/trim";
 import { executeCommand } from "../../utils/cmd";
 import { App } from ".";
+import { useMount } from "../../hooks/useMount";
+import { invoke } from "@tauri-apps/api";
 
 interface AppItemProps {
   app: App;
@@ -14,6 +15,9 @@ interface AppItemProps {
 }
 
 const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
+  const [label, setLabel] = useState<string>(app.label);
+  const [path, setPath] = useState<string>(app.path);
+
   const openApp = async () => {
     appWindow.hide();
     executeCommand(app.path, false);
@@ -25,6 +29,16 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
     localStorage.setItem("apps", JSON.stringify(newApps));
   };
 
+  useMount(async () => {
+    await invoke("trim", { input: app.label }).then((label) =>
+      setLabel(label as string)
+    );
+
+    await invoke("trim", { input: app.path }).then((path) =>
+      setPath(path as string)
+    );
+  });
+
   return (
     <Item label={app.label} className="justify-between">
       <div
@@ -34,8 +48,8 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
         <LuPackage className="text-neutral-300 text-3xl" />
 
         <div className="flex flex-col items-start justify-center">
-          <p className="text-md text-neutral-300">{trim(app.label)}</p>
-          <p className="text-sm text-neutral-400">{trim(app.path)}</p>
+          <p className="text-md text-neutral-300">{label}</p>
+          <p className="text-sm text-neutral-400">{path}</p>
         </div>
       </div>
 

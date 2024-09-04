@@ -5,10 +5,10 @@ import { LuPlus } from "react-icons/lu";
 
 import PageDisplay from "../PageDisplay";
 import { Page } from "../../enums/page";
-import { fileName } from "../../utils/file";
 import Expander from "../Expander";
 import Item from "../Item";
 import AppItem from "./AppItem";
+import { invoke } from "@tauri-apps/api";
 
 type App = {
   label: string;
@@ -38,10 +38,15 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
     if (!paths) return;
 
     const pathsArray = Array.isArray(paths) ? paths : [paths];
-    const addedApps = pathsArray.map((path) => ({
-      label: fileName(path),
-      path,
-    }));
+
+    const addedApps = await Promise.all(
+      pathsArray.map(async (path) => {
+        const label = (await invoke("file_name", {
+          path,
+        })) as unknown as string;
+        return { label, path };
+      })
+    );
 
     setApps((prev) => {
       const newApps = [...prev, ...addedApps];

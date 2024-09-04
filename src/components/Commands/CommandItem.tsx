@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
+import { invoke } from "@tauri-apps/api";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
 
 import Item from "../Item";
-import { trim } from "../../utils/trim";
 import { executeCommand } from "../../utils/cmd";
 import { Command } from ".";
 import admin_icon from "../../assets/icons/admin.png";
+import { useMount } from "../../hooks/useMount";
 
 interface CommandItemProps {
   command: Command;
 }
 
 const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
+  const [label, setLabel] = useState<string>(command.label);
+  const [cmd, setCmd] = useState<string>(command.command);
+
   const execute = async () => {
     appWindow.hide();
     executeCommand(command.command, command.admin);
   };
+
+  useMount(async () => {
+    await invoke("trim", { input: command.label }).then((label) =>
+      setLabel(label as string)
+    );
+
+    await invoke("trim", { input: command.command }).then((cmd) =>
+      setCmd(cmd as string)
+    );
+  });
 
   return (
     <Item label={command.label} onClick={execute} className="justify-between">
@@ -29,8 +43,8 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
         )}
 
         <div className="flex flex-col items-start justify-center">
-          <p className="text-md">{trim(command.label)}</p>
-          <p className="text-sm text-neutral-400">{trim(command.command)}</p>
+          <p className="text-md">{label}</p>
+          <p className="text-sm text-neutral-400">{cmd}</p>
         </div>
       </div>
 

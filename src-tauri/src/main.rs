@@ -11,9 +11,9 @@ use windows::Win32::{
   Graphics::Dwm::{DwmSetWindowAttribute, DWMWA_TRANSITIONS_FORCEDISABLED},
 };
 
-mod dir;
-mod steam;
-mod commands;
+mod config;
+mod module;
+mod util;
 
 fn focus_window(window: &Window) {
   window.show().unwrap();
@@ -74,7 +74,7 @@ fn handle_menu_item_click(window: &Window, id: String) {
 }
 
 fn initialize(app: &mut App) -> Result<(), Box<dyn std::error::Error>> {
-  dir::verify_magnetar_files();
+  util::dir::verify();
 
   let window = app.get_window("main").unwrap();
 
@@ -97,9 +97,13 @@ fn main() {
     .system_tray(SystemTray::new().with_menu(tray_menu))
     .on_system_tray_event(handle_system_tray_event)
     .invoke_handler(tauri::generate_handler![
-      steam::fetch_steam_games,
-      commands::get_commands_json,
-      commands::execute_command,
+      config::theme::load_themes,
+      config::theme::load_theme,
+      module::steam::fetch_steam_games,
+      module::commands::get_commands_json,
+      module::commands::execute_command,
+      util::string::trim,
+      util::string::file_name,
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

@@ -1,15 +1,16 @@
 use std::fs;
 use std::process::Command;
 use std::os::windows::process::CommandExt;
-use crate::dir;
+
+use crate::util::dir;
 
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 #[tauri::command]
 pub async fn get_commands_json() -> String {
-  dir::verify_magnetar_files();
+  dir::verify();
   
-  let path = dir::get_magnetar_path().join("commands.json");
+  let path = dir::magnetar_path().join("commands.json");
 
   let json = fs::read_to_string(path).unwrap_or_else(|_| {
     return "{}".to_string();

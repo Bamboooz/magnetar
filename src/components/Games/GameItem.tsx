@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { appWindow } from "@tauri-apps/api/window";
 
 import Item from "../Item";
-import { trim } from "../../utils/trim";
 import { executeCommand } from "../../utils/cmd";
 import { Game } from ".";
+import { invoke } from "@tauri-apps/api";
+import { useMount } from "../../hooks/useMount";
 
 interface GameItemProps {
   game: Game;
@@ -12,14 +13,21 @@ interface GameItemProps {
 
 const GameItem: React.FC<GameItemProps> = ({ game }) => {
   const [valid, setValid] = useState<boolean>(true);
-
-  const title = game.installed ? `Play ${name}` : `Install ${name}`;
-  const headerImage = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
+  const [name, setName] = useState<string>(game.name);
 
   const openGame = async () => {
     appWindow.hide();
     executeCommand(`start steam://rungameid/${game.id}`, false);
   };
+
+  const title = game.installed ? `Play ${name}` : `Install ${name}`;
+  const headerImage = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
+
+  useMount(async () => {
+    await invoke("trim", { input: game.name }).then((name) =>
+      setName(name as string)
+    );
+  });
 
   return (
     <>
@@ -32,7 +40,7 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
           />
 
           <div className="flex flex-col items-start justify-center">
-            <p className="text-md text-neutral-300">{trim(game.name)}</p>
+            <p className="text-md text-neutral-300">{name}</p>
             <p className="text-sm text-neutral-400">{`steam://rungameid/${game.id}`}</p>
           </div>
 
