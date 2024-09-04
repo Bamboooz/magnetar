@@ -34,7 +34,7 @@ magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox tha
 
 Once installed, to open magnetar you need to enter `Ctrl + Shift + P` and this will open the command palette.
 
-To change the built-in commands, you have to edit the `commands.json` file in the %APPDATA%\magnetar\commands folder. An example commands.json file can be found [here](https://github.com/Bamboooz/magnetar/blob/main/plugins/helpful_commands/commands.json).
+Additional information about the application can be found [here](https://github.com/Bamboooz/magnetar/wiki).
 
 ## Download
 
@@ -42,7 +42,7 @@ To download magnetar you simply need to visit the [latest GitHub release](https:
 
 ## Roadmap
 
-You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/blob/main/ROADMAP.md).
+You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/wiki/Roadmap).
 
 ## Building from source
 
