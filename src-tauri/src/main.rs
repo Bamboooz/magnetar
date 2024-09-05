@@ -100,7 +100,7 @@ fn main() {
       config::theme::load_themes,
       config::theme::load_theme,
       module::steam::fetch_steam_games,
-      module::commands::get_commands_json,
+      module::commands::fetch_commands,
       module::commands::execute_command,
       util::string::trim,
       util::string::file_name,

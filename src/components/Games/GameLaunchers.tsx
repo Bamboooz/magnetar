@@ -6,9 +6,10 @@ import Item from "../Item";
 import { executeCommand } from "../../utils/cmd";
 
 const GameLaunchers: React.FC = () => {
-  const openSteam = async () => executeCommand("start steam://run", false);
+  const openSteam = async () =>
+    await executeCommand("start steam://run", false);
   const closeSteam = async () =>
-    executeCommand("taskkill /f /im steam.exe", false);
+    await executeCommand("taskkill /f /im steam.exe", false);
 
   return (
     <Expander label="Launchers">

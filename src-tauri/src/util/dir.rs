@@ -26,21 +26,17 @@ pub fn verify() {
     fs::create_dir_all(&path).unwrap();
   }
 
-  let commands_directory = path.join("commands");
-
-  if !commands_directory.exists() {
-    fs::create_dir_all(&commands_directory).unwrap();
+  if !commands_path().exists() {
+    fs::create_dir_all(&commands_path()).unwrap();
   }
 
-  let commands_json = commands_directory.join("commands.json");
+  let commands_json = commands_path().join("commands.json");
 
   if !commands_json.exists() {
     fs::write(commands_json, "{}").unwrap();
   }
 
-  let themes_directory = path.join("themes");
-
-  if !themes_directory.exists() {
-    fs::create_dir_all(&themes_directory).unwrap();
+  if !themes_path().exists() {
+    fs::create_dir_all(&themes_path()).unwrap();
   }
 }

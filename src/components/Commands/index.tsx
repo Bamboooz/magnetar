@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api";
 
 import PageDisplay from "../PageDisplay";
 import Expander from "../Expander";
 import CommandItem from "./CommandItem";
 import { Page } from "../../enums/page";
+import { useMount } from "../../hooks/useMount";
 
 type Command = {
   label: string;
@@ -24,19 +25,14 @@ interface HomeProps {
 const Commands: React.FC<HomeProps> = ({ page, search }) => {
   const [commands, setCommands] = useState<Commands>({});
 
-  useEffect(() => {
-    const fetchCommands = async () => {
-      try {
-        const commandsString = (await invoke("get_commands_json")) as string;
-        const commands = JSON.parse(commandsString) as Commands;
-        setCommands(commands);
-      } catch (error) {
-        setCommands({}); // if the content is in the wrong format or some io error
-      }
-    };
-
-    fetchCommands();
-  }, []);
+  useMount(async () => {
+    await invoke("fetch_commands")
+      .then((commands) => {
+        const commandsJson = JSON.parse(commands as string) as Commands;
+        setCommands(commandsJson);
+      })
+      .catch((error) => console.error(error));
+  });
 
   const filteredCommandGroups = Object.entries(commands)
     .map(([label, commands]) => ({

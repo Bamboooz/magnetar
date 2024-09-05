@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api";
 
 import PageDisplay from "../PageDisplay";
@@ -6,6 +6,7 @@ import Expander from "../Expander";
 import Game from "./GameItem";
 import GameLaunchers from "./GameLaunchers";
 import { Page } from "../../enums/page";
+import { useMount } from "../../hooks/useMount";
 
 type Game = {
   id: string;
@@ -21,18 +22,11 @@ interface GamesProps {
 const Games: React.FC<GamesProps> = ({ page, search }) => {
   const [games, setGames] = useState<Game[]>([]);
 
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const games = (await invoke("fetch_steam_games")) as Game[];
-        setGames(games);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchGames();
-  }, []);
+  useMount(async () => {
+    await invoke("fetch_steam_games")
+      .then((games) => setGames(games as Game[]))
+      .catch((error) => console.error(error));
+  });
 
   const filteredGames = games.filter((game) =>
     game.name.toLowerCase().includes(search.toLowerCase())
