@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { open } from "@tauri-apps/api/shell";
-import { getVersion } from "@tauri-apps/api/app";
 import { LuDownload } from "react-icons/lu";
 
 import { Page } from "../enums/page";
 import icon from "../assets/icons/icon_white.png";
+import { useMount } from "../hooks/useMount";
+import { invoke } from "@tauri-apps/api";
 
 interface HeaderProps {
   setPage: React.Dispatch<React.SetStateAction<Page>>;
@@ -13,30 +14,11 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ setPage }) => {
   const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    try {
-      fetch("https://api.github.com/repos/Bamboooz/magnetar/releases/latest", {
-        signal,
-      })
-        .then((res) => res.json())
-        .then(async (data) => {
-          const currentVersion = await getVersion();
-          setUpdateAvailable(data.tag_name !== currentVersion);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  useMount(async () => {
+    await invoke("updates_available")
+      .then((available) => setUpdateAvailable(available as boolean))
+      .catch((error) => console.error(error));
+  });
 
   return (
     <div className="w-full h-16 flex items-center justify-between shrink-0 px-6 bg-black">

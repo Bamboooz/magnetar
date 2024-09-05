@@ -7,6 +7,7 @@ import App from "./App";
 import "./styles.css";
 
 window.onload = async () => {
+  // rewrite in rust later
   await unregister("CommandOrControl+Shift+P");
 
   await register("CommandOrControl+Shift+P", async () => {
@@ -18,6 +19,7 @@ window.onload = async () => {
     }
   });
 
+  // rewrite in rust later
   await appWindow.onFocusChanged(async ({ payload: focused }) => {
     if (!focused) {
       await appWindow.hide();

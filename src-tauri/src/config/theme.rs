@@ -3,7 +3,7 @@ use std::fs;
 use crate::util::dir;
 
 #[tauri::command]
-pub fn load_themes() -> Vec<String> {
+pub async fn load_themes() -> Vec<String> {
   dir::verify();
 
   let path = dir::themes_path();
@@ -28,7 +28,7 @@ pub fn load_themes() -> Vec<String> {
 }
 
 #[tauri::command]
-pub fn load_theme(name: String) -> Result<String, String> {
+pub async fn load_theme(name: String) -> Result<String, String> {
   dir::verify();
   
   let path = dir::themes_path().join(format!("{}.json", name));

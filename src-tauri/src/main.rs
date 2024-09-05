@@ -104,6 +104,7 @@ fn main() {
       module::commands::execute_command,
       util::string::trim,
       util::string::file_name,
+      util::update::updates_available,
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
