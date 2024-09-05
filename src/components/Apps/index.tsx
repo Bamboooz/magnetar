@@ -9,11 +9,7 @@ import Expander from "../Expander";
 import Item from "../Item";
 import AppItem from "./AppItem";
 import { invoke } from "@tauri-apps/api";
-
-type App = {
-  label: string;
-  path: string;
-};
+import { App } from "../../types/modules/apps";
 
 interface AppsProps {
   page: Page;
@@ -87,5 +83,4 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
   );
 };
 
-export type { App };
 export default Apps;

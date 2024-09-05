@@ -4,7 +4,7 @@ import { LuPackage, LuTrash } from "react-icons/lu";
 
 import Item from "../Item";
 import { executeCommand } from "../../utils/cmd";
-import { App } from ".";
+import { App } from "../../types/modules/apps";
 import { useMount } from "../../hooks/useMount";
 import { invoke } from "@tauri-apps/api";
 
@@ -56,7 +56,7 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
       <div
         title={`Remove ${app.label}`}
         onClick={removeApp}
-        className="hidden group-hover:flex items-center justify-center p-2 z-10 text-neutral-400 hover:text-neutral-300"
+        className="hidden group-hover:flex items-center justify-center z-10 text-neutral-400 hover:text-neutral-300"
       >
         <LuTrash className="text-xl" />
       </div>

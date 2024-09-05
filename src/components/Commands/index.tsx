@@ -6,16 +6,7 @@ import Expander from "../Expander";
 import CommandItem from "./CommandItem";
 import { Page } from "../../enums/page";
 import { useMount } from "../../hooks/useMount";
-
-type Command = {
-  label: string;
-  command: string;
-  admin: boolean;
-};
-
-type Commands = {
-  [label: string]: Command[];
-};
+import { CommandList } from "../../types/modules/commands";
 
 interface HomeProps {
   page: Page;
@@ -23,15 +14,13 @@ interface HomeProps {
 }
 
 const Commands: React.FC<HomeProps> = ({ page, search }) => {
-  const [commands, setCommands] = useState<Commands>({});
+  const [commands, setCommands] = useState<CommandList>({});
 
   useMount(async () => {
-    await invoke("fetch_commands")
-      .then((commands) => {
-        const commandsJson = JSON.parse(commands as string) as Commands;
-        setCommands(commandsJson);
-      })
-      .catch((error) => console.error(error));
+    await invoke("fetch_commands").then((commands) => {
+      const commandsJson = JSON.parse(commands as string) as CommandList;
+      setCommands(commandsJson);
+    });
   });
 
   const filteredCommandGroups = Object.entries(commands)
@@ -64,5 +53,4 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
   );
 };
 
-export type { Command };
 export default Commands;

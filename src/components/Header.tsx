@@ -15,9 +15,9 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
   const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
 
   useMount(async () => {
-    await invoke("updates_available")
-      .then((available) => setUpdateAvailable(available as boolean))
-      .catch((error) => console.error(error));
+    await invoke("updates_available").then((available) =>
+      setUpdateAvailable(available as boolean)
+    );
   });
 
   return (
@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ setPage }) => {
             open("https://github.com/Bamboooz/magnetar/releases/latest")
           }
           title="Updates available"
-          className="flex items-center justify-center p-2 text-xl text-neutral-400 hover:text-neutral-300"
+          className="flex items-center justify-center text-xl text-neutral-400 hover:text-neutral-300"
         >
           <LuDownload />
         </button>

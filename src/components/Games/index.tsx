@@ -3,16 +3,11 @@ import { invoke } from "@tauri-apps/api";
 
 import PageDisplay from "../PageDisplay";
 import Expander from "../Expander";
-import Game from "./GameItem";
 import GameLaunchers from "./GameLaunchers";
 import { Page } from "../../enums/page";
 import { useMount } from "../../hooks/useMount";
-
-type Game = {
-  id: string;
-  name: string;
-  installed: boolean;
-};
+import { Game } from "../../types/modules/games";
+import GameItem from "./GameItem";
 
 interface GamesProps {
   page: Page;
@@ -23,9 +18,9 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   const [games, setGames] = useState<Game[]>([]);
 
   useMount(async () => {
-    await invoke("fetch_steam_games")
-      .then((games) => setGames(games as Game[]))
-      .catch((error) => console.error(error));
+    await invoke("fetch_steam_games").then((games) =>
+      setGames(games as Game[])
+    );
   });
 
   const filteredGames = games.filter((game) =>
@@ -43,14 +38,14 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
           {installedGames.length !== 0 && (
             <Expander label={"Installed"}>
               {installedGames.map((game) => (
-                <Game key={game.id} game={game} />
+                <GameItem key={game.id} game={game} />
               ))}
             </Expander>
           )}
           {notInstalledGames.length !== 0 && (
             <Expander label={"Not installed"}>
               {notInstalledGames.map((game) => (
-                <Game key={game.id} game={game} />
+                <GameItem key={game.id} game={game} />
               ))}
             </Expander>
           )}
@@ -66,5 +61,4 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   );
 };
 
-export type { Game };
 export default Games;

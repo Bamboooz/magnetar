@@ -14,7 +14,7 @@ const GameLaunchers: React.FC = () => {
   return (
     <Expander label="Launchers">
       <Item label="Open steam" onClick={openSteam} className="justify-start">
-        <div className="flex items-center justify-start gap-3 text-neutral-300 text-3xl">
+        <div className="flex items-center justify-start gap-6 text-neutral-300 text-3xl">
           <FaSteam />
 
           <div className="flex flex-col items-start justify-center">
@@ -24,7 +24,7 @@ const GameLaunchers: React.FC = () => {
         </div>
       </Item>
       <Item label="Close steam" onClick={closeSteam} className="justify-start">
-        <div className="flex items-center justify-start gap-3 text-neutral-300 text-3xl">
+        <div className="flex items-center justify-start gap-6 text-neutral-300 text-3xl">
           <FaSteam />
 
           <div className="flex flex-col items-start justify-center">

@@ -6,9 +6,9 @@ import { LuTerminal } from "react-icons/lu";
 
 import Item from "../Item";
 import { executeCommand } from "../../utils/cmd";
-import { Command } from ".";
 import admin_icon from "../../assets/icons/admin.png";
 import { useMount } from "../../hooks/useMount";
+import { Command } from "../../types/modules/commands";
 
 interface CommandItemProps {
   command: Command;

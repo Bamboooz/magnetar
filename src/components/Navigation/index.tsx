@@ -64,22 +64,28 @@ const Navigation: React.FC<NavigationProps> = ({
       {page !== Page.HOME && (
         <div className="flex flex-col gap-1">
           {!searching ? (
-            <button
-              onClick={() => setSearching(true)}
-              className="flex items-center justify-center p-2 text-xl hover:text-neutral-300"
-            >
-              <LuSearch />
-            </button>
+            <>
+              <button
+                onClick={() => setSearching(true)}
+                className="flex items-center justify-center text-xl hover:text-neutral-300"
+              >
+                <LuSearch />
+              </button>
+              
+              <div className="w-full h-1 rounded-full bg-transparent" />
+            </>
           ) : (
-            <input
-              ref={searchRef}
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="outline-none bg-transparent border-b border-neutral-400"
-            />
+            <div className="flex flex-col items-center justify-center gap-1">
+              <input
+                ref={searchRef}
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="outline-none bg-transparent"
+              />
+              <div className="w-full h-1 rounded-full bg-secondary" />
+            </div>
           )}
-          <div className="w-full h-1 rounded-full bg-transparent" />
         </div>
       )}
     </div>

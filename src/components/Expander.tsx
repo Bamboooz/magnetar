@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { LuChevronRight } from "react-icons/lu";
 
-import { cn } from "../utils/cn";
-
 interface ExpanderProps {
   label: string;
   children?: React.ReactNode;
@@ -21,14 +19,7 @@ const Expander: React.FC<ExpanderProps> = ({ label, children }) => {
         <p>{label}</p>
       </button>
 
-      <div
-        className={cn(
-          "w-full flex flex-col items-center justify-start overflow-hidden",
-          opened ? "h-auto mb-4" : "h-0 mb-0"
-        )}
-      >
-        {children}
-      </div>
+      {opened && <div className="w-full flex flex-col mb-4">{children}</div>}
     </div>
   );
 };

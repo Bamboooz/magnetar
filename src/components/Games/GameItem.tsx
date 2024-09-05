@@ -3,9 +3,9 @@ import { appWindow } from "@tauri-apps/api/window";
 
 import Item from "../Item";
 import { executeCommand } from "../../utils/cmd";
-import { Game } from ".";
 import { invoke } from "@tauri-apps/api";
 import { useMount } from "../../hooks/useMount";
+import { Game } from "../../types/modules/games";
 
 interface GameItemProps {
   game: Game;
