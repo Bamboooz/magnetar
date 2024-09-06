@@ -32,7 +32,7 @@ magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox tha
 
 ## Usage
 
-Once installed, to open magnetar you need to enter `Ctrl + Shift + P` and this will open the command palette.
+Once installed, to open magnetar you need to press `Ctrl + Shift + P` and this will open the command palette.
 
 Additional information about the application can be found [here](https://github.com/Bamboooz/magnetar/wiki).
 
