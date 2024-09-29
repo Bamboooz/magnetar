@@ -9,6 +9,11 @@ magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox tha
 
 <br />
 
+> [!NOTE]
+> I will start making the next update as soon as [tauri 2.0](https://v2.tauri.app/blog/tauri-2-0-0-release-candidate/) becomes stable, which shouldn't take long.
+
+<br />
+
 <img alt="preview 1" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview1.png?raw=true" />
 
 <br />
