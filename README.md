@@ -5,11 +5,11 @@
 
 <br />
 
-magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
+magnetar is a free, open-source, fast and lightweight (~7.5MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
 
 <br />
 
-<img alt="preview 1" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview1.png?raw=true" />
+<img alt="preview 1" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview1.png?raw=true" />
 
 <br />
 
@@ -23,9 +23,9 @@ magnetar is a free, open-source, fast and lightweight (~6MB) Windows toolbox tha
 
 <table>
   <tr>
-    <td><img alt="preview 2" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview2.png?raw=true" />
-    <td><img alt="preview 3" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview3.png?raw=true" />
-    <td><img alt="preview 4" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/previews/preview4.png?raw=true" />
+    <td><img alt="preview 2" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview2.png?raw=true" />
+    <td><img alt="preview 3" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview3.png?raw=true" />
+    <td><img alt="preview 4" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview4.png?raw=true" />
 </table>
 
 <br />

@@ -17,6 +17,9 @@ export default {
         "2xl": "18px",
         "3xl": "23px",
       },
+      fontFamily: {
+        poppins: "Poppins",
+      },
     },
   },
   plugins: [],

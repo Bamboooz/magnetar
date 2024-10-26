@@ -16,15 +16,10 @@
   font-style: normal;
 }
 
-* {
-  @apply select-none;
-  font-family: "Poppins";
-}
-
 html,
 body,
 :root {
-  @apply m-0 p-0 select-none;
+  @apply m-0 p-0 select-none font-poppins;
 }
 
 ::-webkit-scrollbar {

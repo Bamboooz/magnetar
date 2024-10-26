@@ -1,7 +1,7 @@
 use std::error::Error;
 use winreg::{
-  enums::{HKEY_CURRENT_USER, KEY_READ},
   RegKey,
+  enums::{HKEY_CURRENT_USER, KEY_READ}
 };
 
 #[derive(Debug, serde::Serialize)]
@@ -20,7 +20,7 @@ fn fetch_steam_app_ids() -> Result<Vec<String>, Box<dyn Error>> {
     .enum_keys()
     .map(|key_name| key_name.map(String::from).map_err(Box::from))
     .collect();
-  
+
   app_ids
 }
 

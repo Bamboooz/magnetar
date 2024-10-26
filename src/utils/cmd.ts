@@ -1,10 +1,12 @@
-import { invoke } from "@tauri-apps/api";
-import { appWindow } from "@tauri-apps/api/window";
+import { invoke } from "@tauri-apps/api/core";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
-const executeCommand = async (command: string, admin: boolean) => {
+const executeCommand = async (command: string, admin: boolean = false) => {
+  const appWindow = getCurrentWindow();
+
   try {
-    await invoke("execute_command", { command, admin });
     await appWindow.hide();
+    await invoke("execute_command", { command, admin });
   } catch (error) {
     console.error(error);
   }

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { invoke } from "@tauri-apps/api";
-
+import { invoke } from "@tauri-apps/api/core";
 import PageDisplay from "../PageDisplay";
-import Expander from "../Expander";
-import GameLaunchers from "./GameLaunchers";
+import Expander from "../common/Expander";
 import { Page } from "../../enums/page";
 import { useMount } from "../../hooks/useMount";
 import { Game } from "../../types/modules/games";
 import GameItem from "./GameItem";
+import GameLauncher from "./GameLauncher";
+import { executeCommand } from "../../utils/cmd";
 
 interface GamesProps {
   page: Page;
@@ -17,12 +17,6 @@ interface GamesProps {
 const Games: React.FC<GamesProps> = ({ page, search }) => {
   const [games, setGames] = useState<Game[]>([]);
 
-  useMount(async () => {
-    await invoke("fetch_steam_games").then((games) =>
-      setGames(games as Game[])
-    );
-  });
-
   const filteredGames = games.filter((game) =>
     game.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -30,20 +24,44 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   const installedGames = filteredGames.filter((game) => game.installed);
   const notInstalledGames = filteredGames.filter((game) => !game.installed);
 
+  const openSteam = async () =>
+    await executeCommand("start steam://run", false);
+  const closeSteam = async () =>
+    await executeCommand("taskkill /f /im steam.exe", false);
+
+  useMount(async () => {
+    await invoke("fetch_steam_games").then((games) =>
+      setGames(games as Game[])
+    );
+  });
+
   return (
-    <PageDisplay id={Page.GAMES} page={page}>
-      <GameLaunchers />
+    <PageDisplay id={Page.GAMES} page={page} className="gap-3">
+      <Expander label="Launchers">
+        <GameLauncher
+          title="Open steam"
+          command="start steam://run"
+          onClick={openSteam}
+        />
+        <GameLauncher
+          title="Close steam"
+          command="taskkill /f /im steam.exe"
+          onClick={closeSteam}
+        />
+      </Expander>
+
       {filteredGames.length !== 0 ? (
         <>
           {installedGames.length !== 0 && (
-            <Expander label={"Installed"}>
+            <Expander label="Installed">
               {installedGames.map((game) => (
                 <GameItem key={game.id} game={game} />
               ))}
             </Expander>
           )}
+
           {notInstalledGames.length !== 0 && (
-            <Expander label={"Not installed"}>
+            <Expander label="Not installed">
               {notInstalledGames.map((game) => (
                 <GameItem key={game.id} game={game} />
               ))}

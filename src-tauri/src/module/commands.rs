@@ -1,16 +1,18 @@
-use std::fs;
-use std::process::Command;
-use std::os::windows::process::CommandExt;
+use std::{
+  fs,
+  os::windows::process::CommandExt,
+  process::Command
+};
 
-use crate::util::dir;
+use crate::util::config;
 
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 #[tauri::command]
 pub async fn fetch_commands() -> String {
-  dir::verify();
-  
-  let path = dir::commands_path().join("commands.json");
+  config::verify();
+
+  let path = config::magnetar_path().join("commands").join("commands.json");
 
   let json = fs::read_to_string(path).unwrap_or_else(|_| {
     return "{}".to_string();
@@ -28,7 +30,13 @@ pub async fn execute_command(command: String, admin: bool) {
     );
 
     Command::new("powershell")
-      .args(&["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", &ps_command])
+      .args(&[
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        &ps_command,
+      ])
       .creation_flags(CREATE_NO_WINDOW)
       .spawn()
       .expect("Failed to execute command");

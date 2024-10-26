@@ -10,7 +10,7 @@ struct Release {
 #[tauri::command]
 pub async fn updates_available(app_handle: AppHandle) -> Result<bool, String> {
   let url = "https://api.github.com/repos/Bamboooz/magnetar/releases/latest";
-  
+
   let client = Client::new();
 
   let version = app_handle.package_info().version.to_string();
@@ -23,7 +23,10 @@ pub async fn updates_available(app_handle: AppHandle) -> Result<bool, String> {
     .await
     .map_err(|e| format!("Request failed: {}", e))?;
 
-  let release: Release = response.json().await.map_err(|e| format!("Failed to parse JSON: {}", e))?;
+  let release: Release = response
+    .json()
+    .await
+    .map_err(|e| format!("Failed to parse JSON: {}", e))?;
 
   Ok(release.tag_name != version)
 }

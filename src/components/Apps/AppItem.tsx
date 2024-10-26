@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { appWindow } from "@tauri-apps/api/window";
-import { LuPackage, LuTrash } from "react-icons/lu";
-
-import Item from "../Item";
+import { invoke } from "@tauri-apps/api/core";
+import { LuPackage } from "react-icons/lu";
+import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
 import { App } from "../../types/modules/apps";
 import { useMount } from "../../hooks/useMount";
-import { invoke } from "@tauri-apps/api";
+import AppItemContext from "./AppItemContext";
+
+const initialContextMenu = {
+  x: 0,
+  y: 0,
+  visible: false,
+};
 
 interface AppItemProps {
   app: App;
@@ -17,14 +22,31 @@ interface AppItemProps {
 const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
   const [label, setLabel] = useState<string>(app.label);
   const [path, setPath] = useState<string>(app.path);
+  const [context, setContext] = useState(initialContextMenu);
 
-  const openApp = async () => {
-    appWindow.hide();
-    executeCommand(app.path, false);
+  const closeContextMenu = () => setContext(initialContextMenu);
+
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    const x = e.clientX;
+    const y = e.clientY;
+
+    setContext({ x, y, visible: true });
+  };
+
+  const openApp = async () => executeCommand(app.path, false);
+
+  const openInExplorer = async () => {
+    const path = app.path.substring(0, app.path.lastIndexOf("\\"));
+
+    executeCommand(`explorer "${path}"`, false);
   };
 
   const removeApp = async () => {
-    const newApps = apps.filter((a) => a.label !== app.label);
+    const newApps = apps.filter((a) => a.path !== app.path);
     setApps(newApps);
     localStorage.setItem("apps", JSON.stringify(newApps));
   };
@@ -40,10 +62,12 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
   });
 
   return (
-    <Item label={app.label} className="justify-between">
-      <div
+    <>
+      <Item
+        label={app.label}
         onClick={openApp}
-        className="w-full flex items-center justify-start gap-6"
+        onContextMenu={handleContextMenu}
+        className="justify-start gap-3"
       >
         <LuPackage className="text-neutral-300 text-3xl" />
 
@@ -51,16 +75,19 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
           <p className="text-md text-neutral-300">{label}</p>
           <p className="text-sm text-neutral-400">{path}</p>
         </div>
-      </div>
+      </Item>
 
-      <div
-        title={`Remove ${app.label}`}
-        onClick={removeApp}
-        className="hidden group-hover:flex items-center justify-center z-10 text-neutral-400 hover:text-neutral-300"
-      >
-        <LuTrash className="text-xl" />
-      </div>
-    </Item>
+      {context.visible && (
+        <AppItemContext
+          x={context.x}
+          y={context.y}
+          closeContextMenu={closeContextMenu}
+          openApp={openApp}
+          openInExplorer={openInExplorer}
+          removeApp={removeApp}
+        />
+      )}
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useState, lazy, Suspense } from "react";
-
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import { Page } from "./enums/page";
@@ -22,7 +21,6 @@ const App: React.FC = () => {
         search={search}
         setSearch={setSearch}
       />
-
       <Suspense>
         <Home page={page} />
         <Apps page={page} search={search} />

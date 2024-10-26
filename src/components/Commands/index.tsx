@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { invoke } from "@tauri-apps/api";
-
+import { invoke } from "@tauri-apps/api/core";
 import PageDisplay from "../PageDisplay";
-import Expander from "../Expander";
+import Expander from "../common/Expander";
 import CommandItem from "./CommandItem";
 import { Page } from "../../enums/page";
 import { useMount } from "../../hooks/useMount";
@@ -16,13 +15,6 @@ interface HomeProps {
 const Commands: React.FC<HomeProps> = ({ page, search }) => {
   const [commands, setCommands] = useState<CommandList>({});
 
-  useMount(async () => {
-    await invoke("fetch_commands").then((commands) => {
-      const commandsJson = JSON.parse(commands as string) as CommandList;
-      setCommands(commandsJson);
-    });
-  });
-
   const filteredCommandGroups = Object.entries(commands)
     .map(([label, commands]) => ({
       label,
@@ -31,6 +23,13 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
       ),
     }))
     .filter((group) => group.commands.length > 0);
+
+  useMount(async () => {
+    await invoke("fetch_commands").then((commands) => {
+      const commandsJson = JSON.parse(commands as string) as CommandList;
+      setCommands(commandsJson);
+    });
+  });
 
   return (
     <PageDisplay id={Page.COMMANDS} page={page} className="gap-3">

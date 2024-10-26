@@ -1,3 +1,3 @@
-pub mod dir;
+pub mod config;
 pub mod string;
 pub mod update;

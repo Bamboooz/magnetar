@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { appWindow } from "@tauri-apps/api/window";
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
-
-import Item from "../Item";
+import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
 import admin_icon from "../../assets/icons/admin.png";
 import { useMount } from "../../hooks/useMount";
@@ -18,10 +16,9 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
   const [label, setLabel] = useState<string>(command.label);
   const [cmd, setCmd] = useState<string>(command.command);
 
-  const execute = async () => {
-    appWindow.hide();
-    executeCommand(command.command, command.admin);
-  };
+  const isPowershell = command.command.toLowerCase().includes("powershell");
+
+  const execute = async () => executeCommand(command.command, command.admin);
 
   useMount(async () => {
     await invoke("trim", { input: command.label }).then((label) =>
@@ -36,11 +33,7 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
   return (
     <Item label={command.label} onClick={execute} className="justify-between">
       <div className="flex items-center justify-start gap-6 text-neutral-300 text-3xl">
-        {command.command.toLowerCase().includes("powershell") ? (
-          <VscTerminalPowershell />
-        ) : (
-          <LuTerminal />
-        )}
+        {isPowershell ? <VscTerminalPowershell /> : <LuTerminal />}
 
         <div className="flex flex-col items-start justify-center">
           <p className="text-md">{label}</p>

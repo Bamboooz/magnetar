@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { open } from "@tauri-apps/api/dialog";
-import { appWindow } from "@tauri-apps/api/window";
+import { open } from "@tauri-apps/plugin-dialog";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { invoke } from "@tauri-apps/api/core";
 import { LuPlus } from "react-icons/lu";
-
 import PageDisplay from "../PageDisplay";
 import { Page } from "../../enums/page";
-import Expander from "../Expander";
-import Item from "../Item";
+import Expander from "../common/Expander";
+import Item from "../common/Item";
 import AppItem from "./AppItem";
-import { invoke } from "@tauri-apps/api";
 import { App } from "../../types/modules/apps";
 
 interface AppsProps {
@@ -19,6 +18,12 @@ interface AppsProps {
 const Apps: React.FC<AppsProps> = ({ page, search }) => {
   const foundApps = localStorage.getItem("apps") || "[]";
   const [apps, setApps] = useState<App[]>(JSON.parse(foundApps));
+
+  const appWindow = getCurrentWindow();
+
+  const filteredApps = apps.filter((app) =>
+    app.label.toLowerCase().includes(search.toLowerCase())
+  );
 
   const addApp = async () => {
     const paths = await open({
@@ -39,7 +44,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
       pathsArray.map(async (path) => {
         const label = (await invoke("file_name", {
           path,
-        })) as unknown as string;
+        })) as string;
         return { label, path };
       })
     );
@@ -54,10 +59,6 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
     appWindow.setFocus();
   };
 
-  const filteredApps = apps.filter((app) =>
-    app.label.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <PageDisplay id={Page.APPS} page={page} className="gap-3">
       <Item
@@ -68,6 +69,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
         <LuPlus className="text-3xl" />
         <p className="text-md">Add a new app</p>
       </Item>
+
       {filteredApps.length !== 0 ? (
         <Expander label="Apps">
           {filteredApps.map((app) => (
