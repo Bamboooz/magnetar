@@ -32,7 +32,7 @@ fn main() {
       module::commands::execute_command,
       util::string::trim,
       util::string::file_name,
-      util::update::updates_available,
+      util::update::latest_update,
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

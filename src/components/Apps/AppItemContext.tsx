@@ -23,19 +23,17 @@ const AppItemContext: React.FC<AppItemContextProps> = ({
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
       <ContextButton
-        title="Open app"
+        title="Open"
         icon={<LuPlay />}
         className="text-neutral-400 hover:text-neutral-300"
         onClick={openApp}
       />
-
       <ContextButton
         title="Open in explorer"
         icon={<LuFolder />}
         className="text-neutral-400 hover:text-neutral-300"
         onClick={openInExplorer}
       />
-
       <ContextButton
         title="Remove app"
         icon={<LuTrash />}

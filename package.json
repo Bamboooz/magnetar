@@ -1,7 +1,7 @@
 {
   "name": "magnetar",
   "private": true,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "scripts": {
     "pretty": "pnpm exec prettier . --write",
@@ -15,13 +15,12 @@
   "dependencies": {
     "@tauri-apps/api": "^2.0.3",
     "@tauri-apps/plugin-dialog": "~2.0.1",
-    "@tauri-apps/plugin-fs": "~2.0.1",
     "@tauri-apps/plugin-global-shortcut": "~2.0.0",
     "@tauri-apps/plugin-shell": "~2.0.1",
-    "clsx": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
+    "clsx": "^2.1.1",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {

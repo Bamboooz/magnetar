@@ -14,11 +14,7 @@ const GameLauncher: React.FC<GameLauncherProps> = ({
   onClick,
 }) => {
   return (
-    <Item
-      label={title}
-      onClick={onClick}
-      className="justify-start gap-6 text-neutral-300"
-    >
+    <Item onClick={onClick} className="justify-start gap-6 text-neutral-300">
       <FaSteam className="text-3xl" />
 
       <div className="flex flex-col items-start justify-center">

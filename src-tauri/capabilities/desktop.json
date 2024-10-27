@@ -13,6 +13,10 @@
     "fs:allow-write-file",
     "fs:allow-mkdir",
     "fs:allow-exists",
+    {
+      "identifier": "fs:scope",
+      "allow": ["$DATA/magnetar/**"]
+    },
     "core:default",
     "core:window:allow-show",
     "core:window:allow-hide",
@@ -21,10 +25,6 @@
     "shell:default",
     "shell:allow-open",
     "dialog:default",
-    "dialog:allow-open",
-    {
-      "identifier": "fs:scope",
-      "allow": ["$DATA/magnetar/**"]
-    }
+    "dialog:allow-open"
   ]
 }

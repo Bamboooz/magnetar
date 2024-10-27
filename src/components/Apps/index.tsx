@@ -61,11 +61,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
 
   return (
     <PageDisplay id={Page.APPS} page={page} className="gap-3">
-      <Item
-        label="Add a new app"
-        onClick={addApp}
-        className="justify-start gap-3 text-neutral-300"
-      >
+      <Item onClick={addApp} className="justify-start gap-3 text-neutral-300">
         <LuPlus className="text-3xl" />
         <p className="text-md">Add a new app</p>
       </Item>
@@ -77,7 +73,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
           ))}
         </Expander>
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="size-full flex flex-col items-center justify-center">
           <p className="text-neutral-300 text-2xl font-medium">No apps found</p>
         </div>
       )}

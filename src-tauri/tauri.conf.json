@@ -18,7 +18,7 @@
   },
   "productName": "magnetar",
   "mainBinaryName": "magnetar",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "identifier": "com.magnetar.dev",
   "plugins": {},
   "app": {
@@ -31,7 +31,8 @@
         "resizable": false,
         "decorations": false,
         "visible": false,
-        "skipTaskbar": true
+        "skipTaskbar": true,
+        "alwaysOnTop": true
       }
     ],
     "security": {

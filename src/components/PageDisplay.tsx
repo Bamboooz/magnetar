@@ -19,9 +19,7 @@ const PageDisplay: React.FC<PageDisplayProps> = ({
     <div
       className={cn(
         className,
-        page === id
-          ? "w-full h-full flex flex-col overflow-auto pb-3"
-          : "hidden"
+        page === id ? "size-full flex flex-col overflow-auto" : "hidden"
       )}
     >
       {children}

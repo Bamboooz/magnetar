@@ -31,7 +31,7 @@ pub fn set_window_position(window: &WebviewWindow) {
         x: screen_position.x + (screen_size.width - (window_size.width as i32)),
         y: screen_size.height
           - (window_size.height - (screen_position.y as u32)) as i32
-          - 40,
+          - 50,
       };
 
       window

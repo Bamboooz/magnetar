@@ -64,10 +64,9 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
   return (
     <>
       <Item
-        label={app.label}
         onClick={openApp}
         onContextMenu={handleContextMenu}
-        className="justify-start gap-3"
+        className="justify-start gap-6"
       >
         <LuPackage className="text-neutral-300 text-3xl" />
 

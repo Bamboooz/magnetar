@@ -42,7 +42,7 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
           </Expander>
         ))
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="size-full flex flex-col items-center justify-center">
           <p className="text-neutral-300 text-2xl font-medium">
             No commands found
           </p>

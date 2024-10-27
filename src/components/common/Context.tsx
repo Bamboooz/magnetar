@@ -22,7 +22,6 @@ const Context: React.FC<ContextProps> = ({
     if (contextMenuRef.current) {
       const { innerWidth, innerHeight } = window;
       const { offsetWidth, offsetHeight } = contextMenuRef.current;
-      console.log(offsetWidth, offsetHeight);
 
       x = Math.min(x, innerWidth - offsetWidth);
       y = Math.min(y, innerHeight - offsetHeight);
@@ -53,7 +52,7 @@ const Context: React.FC<ContextProps> = ({
     <div
       ref={contextMenuRef}
       className={cn(
-        "flex flex-col fixed z-50 bg-secondary shadow-2xl rounded-sm border border-tertiary"
+        "flex flex-col p-[1px] fixed z-50 bg-secondary shadow-2xl rounded-sm border border-tertiary"
       )}
       style={{ top: position.y, left: position.x }}
     >

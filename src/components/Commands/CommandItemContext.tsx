@@ -1,41 +1,38 @@
 import React from "react";
-import { LuExternalLink, LuPlay } from "react-icons/lu";
+import { LuPlay } from "react-icons/lu";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import Context from "../common/Context";
 import ContextButton from "../common/ContextButton";
 
-interface GameItemContextProps {
+interface CommandItemContextProps {
   x: number;
   y: number;
   closeContextMenu: () => void;
-  installed: boolean;
-  playGame: () => Promise<void>;
-  openGamePage: () => Promise<void>;
+  execute: (admin: boolean) => Promise<void>;
 }
 
-const GameItemContext: React.FC<GameItemContextProps> = ({
+const CommandItemContext: React.FC<CommandItemContextProps> = ({
   x,
   y,
   closeContextMenu,
-  installed,
-  playGame,
-  openGamePage,
+  execute,
 }) => {
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
       <ContextButton
-        title={installed ? "Play" : "Install"}
+        title="Execute"
         icon={<LuPlay />}
         className="text-neutral-400 hover:text-neutral-300"
-        onClick={playGame}
+        onClick={() => execute(false)}
       />
       <ContextButton
-        title="Open game page"
-        icon={<LuExternalLink />}
+        title="Execute as admin"
+        icon={<MdOutlineAdminPanelSettings />}
         className="text-neutral-400 hover:text-neutral-300"
-        onClick={openGamePage}
+        onClick={() => execute(true)}
       />
     </Context>
   );
 };
 
-export default GameItemContext;
+export default CommandItemContext;

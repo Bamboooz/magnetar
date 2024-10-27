@@ -22,7 +22,6 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
   const [name, setName] = useState<string>(game.name);
   const [context, setContext] = useState(initialContextMenu);
 
-  const title = game.installed ? `Play ${name}` : `Install ${name}`;
   const headerImage = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
 
   const closeContextMenu = () => setContext(initialContextMenu);
@@ -54,7 +53,6 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
       {valid && (
         <>
           <Item
-            label={title}
             onClick={openGame}
             onContextMenu={handleContextMenu}
             className="justify-start gap-3"
@@ -67,11 +65,13 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
 
             <div className="flex flex-col items-start justify-center">
               <p className="text-md text-neutral-300">{name}</p>
-              <p className="text-sm text-neutral-400">{`steam://rungameid/${game.id}`}</p>
+              <p className="text-sm text-neutral-400">
+                steam://rungameid/{game.id}
+              </p>
             </div>
 
             {!game.installed && !context.visible && (
-              <div className="absolute top-0 left-0 w-full h-full z-30 bg-primary bg-opacity-60 group-hover:hidden" />
+              <div className="absolute top-0 left-0 size-full z-30 bg-primary bg-opacity-60 group-hover:hidden" />
             )}
           </Item>
 

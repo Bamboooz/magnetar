@@ -27,7 +27,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   const openSteam = async () =>
     await executeCommand("start steam://run", false);
   const closeSteam = async () =>
-    await executeCommand("taskkill /f /im steam.exe", false);
+    await executeCommand("start steam://exit", false);
 
   useMount(async () => {
     await invoke("fetch_steam_games").then((games) =>
@@ -45,7 +45,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
         />
         <GameLauncher
           title="Close steam"
-          command="taskkill /f /im steam.exe"
+          command="start steam://exit"
           onClick={closeSteam}
         />
       </Expander>
@@ -59,7 +59,6 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
               ))}
             </Expander>
           )}
-
           {notInstalledGames.length !== 0 && (
             <Expander label="Not installed">
               {notInstalledGames.map((game) => (
@@ -69,7 +68,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
           )}
         </>
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="size-full flex flex-col items-center justify-center">
           <p className="text-neutral-300 text-2xl font-medium">
             No games found
           </p>

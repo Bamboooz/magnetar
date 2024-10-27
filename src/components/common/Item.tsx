@@ -2,7 +2,6 @@ import React from "react";
 import { cn } from "../../utils/cn";
 
 interface ItemProps {
-  label: string;
   onClick?: () => void;
   onContextMenu?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   className?: string;
@@ -10,7 +9,6 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({
-  label,
   onClick,
   onContextMenu,
   className,
@@ -18,7 +16,6 @@ const Item: React.FC<ItemProps> = ({
 }) => {
   return (
     <button
-      title={label}
       onClick={onClick}
       onContextMenu={onContextMenu}
       className={cn(
