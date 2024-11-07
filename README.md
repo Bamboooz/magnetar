@@ -17,6 +17,8 @@
   <img src="https://github.com/Bamboooz/magnetar/blob/main/public/home_preview.png?raw=true" alt="magnetar preview" width="800" />
 </div>
 
+<br />
+
 <table>
   <tr>
     <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/apps_preview.png?raw=true" />
