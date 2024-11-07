@@ -1,48 +1,46 @@
 <div align="center">
-    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/src/assets/icons/icon_white.png?raw=true" />
-    <h1>magnetar</h1>
+  <picture>
+    <source width="120" media="(prefers-color-scheme: dark)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/dark_theme_icon.png?raw=true">
+    <source width="120" media="(prefers-color-scheme: light)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
+    <img alt="magnetar logo" width="120" src="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
+  </picture>
+  <h1>magnetar</h1>
+  <p>An advanced Windows toolbox.</p>
+
+  [![License](https://img.shields.io/github/license/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/blob/main/LICENSE)
+  [![GitHub stars](https://img.shields.io/github/stars/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/stargazers)
+  [![GitHub issues](https://img.shields.io/github/issues/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/issues)
+  [![GitHub release](https://img.shields.io/github/v/release/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/releases)
 </div>
 
-<br />
-
-magnetar is a free, open-source, fast and lightweight (~7.5MB) Windows toolbox that allows you to store all your frequently used applications, games and commands in one place. It provides an easy to use interface to just get things done.
-
-<br />
-
-<img alt="preview 1" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview1.png?raw=true" />
-
-<br />
-
-## Built-in modules
-
-- Applications
-- Games
-- Commands
-
-<br />
+<div align="center">
+  <img src="https://github.com/Bamboooz/magnetar/blob/main/public/home_preview.png?raw=true" alt="magnetar preview" width="800" />
+</div>
 
 <table>
   <tr>
-    <td><img alt="preview 2" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview2.png?raw=true" />
-    <td><img alt="preview 3" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview3.png?raw=true" />
-    <td><img alt="preview 4" src="https://github.com/Bamboooz/magnetar/blob/main/.github/previews/preview4.png?raw=true" />
+    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/apps_preview.png?raw=true" />
+    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/games_preview.png?raw=true" />
+    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/commands_preview.png?raw=true" />
 </table>
 
-<br />
+## Features
+
+- 💻 Saving applications in a single place
+- 🎮 Playing and installing your steam games directly from the toolbox
+- 🛠 Accessing your favorite commands and shortcuts
+- ⚙️ Customizing your toolbox with your own settings (soon)
+- 🔥 Very fast and lightweight (~7.5MB)
+
+## Download
+
+To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer / portable executable. The application might trigger a warning about the app being unsigned, this is normal and can be ignored.
 
 ## Usage
 
 Once installed, to open magnetar you need to press `Ctrl + Shift + P` and this will open the command palette.
 
-Additional information about the application can be found [here](https://github.com/Bamboooz/magnetar/wiki).
-
-## Download
-
-To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer.
-
-## Roadmap
-
-You can view the magnetar roadmap [here](https://github.com/Bamboooz/magnetar/wiki/Roadmap).
+You can find any additional information about the application [here](https://github.com/Bamboooz/magnetar/wiki).
 
 ## Building from source
 
@@ -72,10 +70,14 @@ pnpm i
 pnpm start
 ```
 
+## Contributing
+
+We welcome contributions from the community! Please see our [contributing guidelines](./.github/CONTRIBUTING.md) for more information.
+
 ## Support me
 
 You can buy me a coffee if you enjoy my work [Buy me a Ko-fi ☕](https://ko-fi.com/Bamboooz#paypalModal)
 
 ## License
 
-This project is licensed under the [BSD-3 Clause License](https://github.com/Bamboooz/magnetar/blob/main/LICENSE).
+This project is licensed under the [BSD-3 Clause License](LICENSE).

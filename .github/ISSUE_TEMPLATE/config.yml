@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support
+    url: https://github.com/Bamboooz/magnetar/discussions
+    about: Please use discussions for questions and support.

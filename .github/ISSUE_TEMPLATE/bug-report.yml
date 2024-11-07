@@ -1,0 +1,40 @@
+name: Bug report
+description: Create a report of an existing bug you encountered.
+title: '[Bug]: '
+labels:
+  - bug
+assignees:
+  - Bamboooz
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Platform information
+      description: Provide your current magnetar and operating system versions.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Minimal reproduction
+      description: How can we reproduce this bug in order to fix it?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Exception or error
+      description: If possible, provide error logs.
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Provide any additional context or screenshots here.
