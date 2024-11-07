@@ -36,7 +36,7 @@
 
 ## Download
 
-To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer / portable executable. The application might trigger a warning about the app being unsigned, this is normal and can be ignored.
+To download magnetar you simply need to visit the [latest GitHub release](https://github.com/Bamboooz/magnetar/releases/latest) page and download the installer / portable executable. The application might trigger a warning about the app being unsigned, but this is normal and can be ignored.
 
 ## Usage
 
@@ -46,9 +46,9 @@ You can find any additional information about the application [here](https://git
 
 ## Building from source
 
-To build magnetar from source code you need to follow these steps:
+To build magnetar from source you need to follow these steps:
 
-1. Clone the magentar repository from GitHub using this command or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
+1. Clone the magnetar repository from GitHub using this command or download the source code from this [url](https://github.com/Bamboooz/magnetar/releases/latest)
 
 ```bash
 git clone https://github.com/Bamboooz/magnetar.git
@@ -60,7 +60,7 @@ git clone https://github.com/Bamboooz/magnetar.git
 - [pnpm](https://pnpm.io/installation#using-npm)
 - [Rust compiler](https://www.rust-lang.org/tools/install)
 
-3. Open the cloned/downloaded directory in a terminal and execute the following command
+3. Open the cloned / downloaded directory in a terminal and execute the following command
 
 ```bash
 pnpm i
