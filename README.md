@@ -2,7 +2,7 @@
   <picture>
     <source width="120" media="(prefers-color-scheme: dark)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/dark_theme_icon.png?raw=true">
     <source width="120" media="(prefers-color-scheme: light)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
-    <img alt="magnetar logo" width="120" src="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
+    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
   </picture>
   <h1>magnetar</h1>
   <p>An advanced Windows toolbox.</p>
