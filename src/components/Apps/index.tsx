@@ -3,15 +3,14 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { invoke } from "@tauri-apps/api/core";
 import { LuPlus } from "react-icons/lu";
-import PageDisplay from "../PageDisplay";
-import { Page } from "../../enums/page";
+import Page from "../common/Page";
+import { PageType, App } from "../../types";
 import Expander from "../common/Expander";
 import Item from "../common/Item";
 import AppItem from "./AppItem";
-import { App } from "../../types/modules/apps";
 
 interface AppsProps {
-  page: Page;
+  page: PageType;
   search: string;
 }
 
@@ -60,7 +59,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
   };
 
   return (
-    <PageDisplay id={Page.APPS} page={page} className="gap-3">
+    <Page id={PageType.APPS} page={page} className="gap-3">
       <Item onClick={addApp} className="justify-start gap-3 text-neutral-300">
         <LuPlus className="text-3xl" />
         <p className="text-md">Add a new app</p>
@@ -77,7 +76,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
           <p className="text-neutral-300 text-2xl font-medium">No apps found</p>
         </div>
       )}
-    </PageDisplay>
+    </Page>
   );
 };
 

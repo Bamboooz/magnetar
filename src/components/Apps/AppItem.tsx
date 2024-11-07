@@ -3,7 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { LuPackage } from "react-icons/lu";
 import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
-import { App } from "../../types/modules/apps";
+import { App } from "../../types";
 import { useMount } from "../../hooks/useMount";
 import AppItemContext from "./AppItemContext";
 

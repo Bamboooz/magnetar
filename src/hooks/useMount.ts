@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Callback } from "../types/general";
+type Callback = () => void | Promise<void>;
 
 const useMount = (callback: Callback) => {
   useEffect(() => {

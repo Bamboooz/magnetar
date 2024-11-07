@@ -6,7 +6,7 @@ import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
 import admin_icon from "../../assets/icons/admin.png";
 import { useMount } from "../../hooks/useMount";
-import { Command } from "../../types/modules/commands";
+import { Command } from "../../types";
 import CommandItemContext from "./CommandItemContext";
 
 const initialContextMenu = {

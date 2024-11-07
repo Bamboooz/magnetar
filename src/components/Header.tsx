@@ -1,19 +1,19 @@
 import React from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { LuHelpCircle } from "react-icons/lu";
-import { Page } from "../enums/page";
+import { PageType } from "../types";
 
 import icon from "../assets/icons/icon_white.png";
 
 interface HeaderProps {
-  setPage: React.Dispatch<React.SetStateAction<Page>>;
+  setPage: React.Dispatch<React.SetStateAction<PageType>>;
 }
 
 const Header: React.FC<HeaderProps> = ({ setPage }) => {
   return (
     <div className="w-full h-16 flex items-center justify-between shrink-0 pr-6 bg-black">
       <button
-        onClick={() => setPage(Page.HOME)}
+        onClick={() => setPage(PageType.HOME)}
         className="h-full flex items-center justify-center gap-4 px-6"
       >
         <img src={icon} alt="logo" className="w-5 h-5" />

@@ -1,12 +1,12 @@
 import React from "react";
 import { cn } from "../../utils/cn";
-import { Page } from "../../enums/page";
+import { PageType } from "../../types";
 
 interface NavigationButtonProps {
-  id: Page;
+  id: PageType;
   label: string;
-  page: Page;
-  setPage: React.Dispatch<React.SetStateAction<Page>>;
+  page: PageType;
+  setPage: React.Dispatch<React.SetStateAction<PageType>>;
 }
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({

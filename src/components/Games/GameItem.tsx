@@ -4,7 +4,7 @@ import { open } from "@tauri-apps/plugin-shell";
 import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
 import { useMount } from "../../hooks/useMount";
-import { Game } from "../../types/modules/games";
+import { Game } from "../../types";
 import GameItemContext from "./GameItemContext";
 
 const initialContextMenu = {

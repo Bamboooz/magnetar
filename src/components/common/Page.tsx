@@ -1,20 +1,15 @@
 import React from "react";
-import { Page } from "../enums/page";
-import { cn } from "../utils/cn";
+import { PageType } from "../../types";
+import { cn } from "../../utils/cn";
 
-interface PageDisplayProps {
-  id: Page;
-  page: Page;
+interface PageProps {
+  id: PageType;
+  page: PageType;
   className?: string;
   children?: React.ReactNode;
 }
 
-const PageDisplay: React.FC<PageDisplayProps> = ({
-  id,
-  page,
-  className,
-  children,
-}) => {
+const Page: React.FC<PageProps> = ({ id, page, className, children }) => {
   return (
     <div
       className={cn(
@@ -27,4 +22,4 @@ const PageDisplay: React.FC<PageDisplayProps> = ({
   );
 };
 
-export default PageDisplay;
+export default Page;

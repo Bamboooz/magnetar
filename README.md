@@ -7,10 +7,11 @@
   <h1>magnetar</h1>
   <p>An advanced Windows toolbox ☕</p>
 
-  [![License](https://img.shields.io/github/license/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/blob/main/LICENSE)
-  [![GitHub stars](https://img.shields.io/github/stars/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/stargazers)
-  [![GitHub issues](https://img.shields.io/github/issues/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/issues)
-  [![GitHub release](https://img.shields.io/github/v/release/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/releases)
+[![License](https://img.shields.io/github/license/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/issues)
+[![GitHub release](https://img.shields.io/github/v/release/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/releases)
+
 </div>
 
 <div align="center">

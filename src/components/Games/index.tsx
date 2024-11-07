@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import PageDisplay from "../PageDisplay";
+import Page from "../common/Page";
 import Expander from "../common/Expander";
-import { Page } from "../../enums/page";
+import { PageType, Game } from "../../types";
 import { useMount } from "../../hooks/useMount";
-import { Game } from "../../types/modules/games";
 import GameItem from "./GameItem";
 import GameLauncher from "./GameLauncher";
 import { executeCommand } from "../../utils/cmd";
 
 interface GamesProps {
-  page: Page;
+  page: PageType;
   search: string;
 }
 
@@ -36,7 +35,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   });
 
   return (
-    <PageDisplay id={Page.GAMES} page={page} className="gap-3">
+    <Page id={PageType.GAMES} page={page} className="gap-3">
       <Expander label="Launchers">
         <GameLauncher
           title="Open Steam"
@@ -74,7 +73,7 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
           </p>
         </div>
       )}
-    </PageDisplay>
+    </Page>
   );
 };
 

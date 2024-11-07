@@ -1,6 +1,6 @@
 name: Bug report
 description: Create a report of an existing bug you encountered.
-title: '[Bug]: '
+title: "[Bug]: "
 labels:
   - bug
 assignees:

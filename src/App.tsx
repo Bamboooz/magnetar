@@ -1,7 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-import { Page } from "./enums/page";
+import { PageType } from "./types";
 
 const Home = lazy(() => import("./components/Home"));
 const Apps = lazy(() => import("./components/Apps"));
@@ -9,7 +9,7 @@ const Games = lazy(() => import("./components/Games"));
 const Commands = lazy(() => import("./components/Commands"));
 
 const App: React.FC = () => {
-  const [page, setPage] = useState<Page>(Page.HOME);
+  const [page, setPage] = useState<PageType>(PageType.HOME);
   const [search, setSearch] = useState<string>("");
 
   return (

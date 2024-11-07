@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { LuSearch } from "react-icons/lu";
-import { Page } from "../../enums/page";
+import { PageType } from "../../types";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
 interface NavigationSearchProps {
-  page: Page;
+  page: PageType;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -36,7 +36,7 @@ const NavigationSearch: React.FC<NavigationSearchProps> = ({
 
   return (
     <>
-      {page !== Page.HOME && (
+      {page !== PageType.HOME && (
         <div className="flex flex-col gap-1">
           {!searching ? (
             <>

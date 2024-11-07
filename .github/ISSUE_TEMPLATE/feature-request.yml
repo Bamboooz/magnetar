@@ -1,6 +1,6 @@
 name: Feature Request
 description: Suggest a feature we could implement.
-title: '[Feature Request]: '
+title: "[Feature Request]: "
 labels:
   - enhancement
 assignees:

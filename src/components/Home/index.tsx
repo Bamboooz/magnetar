@@ -1,19 +1,19 @@
 import React from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { LuHeart } from "react-icons/lu";
-import PageDisplay from "../PageDisplay";
+import Page from "../common/Page";
 import HomeUpdatePanel from "./HomeUpdatePanel";
-import { Page } from "../../enums/page";
+import { PageType } from "../../types";
 
 import icon from "../../assets/icons/icon_white.png";
 
 interface HomeProps {
-  page: Page;
+  page: PageType;
 }
 
 const Home: React.FC<HomeProps> = ({ page }) => {
   return (
-    <PageDisplay id={Page.HOME} page={page} className="justify-between p-10">
+    <Page id={PageType.HOME} page={page} className="justify-between p-10">
       <div className="size-full flex flex-col items-center justify-center gap-16">
         <div className="flex flex-col items-center justify-center gap-4">
           <img src={icon} alt="logo" className="w-16 h-16" />
@@ -37,7 +37,7 @@ const Home: React.FC<HomeProps> = ({ page }) => {
       </div>
 
       <HomeUpdatePanel />
-    </PageDisplay>
+    </Page>
   );
 };
 

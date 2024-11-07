@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import PageDisplay from "../PageDisplay";
+import Page from "../common/Page";
 import Expander from "../common/Expander";
 import CommandItem from "./CommandItem";
-import { Page } from "../../enums/page";
+import { PageType, CommandList } from "../../types";
 import { useMount } from "../../hooks/useMount";
-import { CommandList } from "../../types/modules/commands";
 
 interface HomeProps {
-  page: Page;
+  page: PageType;
   search: string;
 }
 
@@ -32,7 +31,7 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
   });
 
   return (
-    <PageDisplay id={Page.COMMANDS} page={page} className="gap-3">
+    <Page id={PageType.COMMANDS} page={page} className="gap-3">
       {filteredCommandGroups.length !== 0 ? (
         filteredCommandGroups.map((group) => (
           <Expander label={group.label} key={group.label}>
@@ -48,7 +47,7 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
           </p>
         </div>
       )}
-    </PageDisplay>
+    </Page>
   );
 };
 

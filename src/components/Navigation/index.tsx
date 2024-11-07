@@ -1,11 +1,11 @@
 import React from "react";
 import NavigationButton from "./NavigationButton";
 import NavigationSearch from "./NavigationSearch";
-import { Page } from "../../enums/page";
+import { PageType } from "../../types";
 
 interface NavigationProps {
-  page: Page;
-  setPage: React.Dispatch<React.SetStateAction<Page>>;
+  page: PageType;
+  setPage: React.Dispatch<React.SetStateAction<PageType>>;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -20,19 +20,19 @@ const Navigation: React.FC<NavigationProps> = ({
     <div className="w-full h-16 flex items-center justify-between shrink-0 px-6 gap-6 text-neutral-400 text-lg">
       <div className="flex items-center justify-center gap-6">
         <NavigationButton
-          id={Page.APPS}
+          id={PageType.APPS}
           label="Apps"
           page={page}
           setPage={setPage}
         />
         <NavigationButton
-          id={Page.GAMES}
+          id={PageType.GAMES}
           label="Games"
           page={page}
           setPage={setPage}
         />
         <NavigationButton
-          id={Page.COMMANDS}
+          id={PageType.COMMANDS}
           label="Commands"
           page={page}
           setPage={setPage}
