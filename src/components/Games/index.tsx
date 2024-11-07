@@ -39,12 +39,12 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
     <PageDisplay id={Page.GAMES} page={page} className="gap-3">
       <Expander label="Launchers">
         <GameLauncher
-          title="Open steam"
+          title="Open Steam"
           command="start steam://run"
           onClick={openSteam}
         />
         <GameLauncher
-          title="Close steam"
+          title="Close Steam"
           command="start steam://exit"
           onClick={closeSteam}
         />

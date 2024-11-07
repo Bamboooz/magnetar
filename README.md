@@ -5,7 +5,7 @@
     <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
   </picture>
   <h1>magnetar</h1>
-  <p>An advanced Windows toolbox.</p>
+  <p>An advanced Windows toolbox ☕</p>
 
   [![License](https://img.shields.io/github/license/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/blob/main/LICENSE)
   [![GitHub stars](https://img.shields.io/github/stars/Bamboooz/magnetar)](https://github.com/Bamboooz/magnetar/stargazers)
@@ -14,22 +14,22 @@
 </div>
 
 <div align="center">
-  <img src="https://github.com/Bamboooz/magnetar/blob/main/public/home_preview.png?raw=true" alt="magnetar preview" width="800" />
+  <img alt="magnetar preview" width="800" src="https://github.com/Bamboooz/magnetar/blob/main/public/home_preview.png?raw=true">
 </div>
 
 <br />
 
 <table>
   <tr>
-    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/apps_preview.png?raw=true" />
-    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/games_preview.png?raw=true" />
-    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/commands_preview.png?raw=true" />
+    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/apps_preview.png?raw=true">
+    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/games_preview.png?raw=true">
+    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/commands_preview.png?raw=true">
 </table>
 
 ## Features
 
 - 💻 Saving applications in a single place
-- 🎮 Playing and installing your steam games directly from the toolbox
+- 🎮 Playing and installing your Steam games directly from the toolbox
 - 🛠 Accessing your favorite commands and shortcuts
 - ⚙️ Customizing your toolbox with your own settings (soon)
 - 🔥 Very fast and lightweight (~7.5MB)
@@ -78,7 +78,11 @@ We welcome contributions from the community! Please see our [contributing guidel
 
 ## Support me
 
-You can buy me a coffee if you enjoy my work [Buy me a Ko-fi ☕](https://ko-fi.com/Bamboooz#paypalModal)
+You can support me by buying me a coffee if you enjoy my work:
+
+<a href="https://ko-fi.com/Bamboooz" target="_blank">
+  <img alt="Ko-Fi" src="https://help.ko-fi.com/hc/article_attachments/11833788361117">
+</a>
 
 ## License
 
