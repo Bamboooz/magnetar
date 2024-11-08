@@ -37,10 +37,8 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
 
     if (!paths) return;
 
-    const pathsArray = Array.isArray(paths) ? paths : [paths];
-
     const addedApps = await Promise.all(
-      pathsArray.map(async (path) => {
+      paths.map(async (path) => {
         const label = (await invoke("file_name", {
           path,
         })) as string;

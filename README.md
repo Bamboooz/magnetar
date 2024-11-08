@@ -1,8 +1,8 @@
 <div align="center">
   <picture>
-    <source width="120" media="(prefers-color-scheme: dark)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/dark_theme_icon.png?raw=true">
-    <source width="120" media="(prefers-color-scheme: light)" srcset="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
-    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/public/light_theme_icon.png?raw=true">
+    <source width="120" media="(prefers-color-scheme: dark)" srcset="https://github.com/Bamboooz/magnetar/blob/main/static/dark_theme_icon.png?raw=true">
+    <source width="120" media="(prefers-color-scheme: light)" srcset="https://github.com/Bamboooz/magnetar/blob/main/static/light_theme_icon.png?raw=true">
+    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/static/light_theme_icon.png?raw=true">
   </picture>
   <h1>magnetar</h1>
   <p>An advanced Windows toolbox ☕</p>
@@ -15,16 +15,16 @@
 </div>
 
 <div align="center">
-  <img alt="magnetar preview" width="800" src="https://github.com/Bamboooz/magnetar/blob/main/public/home_preview.png?raw=true">
+  <img alt="magnetar preview" width="800" src="https://github.com/Bamboooz/magnetar/blob/main/static/home_preview.png?raw=true">
 </div>
 
 <br />
 
 <table>
   <tr>
-    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/apps_preview.png?raw=true">
-    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/games_preview.png?raw=true">
-    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/public/commands_preview.png?raw=true">
+    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/apps_preview.png?raw=true">
+    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/games_preview.png?raw=true">
+    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/commands_preview.png?raw=true">
 </table>
 
 ## Features
