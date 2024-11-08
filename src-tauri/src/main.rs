@@ -30,7 +30,6 @@ fn main() {
       module::steam::fetch_steam_games,
       module::commands::fetch_commands,
       module::commands::execute_command,
-      util::string::trim,
       util::string::file_name,
       util::update::latest_update,
     ])

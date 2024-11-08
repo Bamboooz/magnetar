@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
-import Item from "../common/Item";
 import { executeCommand } from "../../utils/cmd";
 import admin_icon from "../../assets/icons/admin.png";
-import { useMount } from "../../hooks/useMount";
 import { Command } from "../../types";
 import CommandItemContext from "./CommandItemContext";
+import Item from "../common/Item";
 
 const initialContextMenu = {
   x: 0,
@@ -20,8 +18,6 @@ interface CommandItemProps {
 }
 
 const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
-  const [label, setLabel] = useState<string>(command.label);
-  const [cmd, setCmd] = useState<string>(command.command);
   const [context, setContext] = useState(initialContextMenu);
 
   const isPowershell = command.command.toLowerCase().includes("powershell");
@@ -42,32 +38,15 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
   const execute = async (admin: boolean) =>
     executeCommand(command.command, admin);
 
-  useMount(async () => {
-    await invoke("trim", { input: command.label }).then((label) =>
-      setLabel(label as string)
-    );
-
-    await invoke("trim", { input: command.command }).then((cmd) =>
-      setCmd(cmd as string)
-    );
-  });
-
   return (
     <>
       <Item
+        icon={isPowershell ? <VscTerminalPowershell /> : <LuTerminal />}
+        title={command.label}
+        description={command.command}
         onClick={() => execute(command.admin)}
         onContextMenu={handleContextMenu}
-        className="justify-between"
       >
-        <div className="flex items-center justify-start gap-6 text-neutral-300 text-3xl">
-          {isPowershell ? <VscTerminalPowershell /> : <LuTerminal />}
-
-          <div className="flex flex-col items-start justify-center">
-            <p className="text-md">{label}</p>
-            <p className="text-sm text-neutral-400">{cmd}</p>
-          </div>
-        </div>
-
         {command.admin && <img src={admin_icon} className="h-4 w-4" />}
       </Item>
 

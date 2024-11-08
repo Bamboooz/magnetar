@@ -3,6 +3,7 @@ enum PageType {
   APPS,
   GAMES,
   COMMANDS,
+  SETTINGS,
 }
 
 interface App {

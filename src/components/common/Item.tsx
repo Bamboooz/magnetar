@@ -1,28 +1,37 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 interface ItemProps {
-  onClick?: () => void;
+  icon: React.ReactElement;
+  title: string;
+  description: string;
+  onClick: () => void;
   onContextMenu?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  className?: string;
   children?: React.ReactNode;
 }
 
 const Item: React.FC<ItemProps> = ({
+  icon,
+  title,
+  description,
   onClick,
   onContextMenu,
-  className,
   children,
 }) => {
   return (
     <button
       onClick={onClick}
       onContextMenu={onContextMenu}
-      className={cn(
-        "group w-full h-14 flex items-center relative shrink-0 px-6 hover:bg-secondary",
-        className
-      )}
+      className="w-full h-14 flex justify-between items-center px-6 hover:bg-secondary"
     >
+      <div className="w-full flex items-center gap-6 text-neutral-300 text-3xl">
+        <div>{icon}</div>
+
+        <div className="flex flex-col items-start max-w-[70%] overflow-hidden whitespace-nowrap">
+          <p className="text-md">{title}</p>
+          <p className="text-sm text-neutral-400">{description}</p>
+        </div>
+      </div>
+
       {children}
     </button>
   );

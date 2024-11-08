@@ -6,8 +6,8 @@ import { LuPlus } from "react-icons/lu";
 import Page from "../common/Page";
 import { PageType, App } from "../../types";
 import Expander from "../common/Expander";
-import Item from "../common/Item";
 import AppItem from "./AppItem";
+import Item from "../common/Item";
 
 interface AppsProps {
   page: PageType;
@@ -58,10 +58,12 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
 
   return (
     <Page id={PageType.APPS} page={page} className="gap-3">
-      <Item onClick={addApp} className="justify-start gap-3 text-neutral-300">
-        <LuPlus className="text-3xl" />
-        <p className="text-md">Add a new app</p>
-      </Item>
+      <Item
+        icon={<LuPlus />}
+        title="Add a new app"
+        description=""
+        onClick={addApp}
+      />
 
       {filteredApps.length !== 0 ? (
         <Expander label="Apps">

@@ -36,7 +36,7 @@ const NavigationSearch: React.FC<NavigationSearchProps> = ({
 
   return (
     <>
-      {page !== PageType.HOME && (
+      {page !== PageType.HOME && page !== PageType.SETTINGS && (
         <div className="flex flex-col gap-1">
           {!searching ? (
             <>
