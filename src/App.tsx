@@ -18,6 +18,7 @@ const App: React.FC = () => {
         e.preventDefault();
       }
     };
+
     document.addEventListener("contextmenu", onContextMenu);
 
     return () => {
@@ -36,13 +37,9 @@ const App: React.FC = () => {
       />
 
       <Home page={page} />
-
       <Apps page={page} search={search} />
-
       <Games page={page} search={search} />
-
       <Commands page={page} search={search} />
-
       <Settings page={page} />
     </div>
   );

@@ -1,10 +1,11 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 interface ItemProps {
   icon: React.ReactElement;
   title: string;
   description: string;
-  onClick: () => void;
+  onClick?: () => void;
   onContextMenu?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children?: React.ReactNode;
 }
@@ -21,14 +22,17 @@ const Item: React.FC<ItemProps> = ({
     <button
       onClick={onClick}
       onContextMenu={onContextMenu}
-      className="w-full h-14 flex justify-between items-center px-6 hover:bg-secondary"
+      className={cn(
+        "w-full h-14 flex justify-between items-center px-6 gap-6",
+        onClick != null ? "hover:bg-secondary" : "cursor-default"
+      )}
     >
-      <div className="w-[80%] flex items-center gap-6 text-neutral-300 text-3xl">
-        <div className="shrink-0">{icon}</div>
+      <div className="w-full flex items-center gap-6 text-neutral-300 text-3xl overflow-hidden">
+        {icon}
 
-        <div className="flex flex-col items-start truncate">
-          <p className="text-md">{title}</p>
-          <p className="text-sm text-neutral-400">{description}</p>
+        <div className="w-full flex flex-col items-start overflow-hidden">
+          <p className="text-md truncate max-w-full">{title}</p>
+          <p className="text-sm text-neutral-400 truncate max-w-full">{description}</p>
         </div>
       </div>
 

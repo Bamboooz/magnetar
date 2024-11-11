@@ -11,7 +11,7 @@ const ContextButton: React.FC<ContextButtonProps> = ({ label, onClick }) => {
       onClick={onClick}
       className="w-full h-8 flex items-center px-4 rounded-md hover:bg-secondary"
     >
-      <p className="text-neutral-400 text-md whitespace-nowrap">{label}</p>
+      <p className="text-neutral-400 text-md truncate">{label}</p>
     </button>
   );
 };
