@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
@@ -11,6 +11,19 @@ import { PageType } from "./types";
 const App: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.HOME);
   const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    const onContextMenu = (e: MouseEvent) => {
+      if (!import.meta.env.DEV) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("contextmenu", onContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", onContextMenu);
+    };
+  }, []);
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-primary">
