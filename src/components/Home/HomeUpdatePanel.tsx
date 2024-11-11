@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { invoke } from "@tauri-apps/api/core";
 import { getVersion } from "@tauri-apps/api/app";
-import { useMount } from "../../hooks/useMount";
 
 const HomeUpdatePanel: React.FC = () => {
   const [latestUpdate, setLatestUpdate] = useState<string>("");
   const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
 
-  useMount(async () => {
-    try {
-      const update = (await invoke("latest_update")) as string;
-      const currentVersion = await getVersion();
-      const available = currentVersion !== update;
+  useEffect(() => {
+    const fetchUpdate = async () => {
+      try {
+        const update = (await invoke("latest_update")) as string;
+        const currentVersion = await getVersion();
+        const available = currentVersion !== update;
 
-      setLatestUpdate(update);
-      setUpdateAvailable(available);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+        setLatestUpdate(update);
+        setUpdateAvailable(available);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUpdate();
+  }, []);
 
   return (
     <>

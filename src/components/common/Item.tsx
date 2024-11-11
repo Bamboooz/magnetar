@@ -23,10 +23,10 @@ const Item: React.FC<ItemProps> = ({
       onContextMenu={onContextMenu}
       className="w-full h-14 flex justify-between items-center px-6 hover:bg-secondary"
     >
-      <div className="w-full flex items-center gap-6 text-neutral-300 text-3xl">
-        <div>{icon}</div>
+      <div className="w-[80%] flex items-center gap-6 text-neutral-300 text-3xl">
+        <div className="shrink-0">{icon}</div>
 
-        <div className="flex flex-col items-start max-w-[70%] overflow-hidden whitespace-nowrap">
+        <div className="flex flex-col items-start truncate">
           <p className="text-md">{title}</p>
           <p className="text-sm text-neutral-400">{description}</p>
         </div>

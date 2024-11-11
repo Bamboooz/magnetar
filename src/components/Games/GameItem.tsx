@@ -44,7 +44,13 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
       {valid && (
         <>
           <Item
-            icon={<img src={headerImage} onError={() => setValid(false)} className="h-[44px] rounded-sm" />}
+            icon={
+              <img
+                src={headerImage}
+                onError={() => setValid(false)}
+                className="h-[44px] rounded-sm"
+              />
+            }
             title={game.name}
             description={`steam://rungameid/${game.id}`}
             onClick={openGame}

@@ -1,29 +1,17 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 interface ContextButtonProps {
-  title: string;
-  icon: React.ReactNode;
+  label: string;
   onClick: () => void;
-  className: string;
 }
 
-const ContextButton: React.FC<ContextButtonProps> = ({
-  title,
-  icon,
-  onClick,
-  className,
-}) => {
+const ContextButton: React.FC<ContextButtonProps> = ({ label, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={cn(
-        "w-full flex items-center gap-2 px-4 py-3 text-md",
-        className
-      )}
+      className="w-full h-8 flex items-center px-4 rounded-md hover:bg-secondary"
     >
-      {icon}
-      <p className="whitespace-nowrap">{title}</p>
+      <p className="text-neutral-400 text-md whitespace-nowrap">{label}</p>
     </button>
   );
 };

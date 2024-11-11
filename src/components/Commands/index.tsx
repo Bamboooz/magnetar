@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import Page from "../common/Page";
 import Expander from "../common/Expander";
 import CommandItem from "./CommandItem";
-import { PageType, CommandList } from "../../types";
-import { useMount } from "../../hooks/useMount";
+import { CommandList, PageType } from "../../types";
+import Page from "../common/Page";
 
 interface HomeProps {
   page: PageType;
@@ -23,15 +22,15 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
     }))
     .filter((group) => group.commands.length > 0);
 
-  useMount(async () => {
-    await invoke("fetch_commands").then((commands) => {
+  useEffect(() => {
+    invoke("fetch_commands").then((commands) => {
       const commandsJson = JSON.parse(commands as string) as CommandList;
       setCommands(commandsJson);
     });
-  });
+  }, []);
 
   return (
-    <Page id={PageType.COMMANDS} page={page} className="gap-3">
+    <Page target={PageType.COMMANDS} current={page} className="gap-3">
       {filteredCommandGroups.length !== 0 ? (
         filteredCommandGroups.map((group) => (
           <Expander label={group.label} key={group.label}>

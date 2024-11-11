@@ -1,7 +1,7 @@
 use std::error::Error;
 use winreg::{
+  enums::{HKEY_CURRENT_USER, KEY_READ},
   RegKey,
-  enums::{HKEY_CURRENT_USER, KEY_READ}
 };
 
 #[derive(Debug, serde::Serialize)]
@@ -41,7 +41,7 @@ fn fetch_steam_game(id: String) -> Option<SteamGame> {
 }
 
 #[tauri::command]
-pub async fn fetch_steam_games() -> Vec<SteamGame> {
+pub async fn fetch_games() -> Vec<SteamGame> {
   let app_ids = match fetch_steam_app_ids() {
     Ok(ids) => ids,
     Err(_) => return Vec::new(),

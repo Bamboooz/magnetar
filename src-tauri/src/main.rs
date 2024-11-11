@@ -27,10 +27,9 @@ fn main() {
     .plugin(tauri_plugin_dialog::init())
     .setup(initialize)
     .invoke_handler(tauri::generate_handler![
-      module::steam::fetch_steam_games,
+      module::steam::fetch_games,
       module::commands::fetch_commands,
       module::commands::execute_command,
-      util::string::file_name,
       util::update::latest_update,
     ])
     .run(tauri::generate_context!())

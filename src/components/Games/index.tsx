@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { FaSteam } from "react-icons/fa";
-import Page from "../common/Page";
 import Expander from "../common/Expander";
-import { PageType, Game } from "../../types";
-import { useMount } from "../../hooks/useMount";
+import { Game, PageType } from "../../types";
 import GameItem from "./GameItem";
 import { executeCommand } from "../../utils/cmd";
 import Item from "../common/Item";
+import Page from "../common/Page";
 
 interface GamesProps {
   page: PageType;
@@ -29,14 +28,12 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   const closeSteam = async () =>
     await executeCommand("start steam://exit", false);
 
-  useMount(async () => {
-    await invoke("fetch_steam_games").then((games) =>
-      setGames(games as Game[])
-    );
-  });
+  useEffect(() => {
+    invoke("fetch_games").then((games) => setGames(games as Game[]));
+  }, []);
 
   return (
-    <Page id={PageType.GAMES} page={page} className="gap-3">
+    <Page target={PageType.GAMES} current={page} className="gap-3">
       <Expander label="Launchers">
         <Item
           icon={<FaSteam />}

@@ -1,9 +1,9 @@
 import React from "react";
 import { LuLanguages, LuPaintbrush, LuPlay } from "react-icons/lu";
-import Page from "../common/Page";
 import Expander from "../common/Expander";
 import SettingsItem from "./SettingsItem";
 import { PageType } from "../../types";
+import Page from "../common/Page";
 
 interface SettingsProps {
   page: PageType;
@@ -11,7 +11,7 @@ interface SettingsProps {
 
 const Settings: React.FC<SettingsProps> = ({ page }) => {
   return (
-    <Page id={PageType.SETTINGS} page={page} className="gap-3">
+    <Page target={PageType.SETTINGS} current={page} className="gap-3">
       <Expander label="General">
         <SettingsItem
           icon={<LuLanguages />}

@@ -1,5 +1,4 @@
 import React from "react";
-import { LuExternalLink, LuPlay } from "react-icons/lu";
 import Context from "../common/Context";
 import ContextButton from "../common/ContextButton";
 
@@ -23,17 +22,10 @@ const GameItemContext: React.FC<GameItemContextProps> = ({
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
       <ContextButton
-        title={installed ? "Play" : "Install"}
-        icon={<LuPlay />}
-        className="text-neutral-400 hover:text-neutral-300"
+        label={installed ? "Play" : "Install"}
         onClick={playGame}
       />
-      <ContextButton
-        title="Open game page"
-        icon={<LuExternalLink />}
-        className="text-neutral-400 hover:text-neutral-300"
-        onClick={openGamePage}
-      />
+      <ContextButton label="Open game page" onClick={openGamePage} />
     </Context>
   );
 };

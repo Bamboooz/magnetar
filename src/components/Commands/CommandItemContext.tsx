@@ -1,6 +1,4 @@
 import React from "react";
-import { LuPlay } from "react-icons/lu";
-import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import Context from "../common/Context";
 import ContextButton from "../common/ContextButton";
 
@@ -19,18 +17,8 @@ const CommandItemContext: React.FC<CommandItemContextProps> = ({
 }) => {
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
-      <ContextButton
-        title="Execute"
-        icon={<LuPlay />}
-        className="text-neutral-400 hover:text-neutral-300"
-        onClick={() => execute(false)}
-      />
-      <ContextButton
-        title="Execute as admin"
-        icon={<MdOutlineAdminPanelSettings />}
-        className="text-neutral-400 hover:text-neutral-300"
-        onClick={() => execute(true)}
-      />
+      <ContextButton label="Execute" onClick={() => execute(false)} />
+      <ContextButton label="Execute as admin" onClick={() => execute(true)} />
     </Context>
   );
 };

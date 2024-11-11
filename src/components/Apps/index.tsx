@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { invoke } from "@tauri-apps/api/core";
 import { LuPlus } from "react-icons/lu";
-import Page from "../common/Page";
-import { PageType, App } from "../../types";
+import { App, PageType } from "../../types";
 import Expander from "../common/Expander";
 import AppItem from "./AppItem";
 import Item from "../common/Item";
+import { useStickyState } from "../../hooks/useStickyState";
+import Page from "../common/Page";
 
 interface AppsProps {
   page: PageType;
@@ -15,8 +15,7 @@ interface AppsProps {
 }
 
 const Apps: React.FC<AppsProps> = ({ page, search }) => {
-  const foundApps = localStorage.getItem("apps") || "[]";
-  const [apps, setApps] = useState<App[]>(JSON.parse(foundApps));
+  const [apps, setApps] = useStickyState<App[]>("apps", []);
 
   const appWindow = getCurrentWindow();
 
@@ -37,19 +36,16 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
 
     if (!paths) return;
 
-    const addedApps = await Promise.all(
-      paths.map(async (path) => {
-        const label = (await invoke("file_name", {
-          path,
-        })) as string;
-        return { label, path };
-      })
-    );
-
     setApps((prev) => {
-      const newApps = [...prev, ...addedApps];
-      localStorage.setItem("apps", JSON.stringify(newApps));
-      return newApps;
+      const newApps = paths
+        .filter((path) => !prev.some((app) => app.path === path))
+        .map((path) => {
+          const file = path.split(/(\\|\/)/g).pop()!;
+          const label = file.replace(/\.[^/.]+$/, "");
+          return { label, path };
+        });
+
+      return [...prev, ...newApps];
     });
 
     appWindow.show();
@@ -57,7 +53,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
   };
 
   return (
-    <Page id={PageType.APPS} page={page} className="gap-3">
+    <Page target={PageType.APPS} current={page} className="gap-3">
       <Item
         icon={<LuPlus />}
         title="Add a new app"
@@ -68,7 +64,7 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
       {filteredApps.length !== 0 ? (
         <Expander label="Apps">
           {filteredApps.map((app) => (
-            <AppItem key={app.label} app={app} apps={apps} setApps={setApps} />
+            <AppItem key={app.path} app={app} apps={apps} setApps={setApps} />
           ))}
         </Expander>
       ) : (

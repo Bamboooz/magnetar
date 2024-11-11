@@ -13,7 +13,11 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ page }) => {
   return (
-    <Page id={PageType.HOME} page={page} className="justify-between p-10">
+    <Page
+      target={PageType.HOME}
+      current={page}
+      className="justify-between p-10"
+    >
       <div className="size-full flex flex-col items-center justify-center gap-16">
         <div className="flex flex-col items-center justify-center gap-4">
           <img src={icon} alt="logo" className="w-16 h-16" />
