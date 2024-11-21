@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="magnetar logo" width="120" height="120" src="https://github.com/Bamboooz/magnetar/blob/main/static/favicon.png?raw=true">
+  <img alt="magnetar logo" width="120" height="120" src="https://github.com/Bamboooz/magnetar/blob/main/public/favicon.png?raw=true">
   <h1>magnetar</h1>
   <p>An advanced Windows toolbox ☕</p>
 
@@ -11,16 +11,16 @@
 </div>
 
 <div align="center">
-  <img alt="magnetar preview" width="800" src="https://github.com/Bamboooz/magnetar/blob/main/static/home_preview.png?raw=true">
+  <img alt="magnetar preview" width="800" src="https://github.com/Bamboooz/magnetar/blob/main/static/home.png?raw=true">
 </div>
 
 <br />
 
 <table>
   <tr>
-    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/apps_preview.png?raw=true">
-    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/games_preview.png?raw=true">
-    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/commands_preview.png?raw=true">
+    <td><img alt="apps preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/apps.png?raw=true">
+    <td><img alt="games preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/games.png?raw=true">
+    <td><img alt="commands preview" src="https://github.com/Bamboooz/magnetar/blob/main/static/commands.png?raw=true">
 </table>
 
 ## Features

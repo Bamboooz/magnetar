@@ -4,8 +4,6 @@ import { LuHelpCircle, LuSettings } from "react-icons/lu";
 import { PageType } from "../types";
 import { cn } from "../utils/cn";
 
-import favicon from "../assets/icons/favicon.png";
-
 interface HeaderProps {
   page: PageType;
   setPage: React.Dispatch<React.SetStateAction<PageType>>;
@@ -18,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ page, setPage }) => {
         onClick={() => setPage(PageType.HOME)}
         className="h-full flex items-center justify-center gap-6 px-6"
       >
-        <img src={favicon} alt="logo" className="w-5 h-5" />
+        <img src="/favicon.png" alt="logo" className="w-5 h-5" />
         <p className="text-lg text-neutral-300">magnetar</p>
       </button>
 

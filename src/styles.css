@@ -4,14 +4,14 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("./assets/fonts/poppins/Poppins-Regular.ttf") format("truetype");
+  src: url("./fonts/poppins/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Poppins";
-  src: url("./assets/fonts/poppins/Poppins-Medium.ttf") format("truetype");
+  src: url("./fonts/poppins/Poppins-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }

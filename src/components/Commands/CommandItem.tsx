@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
 import { executeCommand } from "../../utils/cmd";
-import admin_icon from "../../assets/icons/admin.png";
 import { Command } from "../../types";
 import CommandItemContext from "./CommandItemContext";
 import Item from "../common/Item";
@@ -47,7 +46,7 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
         onClick={() => execute(command.admin)}
         onContextMenu={handleContextMenu}
       >
-        {command.admin && <img src={admin_icon} className="h-4 w-4" />}
+        {command.admin && <img src="/admin.png" className="h-4 w-4" />}
       </Item>
 
       {context.visible && (
