@@ -1,9 +1,5 @@
 <div align="center">
-  <picture>
-    <source width="120" media="(prefers-color-scheme: dark)" srcset="https://github.com/Bamboooz/magnetar/blob/main/static/dark_theme_icon.png?raw=true">
-    <source width="120" media="(prefers-color-scheme: light)" srcset="https://github.com/Bamboooz/magnetar/blob/main/static/light_theme_icon.png?raw=true">
-    <img alt="magnetar logo" width="100" src="https://github.com/Bamboooz/magnetar/blob/main/static/light_theme_icon.png?raw=true">
-  </picture>
+  <img alt="magnetar logo" width="120" height="120" src="https://github.com/Bamboooz/magnetar/blob/main/static/favicon.png?raw=true">
   <h1>magnetar</h1>
   <p>An advanced Windows toolbox ☕</p>
 
