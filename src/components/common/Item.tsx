@@ -32,7 +32,9 @@ const Item: React.FC<ItemProps> = ({
 
         <div className="w-full flex flex-col items-start overflow-hidden">
           <p className="text-md truncate max-w-full">{title}</p>
-          <p className="text-sm text-neutral-400 truncate max-w-full">{description}</p>
+          <p className="text-sm text-neutral-400 truncate max-w-full">
+            {description}
+          </p>
         </div>
       </div>
 

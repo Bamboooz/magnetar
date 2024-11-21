@@ -5,7 +5,7 @@ import Page from "../common/Page";
 import HomeUpdatePanel from "./HomeUpdatePanel";
 import { PageType } from "../../types";
 
-import icon from "../../assets/icons/icon_white.png";
+import favicon from "../../assets/icons/favicon.png";
 
 interface HomeProps {
   page: PageType;
@@ -20,7 +20,7 @@ const Home: React.FC<HomeProps> = ({ page }) => {
     >
       <div className="size-full flex flex-col items-center justify-center gap-16">
         <div className="flex flex-col items-center justify-center gap-4">
-          <img src={icon} alt="logo" className="w-16 h-16" />
+          <img src={favicon} alt="logo" className="w-16 h-16" />
           <p className="text-3xl text-neutral-300">magnetar</p>
           <p className="text-lg text-neutral-400 text-center">
             An advanced Windows toolbox
