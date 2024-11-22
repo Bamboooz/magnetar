@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { FaSteam } from "react-icons/fa";
 import Expander from "../common/Expander";
 import { Game, PageType } from "../../types";
 import GameItem from "./GameItem";
-import { executeCommand } from "../../utils/cmd";
+import { exec } from "../../utils";
 import Item from "../common/Item";
 import Page from "../common/Page";
 
@@ -13,7 +13,7 @@ interface GamesProps {
   search: string;
 }
 
-const Games: React.FC<GamesProps> = ({ page, search }) => {
+export default function Games({ page, search }: GamesProps) {
   const [games, setGames] = useState<Game[]>([]);
 
   const filteredGames = games.filter((game) =>
@@ -23,10 +23,8 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
   const installedGames = filteredGames.filter((game) => game.installed);
   const notInstalledGames = filteredGames.filter((game) => !game.installed);
 
-  const openSteam = async () =>
-    await executeCommand("start steam://run", false);
-  const closeSteam = async () =>
-    await executeCommand("start steam://exit", false);
+  const openSteam = async () => await exec("start steam://run", false);
+  const closeSteam = async () => await exec("start steam://exit", false);
 
   useEffect(() => {
     invoke("fetch_games").then((games) => setGames(games as Game[]));
@@ -68,13 +66,11 @@ const Games: React.FC<GamesProps> = ({ page, search }) => {
         </>
       ) : (
         <div className="size-full flex flex-col items-center justify-center">
-          <p className="text-neutral-300 text-2xl font-medium">
+          <p className=" text-2xl font-medium">
             No games found
           </p>
         </div>
       )}
     </Page>
   );
-};
-
-export default Games;
+}

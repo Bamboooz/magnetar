@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "../../utils";
 import { PageType } from "../../types";
 
 interface NavigationButtonProps {
@@ -9,12 +9,12 @@ interface NavigationButtonProps {
   setPage: React.Dispatch<React.SetStateAction<PageType>>;
 }
 
-const NavigationButton: React.FC<NavigationButtonProps> = ({
+export default function NavigationButton({
   id,
   label,
   page,
   setPage,
-}) => {
+}: NavigationButtonProps) {
   return (
     <button
       onClick={() => setPage(id)}
@@ -29,6 +29,4 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
       />
     </button>
   );
-};
-
-export default NavigationButton;
+}

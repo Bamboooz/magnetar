@@ -25,6 +25,9 @@ tauri-plugin-global-shortcut = "2"
 [features]
 custom-protocol = ["tauri/custom-protocol"]
 
+[profile.dev]
+incremental = true
+
 [profile.release]
 opt-level = 3
 debug = false

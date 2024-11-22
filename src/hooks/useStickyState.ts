@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const useStickyState = <T>(
+export function useStickyState<T>(
   key: string,
   defaultValue: T
-): [T, React.Dispatch<React.SetStateAction<T>>] => {
+): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState<T>(() => {
     const stickyValue = window.localStorage.getItem(key);
 
@@ -15,6 +15,4 @@ const useStickyState = <T>(
   }, [key, value]);
 
   return [value, setValue];
-};
-
-export { useStickyState };
+}

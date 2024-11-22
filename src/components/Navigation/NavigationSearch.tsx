@@ -9,11 +9,11 @@ interface NavigationSearchProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NavigationSearch: React.FC<NavigationSearchProps> = ({
+export default function NavigationSearch({
   page,
   search,
   setSearch,
-}) => {
+}: NavigationSearchProps) {
   const [searching, setSearching] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -36,13 +36,13 @@ const NavigationSearch: React.FC<NavigationSearchProps> = ({
 
   return (
     <>
-      {page !== PageType.HOME && page !== PageType.SETTINGS && (
+      {page !== PageType.HOME && (
         <div className="flex flex-col gap-1">
           {!searching ? (
             <>
               <button
                 onClick={() => setSearching(true)}
-                className="flex items-center justify-center text-xl hover:text-neutral-300"
+                className="flex items-center justify-center text-xl hover:"
               >
                 <LuSearch />
               </button>
@@ -59,13 +59,11 @@ const NavigationSearch: React.FC<NavigationSearchProps> = ({
                 className="outline-none bg-transparent"
               />
 
-              <div className="w-full h-1 rounded-full bg-secondary" />
+              <div className="w-full h-1 rounded-full bg-background-secondary" />
             </>
           )}
         </div>
       )}
     </>
   );
-};
-
-export default NavigationSearch;
+}

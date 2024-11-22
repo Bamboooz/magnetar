@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { open } from "@tauri-apps/plugin-shell";
-import { executeCommand } from "../../utils/cmd";
+import { exec } from "../../utils";
 import { Game } from "../../types";
 import GameItemContext from "./GameItemContext";
 import Item from "../common/Item";
@@ -15,7 +15,7 @@ interface GameItemProps {
   game: Game;
 }
 
-const GameItem: React.FC<GameItemProps> = ({ game }) => {
+export default function GameItem({ game }: GameItemProps) {
   const [valid, setValid] = useState<boolean>(true);
   const [context, setContext] = useState(initialContextMenu);
 
@@ -35,7 +35,7 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
   };
 
   const openGame = async () =>
-    await executeCommand(`start steam://rungameid/${game.id}`, false);
+    await exec(`start steam://rungameid/${game.id}`, false);
   const openGamePage = async () =>
     await open(`https://store.steampowered.com/app/${game.id}`);
 
@@ -71,6 +71,4 @@ const GameItem: React.FC<GameItemProps> = ({ game }) => {
       )}
     </>
   );
-};
-
-export default GameItem;
+}

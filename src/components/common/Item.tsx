@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "../../utils";
 
 interface ItemProps {
   icon: React.ReactElement;
@@ -10,29 +10,29 @@ interface ItemProps {
   children?: React.ReactNode;
 }
 
-const Item: React.FC<ItemProps> = ({
+export default function Item({
   icon,
   title,
   description,
   onClick,
   onContextMenu,
   children,
-}) => {
+}: ItemProps) {
   return (
     <button
       onClick={onClick}
       onContextMenu={onContextMenu}
       className={cn(
         "w-full h-14 flex justify-between items-center px-6 gap-6",
-        onClick != null ? "hover:bg-secondary" : "cursor-default"
+        onClick != null ? "hover:bg-background-secondary" : "cursor-default"
       )}
     >
-      <div className="w-full flex items-center gap-6 text-neutral-300 text-3xl overflow-hidden">
+      <div className="w-full flex items-center gap-6  text-3xl overflow-hidden">
         {icon}
 
         <div className="w-full flex flex-col items-start overflow-hidden">
           <p className="text-md truncate max-w-full">{title}</p>
-          <p className="text-sm text-neutral-400 truncate max-w-full">
+          <p className="text-sm text-foreground-secondary truncate max-w-full">
             {description}
           </p>
         </div>
@@ -41,6 +41,4 @@ const Item: React.FC<ItemProps> = ({
       {children}
     </button>
   );
-};
-
-export default Item;
+}

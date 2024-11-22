@@ -1,4 +1,3 @@
-import React from "react";
 import Context from "../common/Context";
 import ContextButton from "../common/ContextButton";
 
@@ -11,14 +10,14 @@ interface GameItemContextProps {
   openGamePage: () => Promise<void>;
 }
 
-const GameItemContext: React.FC<GameItemContextProps> = ({
+export default function GameItemContext({
   x,
   y,
   closeContextMenu,
   installed,
   playGame,
   openGamePage,
-}) => {
+}: GameItemContextProps) {
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
       <ContextButton
@@ -28,6 +27,4 @@ const GameItemContext: React.FC<GameItemContextProps> = ({
       <ContextButton label="Open game page" onClick={openGamePage} />
     </Context>
   );
-};
-
-export default GameItemContext;
+}

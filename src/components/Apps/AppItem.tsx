@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LuPackage } from "react-icons/lu";
-import { executeCommand } from "../../utils/cmd";
+import { exec } from "../../utils";
 import { App } from "../../types";
 import AppItemContext from "./AppItemContext";
 import Item from "../common/Item";
@@ -17,7 +17,7 @@ interface AppItemProps {
   setApps: React.Dispatch<React.SetStateAction<App[]>>;
 }
 
-const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
+export default function AppItem({ app, apps, setApps }: AppItemProps) {
   const [context, setContext] = useState(initialContextMenu);
 
   const closeContextMenu = () => setContext(initialContextMenu);
@@ -33,12 +33,12 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
     setContext({ x, y, visible: true });
   };
 
-  const openApp = async () => executeCommand(app.path, false);
+  const openApp = async () => exec(app.path, false);
 
   const openInExplorer = async () => {
     const path = app.path.substring(0, app.path.lastIndexOf("\\"));
 
-    executeCommand(`explorer "${path}"`, false);
+    exec(`explorer "${path}"`, false);
   };
 
   const removeApp = async () => {
@@ -69,6 +69,4 @@ const AppItem: React.FC<AppItemProps> = ({ app, apps, setApps }) => {
       )}
     </>
   );
-};
-
-export default AppItem;
+}

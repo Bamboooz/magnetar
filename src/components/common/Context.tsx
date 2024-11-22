@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-import { cn } from "../../utils/cn";
+import { cn } from "../../utils";
 
 interface ContextProps {
   x: number;
@@ -9,12 +9,12 @@ interface ContextProps {
   children?: React.ReactNode;
 }
 
-const Context: React.FC<ContextProps> = ({
+export default function Context({
   x,
   y,
   closeContextMenu,
   children,
-}) => {
+}: ContextProps) {
   const contextMenuRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x, y });
 
@@ -52,13 +52,11 @@ const Context: React.FC<ContextProps> = ({
     <div
       ref={contextMenuRef}
       className={cn(
-        "flex flex-col fixed z-50 bg-primary p-1 border border-tertiary"
+        "flex flex-col fixed z-50 bg-background p-1 border border-background-tertiary"
       )}
       style={{ top: position.y, left: position.x }}
     >
       {children}
     </div>
   );
-};
-
-export default Context;
+}

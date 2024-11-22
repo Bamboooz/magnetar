@@ -1,19 +1,15 @@
-import React from "react";
-
 interface ContextButtonProps {
   label: string;
   onClick: () => void;
 }
 
-const ContextButton: React.FC<ContextButtonProps> = ({ label, onClick }) => {
+export default function ContextButton({ label, onClick }: ContextButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="w-full h-8 flex items-center px-4 rounded-md hover:bg-secondary"
+      className="w-full h-8 flex items-center px-4 rounded-md hover:bg-background-secondary"
     >
-      <p className="text-neutral-400 text-md truncate">{label}</p>
+      <p className="text-foreground-secondary text-md truncate">{label}</p>
     </button>
   );
-};
-
-export default ContextButton;
+}

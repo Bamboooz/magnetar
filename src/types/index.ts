@@ -1,31 +1,27 @@
-enum PageType {
+export enum PageType {
   HOME,
   APPS,
   GAMES,
   COMMANDS,
-  SETTINGS,
 }
 
-interface App {
+export interface App {
   label: string;
   path: string;
 }
 
-interface Game {
+export interface Game {
   id: string;
   name: string;
   installed: boolean;
 }
 
-interface Command {
+export interface Command {
   label: string;
   command: string;
   admin: boolean;
 }
 
-interface CommandList {
+export interface CommandList {
   [label: string]: Command[];
 }
-
-export { PageType };
-export type { App, Game, Command, CommandList };

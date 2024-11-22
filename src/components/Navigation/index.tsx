@@ -10,14 +10,14 @@ interface NavigationProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Navigation: React.FC<NavigationProps> = ({
+export default function Navigation({
   page,
   setPage,
   search,
   setSearch,
-}) => {
+}: NavigationProps) {
   return (
-    <div className="w-full h-16 flex items-center justify-between shrink-0 px-6 gap-6 text-neutral-400 text-lg">
+    <div className="w-full h-16 flex items-center justify-between shrink-0 px-6 gap-6 text-foreground-secondary text-lg">
       <div className="flex items-center justify-center gap-6">
         <NavigationButton
           id={PageType.APPS}
@@ -42,6 +42,4 @@ const Navigation: React.FC<NavigationProps> = ({
       <NavigationSearch page={page} search={search} setSearch={setSearch} />
     </div>
   );
-};
-
-export default Navigation;
+}

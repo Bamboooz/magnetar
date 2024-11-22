@@ -1,4 +1,3 @@
-import React from "react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { LuPlus } from "react-icons/lu";
@@ -14,7 +13,7 @@ interface AppsProps {
   search: string;
 }
 
-const Apps: React.FC<AppsProps> = ({ page, search }) => {
+export default function Apps({ page, search }: AppsProps) {
   const [apps, setApps] = useStickyState<App[]>("apps", []);
 
   const appWindow = getCurrentWindow();
@@ -69,11 +68,9 @@ const Apps: React.FC<AppsProps> = ({ page, search }) => {
         </Expander>
       ) : (
         <div className="size-full flex flex-col items-center justify-center">
-          <p className="text-neutral-300 text-2xl font-medium">No apps found</p>
+          <p className=" text-2xl font-medium">No apps found</p>
         </div>
       )}
     </Page>
   );
-};
-
-export default Apps;
+}

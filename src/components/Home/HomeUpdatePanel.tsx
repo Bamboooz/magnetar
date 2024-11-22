@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { invoke } from "@tauri-apps/api/core";
 import { getVersion } from "@tauri-apps/api/app";
 
-const HomeUpdatePanel: React.FC = () => {
+export default function HomeUpdatePanel() {
   const [latestUpdate, setLatestUpdate] = useState<string>("");
   const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
 
@@ -27,8 +27,8 @@ const HomeUpdatePanel: React.FC = () => {
   return (
     <>
       {updateAvailable && (
-        <div className="w-full flex flex-col items-center justify-center gap-2 p-4 text-md bg-secondary border border-tertiary rounded-md">
-          <p className="text-neutral-400">
+        <div className="w-full flex flex-col items-center justify-center gap-2 p-4 text-md bg-background-secondary border border-background-tertiary rounded-md">
+          <p className="text-foreground-secondary">
             New version of magnetar is available ({latestUpdate})
           </p>
           <a
@@ -43,6 +43,4 @@ const HomeUpdatePanel: React.FC = () => {
       )}
     </>
   );
-};
-
-export default HomeUpdatePanel;
+}

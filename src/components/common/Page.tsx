@@ -1,6 +1,6 @@
 import React from "react";
 import { PageType } from "../../types";
-import { cn } from "../../utils/cn";
+import { cn } from "../../utils";
 
 interface PageProps {
   target: PageType;
@@ -9,12 +9,12 @@ interface PageProps {
   children?: React.ReactNode;
 }
 
-const Page: React.FC<PageProps> = ({
+export default function Page({
   target,
   current,
   className,
   children,
-}) => {
+}: PageProps) {
   return (
     <div
       className={cn(
@@ -25,6 +25,4 @@ const Page: React.FC<PageProps> = ({
       {children}
     </div>
   );
-};
-
-export default Page;
+}

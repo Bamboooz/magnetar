@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
-import { executeCommand } from "../../utils/cmd";
+import { exec } from "../../utils";
 import { Command } from "../../types";
 import CommandItemContext from "./CommandItemContext";
 import Item from "../common/Item";
@@ -16,7 +16,7 @@ interface CommandItemProps {
   command: Command;
 }
 
-const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
+export default function CommandItem({ command }: CommandItemProps) {
   const [context, setContext] = useState(initialContextMenu);
 
   const isPowershell = command.command.toLowerCase().includes("powershell");
@@ -34,8 +34,7 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
     setContext({ x, y, visible: true });
   };
 
-  const execute = async (admin: boolean) =>
-    executeCommand(command.command, admin);
+  const execute = async (admin: boolean) => exec(command.command, admin);
 
   return (
     <>
@@ -59,6 +58,4 @@ const CommandItem: React.FC<CommandItemProps> = ({ command }) => {
       )}
     </>
   );
-};
-
-export default CommandItem;
+}

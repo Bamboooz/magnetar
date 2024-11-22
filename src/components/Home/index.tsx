@@ -1,4 +1,3 @@
-import React from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { LuHeart } from "react-icons/lu";
 import Page from "../common/Page";
@@ -9,7 +8,7 @@ interface HomeProps {
   page: PageType;
 }
 
-const Home: React.FC<HomeProps> = ({ page }) => {
+export default function Home({ page }: HomeProps) {
   return (
     <Page
       target={PageType.HOME}
@@ -19,13 +18,13 @@ const Home: React.FC<HomeProps> = ({ page }) => {
       <div className="size-full flex flex-col items-center justify-center gap-16">
         <div className="flex flex-col items-center justify-center gap-4">
           <img src="/favicon.png" alt="logo" className="w-16 h-16" />
-          <p className="text-3xl text-neutral-300">magnetar</p>
-          <p className="text-lg text-neutral-400 text-center">
+          <p className="text-3xl ">magnetar</p>
+          <p className="text-lg text-foreground-secondary text-center">
             An advanced Windows toolbox
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-1 text-lg text-neutral-500">
+        <div className="flex items-center justify-center gap-1 text-lg text-foreground-tertiary">
           <span>Made with</span>
           <LuHeart className="text-accent" />
           <span>by</span>
@@ -41,6 +40,4 @@ const Home: React.FC<HomeProps> = ({ page }) => {
       <HomeUpdatePanel />
     </Page>
   );
-};
-
-export default Home;
+}

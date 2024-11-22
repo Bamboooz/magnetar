@@ -4,10 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0d0f12",
-        secondary: "#171a1e",
-        tertiary: "#30363a",
-        accent: "#5066ef",
+        background: "var(--background)",
+        "background-secondary": "var(--background-secondary)",
+        "background-tertiary": "var(--background-tertiary)",
+        foreground: "var(--foreground)",
+        "foreground-secondary": "var(--foreground-secondary)",
+        "foreground-tertiary": "var(--foreground-tertiary)",
+        accent: "var(--accent)",
       },
       fontSize: {
         sm: "10px",

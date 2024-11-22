@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import Expander from "../common/Expander";
 import CommandItem from "./CommandItem";
@@ -10,7 +10,7 @@ interface HomeProps {
   search: string;
 }
 
-const Commands: React.FC<HomeProps> = ({ page, search }) => {
+export default function Commands({ page, search }: HomeProps) {
   const [commands, setCommands] = useState<CommandList>({});
 
   const filteredCommandGroups = Object.entries(commands)
@@ -41,13 +41,11 @@ const Commands: React.FC<HomeProps> = ({ page, search }) => {
         ))
       ) : (
         <div className="size-full flex flex-col items-center justify-center">
-          <p className="text-neutral-300 text-2xl font-medium">
+          <p className=" text-2xl font-medium">
             No commands found
           </p>
         </div>
       )}
     </Page>
   );
-};
-
-export default Commands;
+}

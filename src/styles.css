@@ -4,32 +4,45 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("./fonts/poppins/Poppins-Regular.ttf") format("truetype");
+  src: url("./fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Poppins";
-  src: url("./fonts/poppins/Poppins-Medium.ttf") format("truetype");
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
-html,
-body,
-:root {
-  @apply m-0 p-0 select-none font-poppins;
-}
+@layer base {
+  :root {
+    --header: #000000;
+    --background: #0d0f12;
+    --background-secondary: #171a1e;
+    --background-tertiary: #30363a;
+    --foreground: #d4d4d4;
+    --foreground-secondary: #a3a3a3;
+    --foreground-tertiary: #737373;
+    --accent: #5066ef;
+  }
 
-::-webkit-scrollbar {
-  @apply w-2 h-2;
-}
+  html,
+  body,
+  :root {
+    @apply text-foreground bg-background font-poppins select-none;
+  }
 
-::-webkit-scrollbar-thumb {
-  @apply rounded-md bg-secondary;
-}
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
 
-::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-background-secondary;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import Context from "../common/Context";
 import ContextButton from "../common/ContextButton";
 
@@ -11,14 +10,14 @@ interface AppItemContextProps {
   removeApp: () => Promise<void>;
 }
 
-const AppItemContext: React.FC<AppItemContextProps> = ({
+export default function AppItemContext({
   x,
   y,
   closeContextMenu,
   openApp,
   openInExplorer,
   removeApp,
-}) => {
+}: AppItemContextProps) {
   return (
     <Context x={x} y={y} closeContextMenu={closeContextMenu}>
       <ContextButton label="Open" onClick={openApp} />
@@ -26,6 +25,4 @@ const AppItemContext: React.FC<AppItemContextProps> = ({
       <ContextButton label="Remove app" onClick={removeApp} />
     </Context>
   );
-};
-
-export default AppItemContext;
+}
