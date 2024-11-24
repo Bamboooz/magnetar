@@ -66,9 +66,7 @@ export default function Games({ page, search }: GamesProps) {
         </>
       ) : (
         <div className="size-full flex flex-col items-center justify-center">
-          <p className=" text-2xl font-medium">
-            No games found
-          </p>
+          <p className=" text-2xl font-medium">No games found</p>
         </div>
       )}
     </Page>

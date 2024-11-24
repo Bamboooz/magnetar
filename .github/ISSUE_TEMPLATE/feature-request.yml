@@ -22,6 +22,8 @@ body:
     attributes:
       label: Describe alternatives you've considered
       description: Have you considered any alternative solutions or workarounds?
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Additional context

@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export default function Header({ setPage }: HeaderProps) {
   return (
-    <div className="w-full h-16 flex items-center justify-between shrink-0 pr-6 bg-black">
+    <div className="w-full h-16 flex items-center justify-between shrink-0 pr-6 bg-header">
       <button
         onClick={() => setPage(PageType.HOME)}
         className="h-full flex items-center justify-center gap-6 px-6"

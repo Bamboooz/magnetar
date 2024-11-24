@@ -41,9 +41,7 @@ export default function Commands({ page, search }: HomeProps) {
         ))
       ) : (
         <div className="size-full flex flex-col items-center justify-center">
-          <p className=" text-2xl font-medium">
-            No commands found
-          </p>
+          <p className=" text-2xl font-medium">No commands found</p>
         </div>
       )}
     </Page>
