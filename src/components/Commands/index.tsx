@@ -14,8 +14,8 @@ export default function Commands({ page, search }: HomeProps) {
   const [commands, setCommands] = useState<CommandList>({});
 
   const filteredCommandGroups = Object.entries(commands)
-    .map(([label, commands]) => ({
-      label,
+    .map(([category, commands]) => ({
+      category,
       commands: commands.filter((command) =>
         command.label.toLowerCase().includes(search.toLowerCase())
       ),
@@ -31,19 +31,14 @@ export default function Commands({ page, search }: HomeProps) {
 
   return (
     <Page target={PageType.COMMANDS} current={page} className="gap-3">
-      {filteredCommandGroups.length !== 0 ? (
+      {filteredCommandGroups.length !== 0 &&
         filteredCommandGroups.map((group) => (
-          <Expander label={group.label} key={group.label}>
+          <Expander label={group.category} key={group.category}>
             {group.commands.map((command) => (
               <CommandItem key={command.label} command={command} />
             ))}
           </Expander>
-        ))
-      ) : (
-        <div className="size-full flex flex-col items-center justify-center">
-          <p className=" text-2xl font-medium">No commands found</p>
-        </div>
-      )}
+        ))}
     </Page>
   );
 }

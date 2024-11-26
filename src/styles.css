@@ -39,7 +39,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-md bg-background-secondary;
+    @apply bg-background-secondary rounded-md;
   }
 
   ::-webkit-scrollbar-track {

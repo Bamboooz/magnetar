@@ -17,8 +17,8 @@ export default function Navigation({
   setSearch,
 }: NavigationProps) {
   return (
-    <div className="w-full h-16 flex items-center justify-between shrink-0 px-6 gap-6 text-foreground-secondary text-lg">
-      <div className="flex items-center justify-center gap-6">
+    <div className="w-full h-16 flex items-center justify-between shrink-0 pl-3 pr-6 gap-6">
+      <div className="flex items-center">
         <NavigationButton
           id={PageType.APPS}
           label="Apps"

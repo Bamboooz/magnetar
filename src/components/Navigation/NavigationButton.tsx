@@ -18,14 +18,18 @@ export default function NavigationButton({
   return (
     <button
       onClick={() => setPage(id)}
-      className="flex flex-col items-center justify-center gap-1"
+      className="flex flex-col gap-1 px-3 py-1"
     >
-      {label}
-      <div
+      <p
         className={cn(
-          "w-full h-1 rounded-full",
-          page === id ? "bg-accent" : "bg-transparent"
+          "text-lg",
+          page === id ? "text-foreground" : "text-foreground-secondary"
         )}
+      >
+        {label}
+      </p>
+      <div
+        className={cn("w-full h-1 rounded-full", page === id && "bg-accent")}
       />
     </button>
   );

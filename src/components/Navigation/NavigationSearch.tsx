@@ -42,7 +42,7 @@ export default function NavigationSearch({
             <>
               <button
                 onClick={() => setSearching(true)}
-                className="flex items-center justify-center text-xl hover:"
+                className="flex items-center justify-center text-foreground-secondary hover:text-foreground"
               >
                 <LuSearch />
               </button>
@@ -55,8 +55,9 @@ export default function NavigationSearch({
                 ref={searchRef}
                 type="text"
                 value={search}
+                spellCheck="false"
                 onChange={(e) => setSearch(e.target.value)}
-                className="outline-none bg-transparent"
+                className="text-lg w-full outline-none bg-transparent"
               />
 
               <div className="w-full h-1 rounded-full bg-background-secondary" />

@@ -60,16 +60,12 @@ export default function Apps({ page, search }: AppsProps) {
         onClick={addApp}
       />
 
-      {filteredApps.length !== 0 ? (
+      {filteredApps.length !== 0 && (
         <Expander label="Apps">
           {filteredApps.map((app) => (
             <AppItem key={app.path} app={app} apps={apps} setApps={setApps} />
           ))}
         </Expander>
-      ) : (
-        <div className="size-full flex flex-col items-center justify-center">
-          <p className=" text-2xl font-medium">No apps found</p>
-        </div>
       )}
     </Page>
   );

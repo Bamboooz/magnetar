@@ -23,5 +23,5 @@ export interface Command {
 }
 
 export interface CommandList {
-  [label: string]: Command[];
+  [category: string]: Command[];
 }

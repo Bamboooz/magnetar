@@ -1,7 +1,7 @@
 import React from "react";
 import { open } from "@tauri-apps/plugin-shell";
 import { LuHelpCircle } from "react-icons/lu";
-import { PageType } from "../types";
+import { PageType } from "../../types";
 
 interface HeaderProps {
   setPage: React.Dispatch<React.SetStateAction<PageType>>;
@@ -14,13 +14,13 @@ export default function Header({ setPage }: HeaderProps) {
         onClick={() => setPage(PageType.HOME)}
         className="h-full flex items-center justify-center gap-6 px-6"
       >
-        <img src="/favicon.png" alt="logo" className="w-5 h-5" />
-        <p className="text-lg ">magnetar</p>
+        <img src="/favicon.png" alt="logo" className="w-6 h-6" />
+        <p className="text-lg">magnetar</p>
       </button>
 
       <button
         onClick={() => open("https://github.com/Bamboooz/magnetar/wiki")}
-        className="flex items-center justify-center text-xl text-foreground-secondary hover:"
+        className="text-foreground-secondary hover:text-foreground"
       >
         <LuHelpCircle />
       </button>

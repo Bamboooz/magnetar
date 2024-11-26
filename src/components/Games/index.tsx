@@ -47,27 +47,20 @@ export default function Games({ page, search }: GamesProps) {
         />
       </Expander>
 
-      {filteredGames.length !== 0 ? (
-        <>
-          {installedGames.length !== 0 && (
-            <Expander label="Installed">
-              {installedGames.map((game) => (
-                <GameItem key={game.id} game={game} />
-              ))}
-            </Expander>
-          )}
-          {notInstalledGames.length !== 0 && (
-            <Expander label="Not installed">
-              {notInstalledGames.map((game) => (
-                <GameItem key={game.id} game={game} />
-              ))}
-            </Expander>
-          )}
-        </>
-      ) : (
-        <div className="size-full flex flex-col items-center justify-center">
-          <p className=" text-2xl font-medium">No games found</p>
-        </div>
+      {installedGames.length !== 0 && (
+        <Expander label="Installed">
+          {installedGames.map((game) => (
+            <GameItem key={game.id} game={game} />
+          ))}
+        </Expander>
+      )}
+
+      {notInstalledGames.length !== 0 && (
+        <Expander label="Not installed">
+          {notInstalledGames.map((game) => (
+            <GameItem key={game.id} game={game} />
+          ))}
+        </Expander>
       )}
     </Page>
   );

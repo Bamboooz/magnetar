@@ -17,8 +17,6 @@ export default {
         sm: "10px",
         md: "12px",
         lg: "13px",
-        xl: "16px",
-        "2xl": "18px",
         "3xl": "23px",
       },
       fontFamily: {

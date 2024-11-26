@@ -13,7 +13,7 @@ export async function exec(command: string, admin: boolean = false) {
   try {
     await appWindow.hide();
     await invoke("execute_command", { command, admin });
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 }

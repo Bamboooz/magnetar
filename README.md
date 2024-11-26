@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="magnetar logo" width="120" height="120" src="https://github.com/Bamboooz/magnetar/blob/main/public/favicon.png?raw=true">
+  <img alt="magnetar logo" width="120" height="120" src="https://github.com/Bamboooz/magnetar/blob/main/static/favicon.png?raw=true">
   <h1>magnetar</h1>
   <p>Your ultimate Windows toolbox</p>
 
