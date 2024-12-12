@@ -23,8 +23,8 @@ export default function Commands({ page, search }: HomeProps) {
     .filter((group) => group.commands.length > 0);
 
   useEffect(() => {
-    invoke("fetch_commands").then((commands) => {
-      const commandsJson = JSON.parse(commands as string) as CommandList;
+    invoke<string>("fetch_commands").then((commands) => {
+      const commandsJson = JSON.parse(commands) as CommandList;
       setCommands(commandsJson);
     });
   }, []);

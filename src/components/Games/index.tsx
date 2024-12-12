@@ -27,7 +27,7 @@ export default function Games({ page, search }: GamesProps) {
   const closeSteam = async () => await exec("start steam://exit", false);
 
   useEffect(() => {
-    invoke("fetch_games").then((games) => setGames(games as Game[]));
+    invoke<Game[]>("fetch_steam_apps").then((games) => setGames(games));
   }, []);
 
   return (

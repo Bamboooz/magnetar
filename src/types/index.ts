@@ -13,6 +13,7 @@ export interface App {
 export interface Game {
   id: string;
   name: string;
+  banner: string;
   installed: boolean;
 }
 
