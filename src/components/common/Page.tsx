@@ -1,6 +1,6 @@
 import React from "react";
 import { PageType } from "../../types";
-import { cn } from "../../utils";
+import { cn } from "../../util";
 
 interface PageProps {
   target: PageType;

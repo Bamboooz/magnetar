@@ -4,7 +4,7 @@ import { FaSteam } from "react-icons/fa";
 import Expander from "../common/Expander";
 import { Game, PageType } from "../../types";
 import GameItem from "./GameItem";
-import { exec } from "../../utils";
+import { exec } from "../../util";
 import Item from "../common/Item";
 import Page from "../common/Page";
 
@@ -27,7 +27,7 @@ export default function Games({ page, search }: GamesProps) {
   const closeSteam = async () => await exec("start steam://exit", false);
 
   useEffect(() => {
-    invoke<Game[]>("fetch_steam_apps").then((games) => setGames(games));
+    invoke<Game[]>("fetch_steam_games").then((games) => setGames(games));
   }, []);
 
   return (

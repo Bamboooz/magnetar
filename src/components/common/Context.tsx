@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-import { cn } from "../../utils";
+import { cn } from "../../util";
 
 interface ContextProps {
   x: number;

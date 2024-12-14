@@ -1,11 +1,8 @@
 use serde::Serialize;
-use std::process::Command;
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
-use crate::module::steam::locate;
-
 #[derive(Serialize)]
-pub struct SteamApp {
+pub struct SteamGame {
     id: String,
     name: String,
     banner: String,
@@ -24,7 +21,7 @@ fn fetch_steam_app_ids() -> Option<Vec<String>> {
     Some(app_ids)
 }
 
-fn fetch_steam_game(id: String) -> Option<SteamApp> {
+fn fetch_steam_game(id: String) -> Option<SteamGame> {
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
     let key_path = format!(r"SOFTWARE\Valve\Steam\Apps\{}", id);
     let key: RegKey = hkcu.open_subkey(key_path).ok()?;
@@ -36,7 +33,7 @@ fn fetch_steam_game(id: String) -> Option<SteamApp> {
         id
     );
 
-    Some(SteamApp {
+    Some(SteamGame {
         id,
         name,
         banner,
@@ -45,22 +42,10 @@ fn fetch_steam_game(id: String) -> Option<SteamApp> {
 }
 
 #[tauri::command]
-pub async fn fetch_steam_apps() -> Vec<SteamApp> {
+pub async fn fetch_steam_games() -> Vec<SteamGame> {
     fetch_steam_app_ids()
         .unwrap_or_default()
         .into_iter()
         .filter_map(fetch_steam_game)
         .collect()
-}
-
-#[tauri::command]
-pub async fn run_steam_app(id: String) {
-    if let Some(exe) = locate::locate_steam_exe() {
-        let _ = Command::new(exe)
-            .arg("-silent")
-            .arg("-applaunch")
-            .arg(&id)
-            .spawn()
-            .map_err(|e| eprintln!("Failed to launch Steam app {}: {}", id, e));
-    }
 }

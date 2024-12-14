@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { VscTerminalPowershell } from "react-icons/vsc";
 import { LuTerminal } from "react-icons/lu";
-import { exec } from "../../utils";
+import { exec } from "../../util";
 import { Command } from "../../types";
 import CommandItemContext from "./CommandItemContext";
 import Item from "../common/Item";

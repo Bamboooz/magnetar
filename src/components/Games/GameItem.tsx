@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import { invoke } from "@tauri-apps/api/core";
-import { open } from "@tauri-apps/plugin-shell";
 import { Game } from "../../types";
+import { invoke } from "../../util";
 import GameItemContext from "./GameItemContext";
 import Item from "../common/Item";
 
@@ -33,15 +31,9 @@ export default function GameItem({ game }: GameItemProps) {
     setContext({ x, y, visible: true });
   };
 
-  const openGame = async () => {
-    await invoke<void>("run_steam_app", { id: game.id });
-
-    const appWindow = getCurrentWindow();
-    await appWindow.hide();
-  };
-
-  const openGamePage = async () =>
-    await open(`https://store.steampowered.com/app/${game.id}`);
+  const runGame = async () => await invoke("run_game", { id: game.id });
+  const openSteamPage = async () => await invoke("open_steam_page", { id: game.id });
+  const uninstallGame = async () => await invoke("uninstall_game", { id: game.id });
 
   return (
     <>
@@ -57,7 +49,7 @@ export default function GameItem({ game }: GameItemProps) {
             }
             title={game.name}
             description={`steam.exe -silent -applaunch ${game.id}`}
-            onClick={openGame}
+            onClick={runGame}
             onContextMenu={handleContextMenu}
           />
 
@@ -67,8 +59,9 @@ export default function GameItem({ game }: GameItemProps) {
               y={context.y}
               closeContextMenu={closeContextMenu}
               installed={game.installed}
-              playGame={openGame}
-              openGamePage={openGamePage}
+              runGame={runGame}
+              openSteamPage={openSteamPage}
+              uninstallGame={uninstallGame}
             />
           )}
         </>

@@ -1,5 +1,5 @@
-use reqwest::Client;
 use serde::Deserialize;
+use tauri_plugin_http::reqwest;
 
 #[derive(Deserialize)]
 struct Release {
@@ -10,7 +10,7 @@ struct Release {
 pub async fn latest_update() -> Result<String, String> {
     let url = "https://api.github.com/repos/Bamboooz/magnetar/releases/latest";
 
-    let client = Client::new();
+    let client = reqwest::Client::new();
 
     let response = client
         .get(url)

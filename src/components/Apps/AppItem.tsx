@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LuPackage } from "react-icons/lu";
-import { exec } from "../../utils";
+import { exec } from "../../util";
 import { App } from "../../types";
 import AppItemContext from "./AppItemContext";
 import Item from "../common/Item";
